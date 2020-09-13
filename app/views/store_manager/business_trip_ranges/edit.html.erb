@@ -25,6 +25,7 @@
                       <ul class="city-check-box">
                         <div id="boxes">
                           <li class="city-check-box-item"><%= city.check_box + city.text %></li>
+                          <h1><%= city.object.id %></h1>
                         </div>
                       </ul>
                     <% end %>
@@ -48,12 +49,36 @@
 
 <script>
 
-// ↓今のところ東京とそれに紐づく市町村の処理のみ
+// ↓千葉とそれに紐づく市町村の処理
+$(function() {
+    // 1. 「全選択」する
+    $('#prefecture_prefecture_ids_12').on('click', function() {
+      for (let i = 1; i < 61; i++) {
+        var city_id = "input[value=" + i + "]"
+        $(city_id).prop('checked', this.checked);
+      }
+    });
+    // 2. 「全選択」以外のチェックボックスがクリックされたら、
+    $("input[name='masseur[city_ids][]']").on('click', function() {
+      if ($('#boxes :checked').length == $('#boxes :input').length) {
+        // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_12').prop('checked', true);
+      } else {
+        // 1つでもチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_12').prop('checked', false);
+      }
+    });
+})
+
+
+// ↓東京とそれに紐づく市町村の処理
 $(function() {
     // 1. 「全選択」する
     $('#prefecture_prefecture_ids_13').on('click', function() {
-      $("input[name='masseur[city_ids][]']").prop('checked', this.checked);
-      console.log(Event);
+      for (let i = 61; i < 123; i++) {
+        var city_id = "input[value=" + i + "]"
+        $(city_id).prop('checked', this.checked);
+      }
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
     $("input[name='masseur[city_ids][]']").on('click', function() {
@@ -66,5 +91,6 @@ $(function() {
       }
     });
 })
+
 
 </script>
