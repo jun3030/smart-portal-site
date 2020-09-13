@@ -51,7 +51,7 @@ Review.create!(review: "so good",
                user_id: 1,
                masseur_id: 1
                )
-            
+
 5.times do |n|
   Plan.create!(plan_name: "プラン#{n+1}",
                plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
@@ -104,18 +104,34 @@ area_6.each {|value| Prefecture.find_or_create_by(name: value, region_id: 6)}
 area_7.each {|value| Prefecture.find_or_create_by(name: value, region_id: 7)}
 area_8.each {|value| Prefecture.find_or_create_by(name: value, region_id: 8)}
 
-# 都道府県データを取得
-# prefectures = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/prefectures")
+# 市/区データを取得
+# cities_1 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=1")
+# cities_2 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=2")
+# cities_3 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=3")
+# cities_4 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=4")
+# cities_5 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=5")
+# cities_6 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=6")
+# cities_7 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=7")
+# cities_8 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=8")
+# cities_9 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=9")
+# cities_10 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=10")
+# cities_11 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=11")
+cities_12 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=12")
+cities_13 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=13")
+cities_14 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=14")
 
-# prefectures["result"].each do |value|
-#   prefecture_name = value["prefName"]
-#   Prefecture.find_or_create_by(name: prefecture_name)
-# end
-
-# 東京都の市/区データを取得
-cities = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=13")
-
-cities["result"].each do |value|
-  city_name = value["cityName"]
-  City.find_or_create_by(name: city_name, prefecture_id: 13)
-end
+# 都道府県に紐づく市/区データを作成
+# cities_1["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 1)}
+# cities_2["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 2)}
+# cities_3["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 3)}
+# cities_4["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 4)}
+# cities_5["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 5)}
+# cities_6["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 6)}
+# cities_7["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 7)}
+# cities_8["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 8)}
+# cities_9["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 9)}
+# cities_10["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 10)}
+# cities_11["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 11)}
+cities_12["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 12)}
+cities_13["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 13)}
+cities_14["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 14)}

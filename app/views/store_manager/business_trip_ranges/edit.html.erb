@@ -9,7 +9,7 @@
         <table class="prefecture table table-hover">
           <thead>
             <!--今は東京のみを表示しているがDBには全都道府県が入っている-->
-            <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all.where(id: 13), :id, :name, include_hidden: false do |prefecture| %>
+            <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all.where(id: [12, 13, 14]), :id, :name, include_hidden: false do |prefecture| %>
             <tr>
               <th>
                 <%= prefecture.check_box + prefecture.text %>
@@ -19,7 +19,17 @@
           <tbody>
             <tr>
               <td class="city-check-boxes">
-                <div id="city-list"><%= render partial: 'cities', locals: { f: f, prefecture: prefecture } %></div>
+                <div id="city-list">
+                  <%= f.collection_check_boxes :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
+                    <% if prefecture.object.id == city.object.prefecture_id %>
+                      <ul class="city-check-box">
+                        <div id="boxes">
+                          <li class="city-check-box-item"><%= city.check_box + city.text %></li>
+                        </div>
+                      </ul>
+                    <% end %>
+                  <% end %>
+                </div>
               </td>
             </tr>
             <% end %>
@@ -43,6 +53,7 @@ $(function() {
     // 1. 「全選択」する
     $('#prefecture_prefecture_ids_13').on('click', function() {
       $("input[name='masseur[city_ids][]']").prop('checked', this.checked);
+      console.log(Event);
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
     $("input[name='masseur[city_ids][]']").on('click', function() {
