@@ -13,6 +13,10 @@ class User::TopController < User::Base
     else
       @all_store = Store.active
     end
+
+    # マッサージ師の検索機能
+    @search = BusinessTripRange.ransack(params[:q])
+    @business_trip_range = @search.result
   end
 
   def details

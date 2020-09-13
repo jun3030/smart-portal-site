@@ -1,5 +1,8 @@
 <section class="product-shop spad">
   <div class="container">
+
+
+
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
         <div class="box29">
@@ -20,6 +23,9 @@
         </div>-->
       </div>
     </div>
+
+
+
     <div class="col-lg-9 order-1 order-lg-2">
       <div class="product-show-option">
         <div class="list_head">
@@ -47,6 +53,30 @@
             </li>
           </ul>
         </div>
+
+        
+
+        <%= search_form_for @search, url: shop_path do |f| %>
+          
+          <%= f.label :エリアで検索 %>
+        　<%= f.radio_button :city_id_eq, '', {:checked => true} %>指定なし
+          <%= debug f.radio_button :city_id_eq, 1 %>test1
+          
+        
+          <%= f.submit "検索" %>
+        <% end %>
+
+        <% @business_trip_range.each do |range| %>
+          <%= range.id %>
+          <%= Masseur.find(range.masseur_id).masseur_name %>
+          <%= range.city_id %>
+          <hr>
+        <% end %>
+
+
+
+        
+
         <% @all_store.each do |store| %>
           <div class="">
             <div class="row">
