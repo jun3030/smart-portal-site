@@ -25,7 +25,7 @@
                       <ul class="city-check-box">
                         <div id="boxes">
                           <li class="city-check-box-item">
-                          <input type="checkbox" name=<%= city.object.prefecture_id %> value=<%= city.object.id %> ><%= city.text %>
+                          <input type="checkbox" name="masseur[city_ids<%= city.object.prefecture_id %>][]" value=<%= city.object.id %> ><%= city.text %>
                         </div>
                       </ul>
                     <% end %>
@@ -49,30 +49,32 @@
 
 <script>
 
-// ↓千葉とそれに紐づく市町村の処理
+// 千葉県に紐づく市/区
 $(function() {
     // 1. 「全選択」する
     $('#prefecture_prefecture_ids_12').on('click', function() {
-      for (let i = 1; i < 61; i++) {
-        var cities = "input[value=" + i + "]"
-        $(cities).prop('checked', this.checked);
+      $("input[name='masseur[city_ids12][]']").prop('checked', this.checked);
+    });
+    // 2. 「全選択」以外のチェックボックスがクリックされたら、
+    $("input[name='masseur[city_ids12][]']").on('click', function() {
+      if ($('#boxes :checked').length == $('#boxes :input').length) {
+        // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_12').prop('checked', true);
+      } else {
+        // 1つでもチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_12').prop('checked', false);
       }
     });
 })
 
-
-// ↓東京とそれに紐づく市町村の処理
+// 東京都に紐づく市/区
 $(function() {
-  for (let i = 61; i < 123; i++) {
     // 1. 「全選択」する
     $('#prefecture_prefecture_ids_13').on('click', function() {
-
-        var city_id = "input[value=" + i + "]"
-        $(city_id).prop('checked', this.checked);
-
+      $("input[name='masseur[city_ids13][]']").prop('checked', this.checked);
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
-    $("input[name='masseur[city_ids][]']").on('click', function() {
+    $("input[name='masseur[city_ids13][]']").on('click', function() {
       if ($('#boxes :checked').length == $('#boxes :input').length) {
         // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
         $('#prefecture_prefecture_ids_13').prop('checked', true);
@@ -81,7 +83,25 @@ $(function() {
         $('#prefecture_prefecture_ids_13').prop('checked', false);
       }
     });
-  }
 })
+
+// 神奈川県に紐づく市/区
+$(function() {
+    // 1. 「全選択」する
+    $('#prefecture_prefecture_ids_14').on('click', function() {
+      $("input[name='masseur[city_ids14][]']").prop('checked', this.checked);
+    });
+    // 2. 「全選択」以外のチェックボックスがクリックされたら、
+    $("input[name='masseur[city_ids14][]']").on('click', function() {
+      if ($('#boxes :checked').length == $('#boxes :input').length) {
+        // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_14').prop('checked', true);
+      } else {
+        // 1つでもチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_14').prop('checked', false);
+      }
+    });
+})
+
 
 </script>
