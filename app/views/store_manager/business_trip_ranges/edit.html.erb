@@ -25,7 +25,7 @@
                       <ul class="city-check-box">
                         <div id="boxes">
                           <li class="city-check-box-item">
-                          <input type="checkbox" name="masseur[city_ids<%= city.object.prefecture_id %>][]" value=<%= city.object.id %> ><%= city.text %>
+                          <%= city.check_box + city.text %>
                         </div>
                       </ul>
                     <% end %>
@@ -49,14 +49,16 @@
 
 <script>
 
-// 千葉県に紐づく市/区
+// 千葉県に紐づく市/区の処理
 $(function() {
     // 1. 「全選択」する
+    for (let i = 1; i < 61; i++) {
+      city_ids = "input[id='masseur_city_ids_" + i + "']"
     $('#prefecture_prefecture_ids_12').on('click', function() {
-      $("input[name='masseur[city_ids12][]']").prop('checked', this.checked);
+      $("input[id='masseur_city_ids_" + i + "']").prop('checked', this.checked);
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
-    $("input[name='masseur[city_ids12][]']").on('click', function() {
+    $("input[id='masseur_city_ids_" + i + "']").on('click', function() {
       if ($('#boxes :checked').length == $('#boxes :input').length) {
         // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
         $('#prefecture_prefecture_ids_12').prop('checked', true);
@@ -65,16 +67,19 @@ $(function() {
         $('#prefecture_prefecture_ids_12').prop('checked', false);
       }
     });
+    }
 })
 
-// 東京都に紐づく市/区
+// 東京都に紐づく市/区の処理
 $(function() {
     // 1. 「全選択」する
+    for (let i = 61; i < 123; i++) {
+      city_ids = "input[id='masseur_city_ids_" + i + "']"
     $('#prefecture_prefecture_ids_13').on('click', function() {
-      $("input[name='masseur[city_ids13][]']").prop('checked', this.checked);
+      $("input[id='masseur_city_ids_" + i + "']").prop('checked', this.checked);
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
-    $("input[name='masseur[city_ids13][]']").on('click', function() {
+    $("input[id='masseur_city_ids_" + i + "']").on('click', function() {
       if ($('#boxes :checked').length == $('#boxes :input').length) {
         // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
         $('#prefecture_prefecture_ids_13').prop('checked', true);
@@ -83,16 +88,19 @@ $(function() {
         $('#prefecture_prefecture_ids_13').prop('checked', false);
       }
     });
+    }
 })
 
-// 神奈川県に紐づく市/区
+// 神奈川県に紐づく市/区の処理
 $(function() {
     // 1. 「全選択」する
+    for (let i = 123; i < 184; i++) {
+      city_ids = "input[id='masseur_city_ids_" + i + "']"
     $('#prefecture_prefecture_ids_14').on('click', function() {
-      $("input[name='masseur[city_ids14][]']").prop('checked', this.checked);
+      $("input[id='masseur_city_ids_" + i + "']").prop('checked', this.checked);
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
-    $("input[name='masseur[city_ids14][]']").on('click', function() {
+    $("input[id='masseur_city_ids_" + i + "']").on('click', function() {
       if ($('#boxes :checked').length == $('#boxes :input').length) {
         // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
         $('#prefecture_prefecture_ids_14').prop('checked', true);
@@ -101,6 +109,7 @@ $(function() {
         $('#prefecture_prefecture_ids_14').prop('checked', false);
       }
     });
+    }
 })
 
 

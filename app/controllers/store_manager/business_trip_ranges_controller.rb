@@ -18,7 +18,6 @@ class StoreManager::BusinessTripRangesController < StoreManager::Base
   end
 
   def update
-    debugger
     # チェックがあった場合
     if params[:masseur].present?
       @current_masseur.update(city_business_trip_range_params)
@@ -51,7 +50,7 @@ class StoreManager::BusinessTripRangesController < StoreManager::Base
 
   def city_business_trip_range_params
     if params[:masseur].present?
-      params.require(:masseur).permit(city_ids12: [], city_ids13: [], city_ids14: [])
+      params.require(:masseur).permit(city_ids: [])
     end
   end
 
