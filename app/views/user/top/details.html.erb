@@ -68,9 +68,13 @@
                 <td>店長</td>
                 <td>
                   <div class="shop-master">
-                    <% if Store.find(@store.id).store_images.pluck(:sm_image).present? %>
-                      <% @count_store_image.times do |n| %>
-                        <img class="img-master img-circle" src="<%= @store_images.sm_image[n].url %>">
+                    <% unless @store_images.nil? %>
+                      <% unless @count_sm_image == 0 %>
+                        <% @count_sm_image.times do |n| %>
+                         <img class="img-master img-circle" src="<%= @store_images.sm_image[n].url %>">
+                        <% end %>
+                      <% else %>
+                        <img class="img-master img-circle" src="../images/no_image.jpg" alt="店長の写真">
                       <% end %>
                     <% else %>
                       <img class="img-master img-circle" src="../images/no_image.jpg" alt="店長の写真">
