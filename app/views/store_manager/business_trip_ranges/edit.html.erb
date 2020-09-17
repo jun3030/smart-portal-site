@@ -1,22 +1,3 @@
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
 
 <div class="container">
   <div class="row">
@@ -27,34 +8,37 @@
       <h3 class="my-5 text-center"><%= @current_masseur.masseur_name %>の出張範囲登録</h3>
       <%= form_with(model: @current_masseur, url: store_manager_business_trip_ranges_update_path(@current_masseur), method: :patch, local: true) do |f| %>
         <table class="prefecture table table-hover">
-          <thead>
-            <!--今は東京のみを表示しているがDBには全都道府県が入っている-->
-            <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all.where(id: [12, 13, 14]), :id, :name, include_hidden: false do |prefecture| %>
-            <tr>
-              <th>
-                <%= prefecture.check_box + prefecture.text %>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="city-check-boxes">
-                <div id="city-list">
-                  <%= f.collection_check_boxes :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
-                    <% if prefecture.object.id == city.object.prefecture_id %>
-                      <ul class="city-check-box">
-                        <div id="boxes">
-                          <li class="city-check-box-item">
-                          <%= city.check_box + city.text %>
-                        </div>
-                      </ul>
+            <thead>
+              <!--今は東京のみを表示しているがDBには全都道府県が入っている-->
+              <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all.where(id: [12, 13, 14]), :id, :name, include_hidden: false do |prefecture| %>
+              <tr>
+                <th>
+                  <div id="menu<%= prefecture.object.id %>">
+                    <span class="check_box"><%= prefecture.check_box %></span>
+                    <span class="text"><%= prefecture.text %></span>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="city-check-boxes">
+                  <div id="city-list<%= prefecture.object.id %>">
+                    <%= f.collection_check_boxes :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
+                      <% if prefecture.object.id == city.object.prefecture_id %>
+                        <ul class="city-check-box">
+                            <li class="city-check-box-item">
+                            <div id="boxes"><%= city.check_box + city.text %></div>
+                            </li>
+                        </ul>
+                      <% end %>
                     <% end %>
-                  <% end %>
-                </div>
-              </td>
-            </tr>
-            <% end %>
-          </tbody>
+                  </div>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+
         </table>
         <div class="actions text-center">
           <%= f.submit "登録する", class: "btn btn-primary mt-5 w-50" %>
@@ -67,7 +51,31 @@
   </div>
 </div>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
 <script>
+
+$(function () {
+
+  // メニュー領域外をクリックしたらメニューを閉じる
+  $(function(){
+    $("#menu12 .text").on('click', function(){
+      $("#city-list12").slideToggle('fast');
+    });
+  });
+
+  $(function(){
+    $('#menu13 .text').on('click', function(){
+      $("#city-list13").slideToggle('fast');
+    });
+  });
+
+  $(function(){
+    $('#menu14 .text').on('click', function(){
+      $("#city-list14").slideToggle('fast');
+    });
+  });
+});
 
 // 千葉県に紐づく市/区の処理
 $(function() {
@@ -131,6 +139,5 @@ $(function() {
     });
     }
 })
-
 
 </script>
