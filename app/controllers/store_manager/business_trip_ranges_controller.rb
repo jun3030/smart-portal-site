@@ -10,8 +10,6 @@ class StoreManager::BusinessTripRangesController < StoreManager::Base
     @masseurs = @store.masseurs
   end
 
-
-
   def edit
     @prefectures = Prefecture.all
     @ranges = @current_masseur.business_trip_ranges
