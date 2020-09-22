@@ -34,6 +34,7 @@ ja:
           store_description: 店舗についての説明
         store_image:
           store_image: 店舗画像
+          sm_image: 店長写真
         store_manager:
           name: 名前
         plan:
