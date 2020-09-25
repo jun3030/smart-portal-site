@@ -15,8 +15,8 @@ class User::TopController < User::Base
     end
 
     # マッサージ師の検索機能
-    @search = BusinessTripRange.ransack(params[:q])
-    @business_trip_range = @search.result
+    @search = Store.ransack(params[:q])
+    @store_result = @search.result
   end
 
   def details
@@ -24,10 +24,10 @@ class User::TopController < User::Base
     @plans = @store.plans
     @masseurs = @store.masseurs
     # 閲覧中のstoreが持っている出張範囲(各マッサージ師が持っている出張範囲)を全て取得
-    ranges = @masseurs.map { |masseur| masseur.business_trip_ranges.pluck(:city_id).map {|id| City.find_by(id: id) }}
+    @ranges = @masseurs.map { |masseur| masseur.business_trip_ranges.pluck(:city_id).map {|id| City.find_by(id: id) }}
     # 取得した出張範囲で被っている出張範囲を一つにする。 それぞれのIDを取得
-    @prefecture_ids = ranges.flatten.uniq.map {|city| city.prefecture_id}
-    @city_ids = ranges.flatten.uniq.map {|city| city.id}
+    @prefecture_ids = @ranges.flatten.uniq.map {|city| city.prefecture_id}
+    @city_ids = @ranges.flatten.uniq.map {|city| city.id}
 
     @store_images = @store.store_images.first
     unless @store_images.nil?

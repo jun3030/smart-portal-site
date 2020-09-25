@@ -1,7 +1,20 @@
+<div class="search-form">
+  <%= search_form_for @search, url: shop_path do |f| %>
+    <!-- <%= f.label :store_name_cont, '名前' %>
+    <%= f.search_field :store_name_cont %> -->
+
+    <%= f.collection_select :masseurs_cities_name_eq, City.all, :name, :name %>
+
+    <%= f.submit '検索' %>
+  <% end %>
+</div>
+
+<!-- ボタンでポップオーバー -->
+<button type="button" class="btn btn-default" data-toggle="popover" title="タイトル" data-content="コンテンツ">Click to toggle popover</button>
+
+
 <section class="product-shop spad">
   <div class="container">
-
-
 
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
@@ -23,6 +36,7 @@
         </div>-->
       </div>
     </div>
+
 
 
 
@@ -54,30 +68,7 @@
           </ul>
         </div>
 
-        
-
-        <%= search_form_for @search, url: shop_path do |f| %>
-          
-          <%= f.label :エリアで検索 %>
-        　<%= f.radio_button :city_id_eq, '', {:checked => true} %>指定なし
-          <%= debug f.radio_button :city_id_eq, 1 %>test1
-          
-        
-          <%= f.submit "検索" %>
-        <% end %>
-
-        <% @business_trip_range.each do |range| %>
-          <%= range.id %>
-          <%= Masseur.find(range.masseur_id).masseur_name %>
-          <%= range.city_id %>
-          <hr>
-        <% end %>
-
-
-
-        
-
-        <% @all_store.each do |store| %>
+        <% @store_result.each do |store| %>
           <div class="">
             <div class="row">
               <div class="col-lg-12">
@@ -119,6 +110,12 @@
 <script src="assets/js/jquery.nice-select.min.js"></script>
 <script src="assets/js/jquery.zoom.min.js"></script>
 <script src="assets/js/jquery.dd.min.js"></script>
-<script src="assets/js/jquery.slicknav.js"></script> 
+<script src="assets/js/jquery.slicknav.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script> -->
+
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover()
+});
+</script>
