@@ -1,38 +1,16 @@
 <%= search_form_for @search, url: shop_path do |f| %>
-  <div class="wrap-filter">
-    <dl class="filter-item">
-      <dt class="filter-head">エリアで絞り込む</dt>
-        <dd>
-          <div class="dropdown">
-            <button type="button" id="dropdown1"
-                class="btn btn-secondary dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false">
-                <input class="input-item read-only" placeholder="東京都渋谷区" readonly="" type="text">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdown1">
-              <div class="dropdown-frame">
-                <div class="area-navi-title">都道府県から探す</div>
-                <ul class="area-navi">
-                  <% Region.all.each do |region| %>
-                    <li class="area-navi-list">
-                        <button class="area-navi-list-btn" href="#"><%= region.area %></button>
-                    </li>
-                  <% end %>
-                </ul>
-                <ul class="list-area-name list-unstyled">
-                  <li>test</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </dd>
-    </dl>
-    <dl class="filter-item">
-      <dd><%= f.submit '絞り込む' %></dd>
-    </dl>
-  </div>
+  <% Region.all.each do |region| %>
+      <div class="region"><%= region.area %></div>
+    <% region.prefectures.each do |prefecture| %>
+      <div class="prefecture"><%= prefecture.name %></div>
+      <% prefecture.cities.each do |city| %>
+        <div class="city"><%= city.name %></div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= f.submit '絞り込む' %>
+  <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
 <% end %>
 
 
@@ -153,7 +131,11 @@
 <script src="assets/js/main.js"></script> -->
 
 <script>
-$(function () {
-  $('[data-toggle="popover"]').popover()
+
+$(function(){
+  $(".city").on('click', function(){
+    var element = document.getElementById('q_masseurs_cities_name_eq')
+    element.value = this.textContent
+  });
 });
 </script>
