@@ -34,11 +34,35 @@
 
 }
 
-.area-navi {
+.area-navi-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 10px;
+}
 
+.area-navi {
+    border-bottom: 1px solid #ccc;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 10px 20px 0px 20px;
 }
 
 .area-navi-list {
     display: inline-block;
-    background: red;
+}
+
+.area-navi-list-btn {
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 4px 4px 0 0;
+    color: #27b;
+    outline: 0;
+    padding: 10px 24px;
+    width: 100%;
+}
+
+.list-area-name {
+    margin: 10px 0;
+    width: 100%;
+    flex-wrap: wrap;
 }

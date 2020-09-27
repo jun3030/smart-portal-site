@@ -17,9 +17,12 @@
                 <ul class="area-navi">
                   <% Region.all.each do |region| %>
                     <li class="area-navi-list">
-                        <a class="dropdown-item" href="#"><%= region.area %></a>
+                        <button class="area-navi-list-btn" href="#"><%= region.area %></button>
                     </li>
                   <% end %>
+                </ul>
+                <ul class="list-area-name list-unstyled">
+                  <li>test</li>
                 </ul>
               </div>
             </div>
