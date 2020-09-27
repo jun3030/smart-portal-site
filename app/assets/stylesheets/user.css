@@ -25,3 +25,20 @@
 .filter-item {
     padding: 10px;
 }
+
+.dropdown-menu {
+    width: 800px;
+}
+
+.dropdown-frame {
+
+}
+
+.area-navi {
+
+}
+
+.area-navi-list {
+    display: inline-block;
+    background: red;
+}

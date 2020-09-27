@@ -2,15 +2,35 @@
   <div class="wrap-filter">
     <dl class="filter-item">
       <dt class="filter-head">エリアで絞り込む</dt>
-      <dd><input class="input-item read-only" placeholder="東京都渋谷区" readonly="" type="text"></dd>
+        <dd>
+          <div class="dropdown">
+            <button type="button" id="dropdown1"
+                class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false">
+                <input class="input-item read-only" placeholder="東京都渋谷区" readonly="" type="text">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdown1">
+              <div class="dropdown-frame">
+                <div class="area-navi-title">都道府県から探す</div>
+                <ul class="area-navi">
+                  <% Region.all.each do |region| %>
+                    <li class="area-navi-list">
+                        <a class="dropdown-item" href="#"><%= region.area %></a>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </dd>
     </dl>
     <dl class="filter-item">
       <dd><%= f.submit '絞り込む' %></dd>
     </dl>
   </div>
 <% end %>
-
-
 
 
 
