@@ -1,22 +1,20 @@
+<%= search_form_for @search, url: shop_path do |f| %>
+  <div class="wrap-filter">
+    <dl class="filter-item">
+      <dt class="filter-head">エリアで絞り込む</dt>
+      <dd><input class="input-item read-only" placeholder="東京都渋谷区" readonly="" type="text"></dd>
+    </dl>
+    <dl class="filter-item">
+      <dd><%= f.submit '絞り込む' %></dd>
+    </dl>
+  </div>
+<% end %>
 
-<div class="search-form">
-  <%= search_form_for @search, url: shop_path do |f| %>
-  <div class="dropdown">
-    <!-- 切替ボタンの設定 -->
-    <button type="button" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      test
-    </button>
-    <%= f.submit '検索' %>
-    <!-- ドロップメニューの設定 -->
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" href="#">
-        <%= f.collection_select :masseurs_cities_name_eq, City.all, :name, :name %>
-      </a>
 
-    </div><!-- /.dropdown-menu -->
-  </div><!-- /.dropdown -->
-  <% end %>
-</div>
+
+
+
+
 
 
 

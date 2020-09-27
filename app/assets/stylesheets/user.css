@@ -13,3 +13,15 @@
  *= require_tree ./user
  *= require_tree ./share
  */
+
+
+ .wrap-filter {
+    display: flex;
+    background: #f6efe3;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.filter-item {
+    padding: 10px;
+}
