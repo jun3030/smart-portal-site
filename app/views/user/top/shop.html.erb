@@ -1,3 +1,24 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <% Region.all.each do |region| %>
+    <li class="nav-list">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#region<%= region.id %>" role="tab" aria-controls="profile" aria-selected="false">
+        <%= region.area %>
+      </a>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <% Region.all.each do |region| %>
+    <div class="tab-pane fade" id="region<%= region.id %>" role="tabpanel" aria-labelledby="profile-tab">
+      <% region.prefectures.each do |prefecture| %>
+        <%= prefecture.name %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<!--
 <%= search_form_for @search, url: shop_path do |f| %>
   <% Region.all.each do |region| %>
       <div class="region"><%= region.area %></div>
@@ -12,7 +33,7 @@
   <%= f.submit '絞り込む' %>
   <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
 <% end %>
-
+-->
 
 
 
@@ -110,11 +131,6 @@
   </div>
 </section>
 
-<script src="//code.jquery.com/jquery-1.12.1.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 
 <!-- Js Plugins -->
@@ -131,7 +147,7 @@
 <script src="assets/js/main.js"></script> -->
 
 <script>
-
+// 市町村をクリックすると入力フォームに反映、検索可能
 $(function(){
   $(".city").on('click', function(){
     var element = document.getElementById('q_masseurs_cities_name_eq')

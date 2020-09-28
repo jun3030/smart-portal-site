@@ -13,12 +13,3 @@
  *= require_tree ./user
  *= require_tree ./share
  */
-
-#nav {
-    list-style: none;
-    overflow: hidden;
-}
-
-#nav li {
-    float: left;
-}
