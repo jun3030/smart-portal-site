@@ -170,14 +170,22 @@ $(function(){
     var navDetached = $('#myTab .nav-list').detach();
     var returnBtn = '<span class="returnBtn">' + '←' + $(".prefecture12")[0].textContent + '</span>'
 
+    var contentDetached = $('#myTabContent .tab-pane fade').detach();
+    var cityNames = '<span class="cityNames">' + $(".prefectureLink12")[0].textContent + '</span>'
+
     $('#myTab').html(returnBtn);
-    $('#myTabContent').html($(".prefectureLink12"));
+    $('#myTabContent').html(cityNames);
+
     $(".returnBtn").on('click', function(){
-      navDetached.prependTo('#myTab');
       $('.returnBtn').remove();
+      $('.cityNames').remove();
+      navDetached.prependTo('#myTab');
+      contentDetached.prependTo('#myTabContent');
 
     });
+
   });
+
   $(".prefecture13").on('click', function(){
     $(".prefectureLink13").toggle();
   });
