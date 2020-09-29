@@ -166,6 +166,17 @@ console.log(document.getElementsByClassName('nav-list'));
 $(function(){
   $(".prefecture12").on('click', function(){
     $(".prefectureLink12").toggle();
+    // 所定の要素に新たな要素とテキストを追加する
+    var navDetached = $('#myTab .nav-list').detach();
+    var returnBtn = '<span class="returnBtn">' + '←' + $(".prefecture12")[0].textContent + '</span>'
+
+    $('#myTab').html(returnBtn);
+    $('#myTabContent').html($(".prefectureLink12"));
+    $(".returnBtn").on('click', function(){
+      navDetached.prependTo('#myTab');
+      $('.returnBtn').remove();
+
+    });
   });
   $(".prefecture13").on('click', function(){
     $(".prefectureLink13").toggle();
