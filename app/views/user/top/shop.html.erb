@@ -13,6 +13,9 @@
     <div class="tab-pane fade" id="region<%= region.id %>" role="tabpanel" aria-labelledby="profile-tab">
       <% region.prefectures.each do |prefecture| %>
         <span class="prefecture<%= prefecture.id %>"><%= prefecture.name %></span>
+        <% prefecture.cities.each do |city| %>
+          <span class="city<%= city.id %>"><%= city.name %></span>
+        <% end %>
       <% end %>
     </div>
   <% end %>
@@ -159,9 +162,7 @@ $(function(){
 console.log(document.getElementsByClassName('nav-list'));
 
 $(function(){
-  $(".prefecture12").on('click', function(){
 
-  });
   $(".prefecture13").on('click', function(){
 
   });
