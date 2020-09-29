@@ -13,3 +13,15 @@
  *= require_tree ./user
  *= require_tree ./share
  */
+
+ .prefectureLink12 {
+    display:none;
+ }
+
+ .prefectureLink13 {
+    display:none;
+ }
+
+ .prefectureLink14 {
+    display:none;
+ }

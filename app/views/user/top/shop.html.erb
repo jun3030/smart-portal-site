@@ -13,9 +13,11 @@
     <div class="tab-pane fade" id="region<%= region.id %>" role="tabpanel" aria-labelledby="profile-tab">
       <% region.prefectures.each do |prefecture| %>
         <span class="prefecture<%= prefecture.id %>"><%= prefecture.name %></span>
-        <% prefecture.cities.each do |city| %>
-          <span class="city<%= city.id %>"><%= city.name %></span>
-        <% end %>
+        <span class="prefectureLink<%= prefecture.id %>">
+          <% prefecture.cities.each do |city| %>
+            <span class="city<%= city.id %>"><%= city.name %></span>
+          <% end %>
+        </span>
       <% end %>
     </div>
   <% end %>
@@ -162,12 +164,14 @@ $(function(){
 console.log(document.getElementsByClassName('nav-list'));
 
 $(function(){
-
+  $(".prefecture12").on('click', function(){
+    $(".prefectureLink12").toggle();
+  });
   $(".prefecture13").on('click', function(){
-
+    $(".prefectureLink13").toggle();
   });
   $(".prefecture14").on('click', function(){
-
+    $(".prefectureLink14").toggle();
   });
 });
 </script>
