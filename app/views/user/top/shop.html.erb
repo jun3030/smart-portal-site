@@ -173,12 +173,12 @@ $(function(){
     var contentDetached = $('#myTabContent .tab-pane fade').detach();
     var cityNames = '<span class="cityNames">' + $(".prefectureLink12")[0].textContent + '</span>'
 
-    $('#myTab').html(returnBtn);
-    $('#myTabContent').html(cityNames);
+    $('#myTab .nav-list').hide();
+    $('#myTabContent .tab-pane fade').hide();
 
     $(".returnBtn").on('click', function(){
-      $('.returnBtn').remove();
-      $('.cityNames').remove();
+      $('#myTab .nav-list').show();
+      $('#myTabContent .tab-pane fade').show();
       navDetached.prependTo('#myTab');
       contentDetached.prependTo('#myTabContent');
 
