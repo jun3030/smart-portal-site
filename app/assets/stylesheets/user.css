@@ -18,18 +18,10 @@
   display:none;
 }
 
-.prefecturesAll {
+.prefecturesAll, .cityAll {
   display:inline-block;
 }
 
-.prefectureLink12 {
-  display:none;
-}
-
-.prefectureLink13 {
-  display:none;
-}
-
-.prefectureLink14 {
+.prefectureLink12, .prefectureLink13, .prefectureLink14 {
   display:none;
 }

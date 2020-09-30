@@ -1,3 +1,10 @@
+<!-- 検索フォーム -->
+<%= search_form_for @search, url: shop_path do |f| %>
+  <%= f.submit '絞り込む' %>
+  <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
+<% end %>
+
+<!-- 検索項目/日本区域-->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <span class="returnBtn">←戻る</span>
   <% Region.all.each do |region| %>
@@ -8,7 +15,7 @@
     </li>
   <% end %>
 </ul>
-
+<!-- 検索項目/都道府県/市町村-->
 <div class="tab-content" id="myTabContent">
   <% Region.all.each do |region| %>
     <div class="tab-pane fade" id="region<%= region.id %>" role="tabpanel" aria-labelledby="profile-tab">
@@ -18,39 +25,13 @@
         </div>
         <span class="prefectureLink<%= prefecture.id %>">
           <% prefecture.cities.each do |city| %>
-            <span class="city<%= city.id %>"><%= city.name %></span>
+            <div class="cityAll"><%= city.name %></div>
           <% end %>
         </span>
       <% end %>
     </div>
   <% end %>
 </div>
-
-
-<!--
-<%= search_form_for @search, url: shop_path do |f| %>
-  <% Region.all.each do |region| %>
-      <div class="region"><%= region.area %></div>
-    <% region.prefectures.each do |prefecture| %>
-      <div class="prefecture"><%= prefecture.name %></div>
-      <% prefecture.cities.each do |city| %>
-        <div class="city"><%= city.name %></div>
-      <% end %>
-    <% end %>
-  <% end %>
-
-  <%= f.submit '絞り込む' %>
-  <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
-<% end %>
--->
-
-
-
-
-
-
-
-
 
 <section class="product-shop spad">
   <div class="container">
@@ -158,38 +139,40 @@
 <script>
 // 市町村をクリックすると入力フォームに反映、検索可能
 $(function(){
-  $(".city").on('click', function(){
+  $(".cityAll").on('click', function(){
     var element = document.getElementById('q_masseurs_cities_name_eq')
     element.value = this.textContent
   });
 });
 
-// 千葉県の処理
-$(".prefecture12").on('click', function(){
-  $('.returnBtn, .prefectureLink12').show();
-  $('.nav-list, .prefecturesAll').hide();
-  $(".returnBtn").on('click', function(){
-    $('.returnBtn, .prefectureLink12').hide();
-    $('.nav-list, .prefecturesAll').show();
+// 市町村をクリックした際の処理
+$(function(){
+  // 千葉県の処理
+  $(".prefecture12").on('click', function(){
+    $('.returnBtn, .prefectureLink12').show();
+    $('.nav-list, .prefecturesAll').hide();
+    $(".returnBtn").on('click', function(){
+      $('.returnBtn, .prefectureLink12').hide();
+      $('.nav-list, .prefecturesAll').show();
+    });
+  });
+  // 東京都の処理
+  $(".prefecture13").on('click', function(){
+    $('.returnBtn, .prefectureLink13').show();
+    $('.nav-list, .prefecturesAll').hide();
+    $(".returnBtn").on('click', function(){
+      $('.returnBtn, .prefectureLink13').hide();
+      $('.nav-list, .prefecturesAll').show();
+    });
+  });
+  // 神奈川県の処理
+  $(".prefecture14").on('click', function(){
+    $('.returnBtn, .prefectureLink14').show();
+    $('.nav-list, .prefecturesAll').hide();
+    $(".returnBtn").on('click', function(){
+      $('.returnBtn, .prefectureLink14').hide();
+      $('.nav-list, .prefecturesAll').show();
+    });
   });
 });
-// 東京都の処理
-$(".prefecture13").on('click', function(){
-  $('.returnBtn, .prefectureLink13').show();
-  $('.nav-list, .prefecturesAll').hide();
-  $(".returnBtn").on('click', function(){
-    $('.returnBtn, .prefectureLink13').hide();
-    $('.nav-list, .prefecturesAll').show();
-  });
-});
-// 神奈川県の処理
-$(".prefecture14").on('click', function(){
-  $('.returnBtn, .prefectureLink14').show();
-  $('.nav-list, .prefecturesAll').hide();
-  $(".returnBtn").on('click', function(){
-    $('.returnBtn, .prefectureLink14').hide();
-    $('.nav-list, .prefecturesAll').show();
-  });
-});
-
 </script>
