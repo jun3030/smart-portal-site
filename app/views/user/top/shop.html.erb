@@ -1,4 +1,5 @@
 <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <span class="returnBtn">←戻る</span>
   <% Region.all.each do |region| %>
     <li class="nav-list">
       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#region<%= region.id %>" role="tab" aria-controls="profile" aria-selected="false">
@@ -12,7 +13,9 @@
   <% Region.all.each do |region| %>
     <div class="tab-pane fade" id="region<%= region.id %>" role="tabpanel" aria-labelledby="profile-tab">
       <% region.prefectures.each do |prefecture| %>
-        <span class="prefecture<%= prefecture.id %>"><%= prefecture.name %></span>
+        <div class="prefecturesAll">
+          <span class="prefecture<%= prefecture.id %>"><%= prefecture.name %></span>
+        </div>
         <span class="prefectureLink<%= prefecture.id %>">
           <% prefecture.cities.each do |city| %>
             <span class="city<%= city.id %>"><%= city.name %></span>
@@ -161,36 +164,32 @@ $(function(){
   });
 });
 
-console.log(document.getElementsByClassName('nav-list'));
-
-$(function(){
-  $(".prefecture12").on('click', function(){
-    $(".prefectureLink12").toggle();
-    // 所定の要素に新たな要素とテキストを追加する
-    var navDetached = $('#myTab .nav-list').detach();
-    var returnBtn = '<span class="returnBtn">' + '←' + $(".prefecture12")[0].textContent + '</span>'
-
-    var contentDetached = $('#myTabContent .tab-pane fade').detach();
-    var cityNames = '<span class="cityNames">' + $(".prefectureLink12")[0].textContent + '</span>'
-
-    $('#myTab .nav-list').hide();
-    $('#myTabContent .tab-pane fade').hide();
-
-    $(".returnBtn").on('click', function(){
-      $('#myTab .nav-list').show();
-      $('#myTabContent .tab-pane fade').show();
-      navDetached.prependTo('#myTab');
-      contentDetached.prependTo('#myTabContent');
-
-    });
-
-  });
-
-  $(".prefecture13").on('click', function(){
-    $(".prefectureLink13").toggle();
-  });
-  $(".prefecture14").on('click', function(){
-    $(".prefectureLink14").toggle();
+// 千葉県の処理
+$(".prefecture12").on('click', function(){
+  $('.returnBtn, .prefectureLink12').show();
+  $('.nav-list, .prefecturesAll').hide();
+  $(".returnBtn").on('click', function(){
+    $('.returnBtn, .prefectureLink12').hide();
+    $('.nav-list, .prefecturesAll').show();
   });
 });
+// 東京都の処理
+$(".prefecture13").on('click', function(){
+  $('.returnBtn, .prefectureLink13').show();
+  $('.nav-list, .prefecturesAll').hide();
+  $(".returnBtn").on('click', function(){
+    $('.returnBtn, .prefectureLink13').hide();
+    $('.nav-list, .prefecturesAll').show();
+  });
+});
+// 神奈川県の処理
+$(".prefecture14").on('click', function(){
+  $('.returnBtn, .prefectureLink14').show();
+  $('.nav-list, .prefecturesAll').hide();
+  $(".returnBtn").on('click', function(){
+    $('.returnBtn, .prefectureLink14').hide();
+    $('.nav-list, .prefecturesAll').show();
+  });
+});
+
 </script>
