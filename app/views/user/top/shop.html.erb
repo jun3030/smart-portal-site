@@ -1,10 +1,15 @@
 <!-- 検索フォーム -->
-<div class="search-form">
-  <%= search_form_for @search, url: shop_path do |f| %>
-    <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
-    <%= f.submit '絞り込む' %>
-  <% end %>
-</div>
+<%= search_form_for @search, url: shop_path do |f| %>
+  <div id="search-flexbox">
+    <div class="search-box-item-left">
+      <div class="search-head">エリアで絞り込む</div>
+      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly></div>
+    </div>
+    <div class="search-box-item-right">
+      <div class="search-btn"><%= f.submit '絞り込む', class: "search-submit-btn" %></div>
+    </div>
+  </div>
+<% end %>
 
 <!-- 検索項目/日本区域-->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
