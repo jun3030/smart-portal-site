@@ -1,3 +1,18 @@
+<div class="dropdown">
+  <button type="button" id="dropdown1"
+      class="dropdown-toggle"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdown1">
+    <a class="dropdown-item" href="#">Menu #1</a>
+    <a class="dropdown-item" href="#">Menu #2</a>
+    <a class="dropdown-item" href="#">Menu #3</a>
+  </div>
+</div>
+
 <!-- 検索フォーム -->
 <%= search_form_for @search, url: shop_path do |f| %>
   <div id="search-flexbox">
@@ -142,6 +157,11 @@
 <script src="assets/js/jquery.slicknav.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script> -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
 $('#q_masseurs_cities_name_eq').click(function() {
