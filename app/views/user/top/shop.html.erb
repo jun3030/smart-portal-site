@@ -1,8 +1,10 @@
 <!-- 検索フォーム -->
-<%= search_form_for @search, url: shop_path do |f| %>
-  <%= f.submit '絞り込む' %>
-  <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
-<% end %>
+<div class="search-form">
+  <%= search_form_for @search, url: shop_path do |f| %>
+    <input type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly>
+    <%= f.submit '絞り込む' %>
+  <% end %>
+</div>
 
 <!-- 検索項目/日本区域-->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -137,6 +139,10 @@
 <script src="assets/js/main.js"></script> -->
 
 <script>
+$('#q_masseurs_cities_name_eq').click(function() {
+    $('#myTab').toggle();
+})
+
 // 市町村をクリックすると入力フォームに反映、検索可能
 $(function(){
   $(".cityAll").on('click', function(){
