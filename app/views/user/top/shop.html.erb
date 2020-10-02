@@ -1,18 +1,3 @@
-<div class="dropdown">
-  <button type="button" id="dropdown1"
-      class="dropdown-toggle"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false">
-    Dropdown button
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdown1">
-    <a class="dropdown-item" href="#">Menu #1</a>
-    <a class="dropdown-item" href="#">Menu #2</a>
-    <a class="dropdown-item" href="#">Menu #3</a>
-  </div>
-</div>
-
 <!-- 検索フォーム -->
 <%= search_form_for @search, url: shop_path do |f| %>
   <div id="search-flexbox">
@@ -26,6 +11,7 @@
   </div>
 <% end %>
 
+<div id="pop">
 <!-- 検索項目/日本区域-->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <span class="returnBtn">←戻る</span>
@@ -53,6 +39,22 @@
       <% end %>
     </div>
   <% end %>
+</div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3>通常版(ボタンを押すことで表示/非表示)</ph3>
+      <button type="button" class="btn btn-primary"
+              data-toggle="popover" data-placement="bottom"
+              title="popover title!"
+              data-content_div_id="pop">
+        show popover
+      </button>
+    </div>
+
+  </div>
 </div>
 
 <section class="product-shop spad">
@@ -164,6 +166,17 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
+
+$('[data-toggle="popover"]').popover({
+  html: true,
+  container: 'body',
+  content: function () {
+      var contentDivId = '#' + $(this).data('content_div_id');
+      return $(contentDivId).html();
+  },
+  trigger: 'hover'
+});
+
 $('#q_masseurs_cities_name_eq').click(function() {
     $('#myTab').toggle();
 })
