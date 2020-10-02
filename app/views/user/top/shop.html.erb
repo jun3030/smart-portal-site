@@ -3,7 +3,7 @@
   <div id="search-flexbox">
     <div class="search-box-item-left">
       <div class="search-head">エリアで絞り込む</div>
-      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" value="東京都渋谷区" readonly></div>
+      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" data-toggle="popover" data-placement="bottom" title="popover title!" data-content_div_id="pop" value="東京都渋谷区" readonly></div>
     </div>
     <div class="search-box-item-right">
       <div class="search-btn"><%= f.submit '絞り込む', class: "search-submit-btn" %></div>
@@ -42,20 +42,11 @@
 </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h3>通常版(ボタンを押すことで表示/非表示)</ph3>
-      <button type="button" class="btn btn-primary"
-              data-toggle="popover" data-placement="bottom"
-              title="popover title!"
-              data-content_div_id="pop">
+
+      <button type="button" class="btn btn-primary" >
         show popover
       </button>
-    </div>
 
-  </div>
-</div>
 
 <section class="product-shop spad">
   <div class="container">
@@ -166,7 +157,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-
+// popoverの設定
 $('[data-toggle="popover"]').popover({
   html: true,
   container: 'body',
