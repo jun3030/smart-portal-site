@@ -42,12 +42,6 @@
 </div>
 </div>
 
-
-      <button type="button" class="btn btn-primary" >
-        show popover
-      </button>
-
-
 <section class="product-shop spad">
   <div class="container">
 
@@ -163,13 +157,13 @@ $('[data-toggle="popover"]').popover({
   container: 'body',
   content: function () {
       var contentDivId = '#' + $(this).data('content_div_id');
-      return $(contentDivId).html();
+      return $(contentDivId)
   },
-  trigger: 'hover'
+  trigger: 'click'
 });
 
 $('#q_masseurs_cities_name_eq').click(function() {
-    $('#myTab').toggle();
+  var obj = $('#pop').clone();
 })
 
 // 市町村をクリックすると入力フォームに反映、検索可能
