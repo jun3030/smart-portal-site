@@ -70,13 +70,38 @@
               <%= sf.fields_for :store_images do |sif| %>
                   <div class="field mt-3">
                     <%= sif.label :store_image, class:"mr-2" %><br>
-                    <%= sif.file_field :store_image, multiple: true %>
+                    <%= sif.file_field :store_image, multiple: true, id: :user_img %>
+                    <!-- 画像のプレビュー表示 -->
+                    <%= @store_image.each do |image| %>
+                      <%= image_tag image, id: :img_prev %>
+                    <% end %>
+
                   </div>
                   <div class="field mt-3">
                     <%= sif.label :sm_image, class:"mr-2" %><br>
                     <%= sif.file_field :sm_image, multiple: true %>
                   </div>
-                <% end %>
+              <% end %>
+
+              <script type="text/javascript">
+                $(function() {
+                  function readURL(input) {
+                    console.log(input);
+                      if (input.files && input.files[0]) {
+                      var reader = new FileReader();
+                      console.log(reader);
+                      reader.onload = function (e) {
+                  $('#img_prev').attr('src', e.target.result);
+                      }
+                      reader.readAsDataURL(input.files[0]);
+                      }
+                  }
+                  $("#user_img").change(function(){
+                      readURL(this);
+                  });
+                });
+              </script>
+
 
               <h5 class="mt-5 mb-3">【施術プラン】</h5>
               <i>プランは後ほど追加登録することができます。</i>
@@ -123,3 +148,5 @@
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
