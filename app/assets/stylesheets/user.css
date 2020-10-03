@@ -13,6 +13,9 @@
  *= require_tree ./user
  *= require_tree ./share
  */
+#pop{
+  visibility: visible;
+}
 
 .returnBtn {
   display:none;

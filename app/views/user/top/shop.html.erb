@@ -3,7 +3,7 @@
   <div id="search-flexbox">
     <div class="search-box-item-left">
       <div class="search-head">エリアで絞り込む</div>
-      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" data-toggle="popover" data-placement="bottom" title="popover title!" data-content_div_id="pop" value="東京都渋谷区" readonly></div>
+      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" data-toggle="popover" data-placement="bottom" title="popover title!" value="東京都渋谷区" readonly></div>
     </div>
     <div class="search-box-item-right">
       <div class="search-btn"><%= f.submit '絞り込む', class: "search-submit-btn" %></div>
@@ -152,19 +152,14 @@
 
 <script>
 // popoverの設定
+var test = $("#pop")
 $('[data-toggle="popover"]').popover({
   html: true,
   container: 'body',
-  content: function () {
-      var contentDivId = '#' + $(this).data('content_div_id');
-      return $(contentDivId)
-  },
+  content: test,
   trigger: 'click'
 });
 
-$('#q_masseurs_cities_name_eq').click(function() {
-  var obj = $('#pop').clone();
-})
 
 // 市町村をクリックすると入力フォームに反映、検索可能
 $(function(){
