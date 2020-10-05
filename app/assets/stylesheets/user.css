@@ -14,7 +14,7 @@
  *= require_tree ./share
  */
 #pop{
-  visibility: visible;
+  visibility: hidden;
 }
 
 .returnBtn {
