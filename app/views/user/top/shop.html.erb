@@ -166,8 +166,44 @@ $(function(){
       $.each(tabContent, function(index, value){
         value.setAttribute("id", "region" + (index + 10));
       });
-    });
-  });
+      $(function(){
+      // 千葉県の処理
+      $(".prefecture12").on('click', function(){
+        $('.returnBtn, .prefectureLink12').show();
+        $('.nav-list, .prefecturesAll').hide();
+        $(".returnBtn").on('click', function(){
+          $('.returnBtn, .prefectureLink12').hide();
+          $('.nav-list, .prefecturesAll').show();
+        });
+      });
+      // 東京都の処理
+      $(".prefecture13").on('click', function(){
+        $('.returnBtn, .prefectureLink13').show();
+        $('.nav-list, .prefecturesAll').hide();
+        $(".returnBtn").on('click', function(){
+          $('.returnBtn, .prefectureLink13').hide();
+          $('.nav-list, .prefecturesAll').show();
+        });
+      });
+      // 神奈川県の処理
+      $(".prefecture14").on('click', function(){
+        $('.returnBtn, .prefectureLink14').show();
+        $('.nav-list, .prefecturesAll').hide();
+        $(".returnBtn").on('click', function(){
+          $('.returnBtn, .prefectureLink14').hide();
+          $('.nav-list, .prefecturesAll').show();
+        });
+      });
+      });
+      // 市町村をクリックすると入力フォームに反映、検索可能
+      $(function(){
+        $(".cityAll").on('click', function(){
+          var element = document.getElementById('q_masseurs_cities_name_eq')
+          element.value = this.textContent
+        });
+      });
+          });
+      });
 
 
 $('[data-toggle="popover"]').popover({
@@ -187,33 +223,5 @@ $(function(){
 });
 
 // 市町村をクリックした際の処理
-$(function(){
-  // 千葉県の処理
-  $(".prefecture12").on('click', function(){
-    $('.returnBtn, .prefectureLink12').show();
-    $('.nav-list, .prefecturesAll').hide();
-    $(".returnBtn").on('click', function(){
-      $('.returnBtn, .prefectureLink12').hide();
-      $('.nav-list, .prefecturesAll').show();
-    });
-  });
-  // 東京都の処理
-  $(".prefecture13").on('click', function(){
-    $('.returnBtn, .prefectureLink13').show();
-    $('.nav-list, .prefecturesAll').hide();
-    $(".returnBtn").on('click', function(){
-      $('.returnBtn, .prefectureLink13').hide();
-      $('.nav-list, .prefecturesAll').show();
-    });
-  });
-  // 神奈川県の処理
-  $(".prefecture14").on('click', function(){
-    $('.returnBtn, .prefectureLink14').show();
-    $('.nav-list, .prefecturesAll').hide();
-    $(".returnBtn").on('click', function(){
-      $('.returnBtn, .prefectureLink14').hide();
-      $('.nav-list, .prefecturesAll').show();
-    });
-  });
-});
+
 </script>
