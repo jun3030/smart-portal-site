@@ -3,7 +3,7 @@
   <div id="search-flexbox">
     <div class="search-box-item-left">
       <div class="search-head">エリアで絞り込む</div>
-      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" data-toggle="popover" data-placement="bottom" title="popover title!" value="東京都渋谷区" readonly></div>
+      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" data-toggle="popover" data-placement="bottom" title="都道府県から探す" value="東京都渋谷区" readonly></div>
     </div>
     <div class="search-box-item-right">
       <div class="search-btn"><%= f.submit '絞り込む', class: "search-submit-btn" %></div>
@@ -155,6 +155,8 @@ $(function(){
     $("#popover").clone().attr("id", "add").appendTo("#popover-clone");
     var navLink = $("#add").find(".nav-link");
     var tabContent = $("#add").find(".tab-content .tab-pane");
+
+    $(".popover").css({'max-width':'1000px', 'margin-left':'45px'});
 
     //navLinkのhref属性の値を変更/日本区域をクリックすると都道府県表示
     $.each(navLink, function(index, value){

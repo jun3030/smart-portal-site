@@ -13,16 +13,34 @@
  *= require_tree ./user
  *= require_tree ./share
  */
+
 #popover{
   visibility: hidden;
 }
 
 .returnBtn {
   display:none;
+  cursor: pointer;
+  color: #337ab7;
+}
+
+.nav-link {
+  background: #f8f8f8;
+}
+
+.nav-list {
+  margin-right:8px;
+  border-bottom: 1px solid #fff;
 }
 
 .prefecturesAll, .cityAll {
   display:inline-block;
+  padding:10px 24px;
+  border-radius: 5px;
+  margin-right:5px;
+  margin-top:10px;
+  background: #f8f8f8;
+  cursor: pointer;
 }
 
 .prefectureLink12, .prefectureLink13, .prefectureLink14 {
