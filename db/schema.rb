@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_152530) do
+ActiveRecord::Schema.define(version: 2020_08_11_101612) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -166,7 +166,6 @@ ActiveRecord::Schema.define(version: 2020_09_13_152530) do
     t.integer "store_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.json "sm_image"
     t.index ["store_id"], name: "index_store_images_on_store_id"
   end
 
