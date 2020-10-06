@@ -1,6 +1,6 @@
 class StoreManager::StoreController < StoreManager::Base
   include SmartYoyakuApi::Calendar
-
+  
   before_action :sign_in_store_manager, only: [:edit]
   before_action :correct_store, only: [:edit]
 
@@ -33,7 +33,7 @@ class StoreManager::StoreController < StoreManager::Base
   end
 
   private
-
+    
     # ログインしているかどうかの判定
     def sign_in_store_manager
       unless store_manager_signed_in?
@@ -50,6 +50,6 @@ class StoreManager::StoreController < StoreManager::Base
     end
 
     def store_params
-      params.require(:store).permit(:store_name, :adress, :store_phonenumber, :store_description, store_images_attributes:[:id, {store_image: []},:remove_store_image, {sm_image: []},:remove_sm_image ])
+      params.require(:store).permit(:store_name, :adress, :store_phonenumber, :store_description, store_images_attributes:[:id, {store_image: []},:remove_store_image ])
     end
 end
