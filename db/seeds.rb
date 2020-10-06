@@ -104,14 +104,7 @@ area_6.each {|value| Prefecture.find_or_create_by(name: value, region_id: 6)}
 area_7.each {|value| Prefecture.find_or_create_by(name: value, region_id: 7)}
 area_8.each {|value| Prefecture.find_or_create_by(name: value, region_id: 8)}
 
-# 市/区データを取得
-# cities_1 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=1")
-# cities_2 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=2")
-# cities_3 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=3")
-# cities_4 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=4")
-# cities_5 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=5")
-# cities_6 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=6")
-# cities_7 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=7")
+# 市/区データを取得/今のところ関東地域のみ取得
 # cities_8 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=8")
 # cities_9 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=9")
 # cities_10 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=10")
@@ -120,14 +113,7 @@ cities_12 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?p
 cities_13 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=13")
 cities_14 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=14")
 
-# 都道府県に紐づく市/区データを作成
-# cities_1["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 1)}
-# cities_2["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 2)}
-# cities_3["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 3)}
-# cities_4["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 4)}
-# cities_5["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 5)}
-# cities_6["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 6)}
-# cities_7["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 7)}
+# 都道府県に紐づく市/区データを作成/今のところ関東地域のみ作成
 # cities_8["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 8)}
 # cities_9["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 9)}
 # cities_10["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 10)}
