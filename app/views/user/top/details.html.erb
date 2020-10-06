@@ -316,26 +316,22 @@
             <tr>
               <td class="area">対応地域</td>
               <td class="area-service">
-              <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all, :id, :name, include_hidden: false do |prefecture| %>
-                <% @prefecture_ids.uniq.each do |prefecture_id| %>
-                  <% if prefecture.object.id == prefecture_id %>
-                    <div class="prefecture_name"><%= "＜" + prefecture.text + "＞" %></div>
+                <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all, :id, :name, include_hidden: false do |prefecture| %>
+                  <% @prefecture_ids.uniq.each do |prefecture_id| %>
+                    <% if prefecture.value == prefecture_id %>
+                        <div class="prefecture_name"><%= "＜" + prefecture.text + "＞" %></div>
+                    <% end %>
                   <% end %>
-                <% end %>
-                <%= collection_check_boxes :city, :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
-                  <% if prefecture.object.id == city.object.prefecture_id %>
-                    <% @city_ids.each do |city_id| %>
-                      <% if city.object.id == city_id %>
-                      <ul class="wrap-town list-unstyled">
-                        <li class="town">
-                          <%= city.text %>
-                        </li>
-                      </ul>
+                  <%= collection_check_boxes :city, :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
+                    <% if prefecture.object.id == city.object.prefecture_id %>
+                      <% @city_ids.each do |city_id| %>
+                        <% if city.value == city_id %>
+                          <span class="town"><%= city.text + "/" %></span>
+                        <% end %>
                       <% end %>
                     <% end %>
                   <% end %>
                 <% end %>
-              <% end %>
               </td>
             </tr>
           </tbody>
