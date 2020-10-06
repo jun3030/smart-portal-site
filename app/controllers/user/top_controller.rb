@@ -28,7 +28,6 @@ class User::TopController < User::Base
     @store_images = @store.store_images.first
     unless @store_images.nil?
       @count_store_image = @store_images.store_image.count
-      @count_sm_image = @store_images.sm_image.count
     end
   end
 
