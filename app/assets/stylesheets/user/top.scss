@@ -193,7 +193,7 @@ i.icon-l.ctg-icon_aircon {
 }
 
 .area-action {
-  float: right;
+  float: left;
 }
 
 .width_image {
@@ -238,7 +238,16 @@ i.icon-l.ctg-icon_aircon {
 
 .image_solid {
   border: 0.5px solid;
-  border-color: #388aaa;
+  border-color: #C0C0C0;
+}
+
+.img-circle{
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  background-position: center center;
+  border: 1px solid #C0C0C0;
 }
 
 .m-bottom-10 {
