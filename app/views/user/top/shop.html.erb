@@ -1,3 +1,50 @@
+<!-- 検索フォーム -->
+<%= search_form_for @search, url: shop_path do |f| %>
+  <div id="search-flexbox">
+    <div class="search-box-item-left">
+      <div class="search-head">エリアで絞り込む</div>
+      <div><input class="input-item read-only" type="text" name="q[masseurs_cities_name_eq]" id="q_masseurs_cities_name_eq" data-toggle="popover" data-placement="bottom" title="都道府県から探す" value="東京都渋谷区" readonly></div>
+    </div>
+    <div class="search-box-item-right">
+      <div class="search-btn"><%= f.submit '絞り込む', class: "search-submit-btn" %></div>
+    </div>
+  </div>
+<% end %>
+
+<div id="popover">
+  <!-- 検索項目/日本区域-->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <span class="returnBtn">←戻る</span>
+    <% Region.all.each do |region| %>
+      <li class="nav-list">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#region<%= region.id %>" role="tab" aria-controls="profile" aria-selected="false">
+          <%= region.area %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+  <!-- 検索項目/都道府県/市町村-->
+  <div class="tab-content" id="myTabContent">
+    <% Region.all.each do |region| %>
+      <div class="tab-pane fade" id="region<%= region.id %>" role="tabpanel" aria-labelledby="profile-tab">
+        <% region.prefectures.each do |prefecture| %>
+          <div class="prefecturesAll">
+            <span class="prefecture<%= prefecture.id %>"><%= prefecture.name %></span>
+          </div>
+          <span class="prefectureLink<%= prefecture.id %>">
+            <% prefecture.cities.each do |city| %>
+              <div class="cityAll"><%= city.name %></div>
+            <% end %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="popover-clone">
+</div>
+
 <section class="product-shop spad">
   <div class="container">
     <div class="row">
@@ -20,6 +67,7 @@
         </div>-->
       </div>
     </div>
+
     <div class="col-lg-9 order-1 order-lg-2">
       <div class="product-show-option">
         <div class="list_head">
@@ -47,7 +95,8 @@
             </li>
           </ul>
         </div>
-        <% @all_store.each do |store| %>
+        <!-- 検索結果表示 -->
+        <% @store_result.each do |store| %>
           <div class="">
             <div class="row">
               <div class="col-lg-12">
@@ -89,6 +138,79 @@
 <script src="assets/js/jquery.nice-select.min.js"></script>
 <script src="assets/js/jquery.zoom.min.js"></script>
 <script src="assets/js/jquery.dd.min.js"></script>
-<script src="assets/js/jquery.slicknav.js"></script> 
+<script src="assets/js/jquery.slicknav.js"></script>
 <script src="assets/js/owl.carousel.min.js"></script>
 <script src="assets/js/main.js"></script> -->
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<script>
+
+$(function(){
+  $("#q_masseurs_cities_name_eq").one('click', function(){
+    //#popoverをクローン、idを#addに変更、viewに追加
+    $("#popover").clone().attr("id", "add").appendTo("#popover-clone");
+    var navLink = $("#add").find(".nav-link");
+    var tabContent = $("#add").find(".tab-content .tab-pane");
+
+    $(".popover").css({'max-width':'1000px', 'margin-left':'45px'});
+
+    //navLinkのhref属性の値を変更/日本区域をクリックすると都道府県表示
+    $.each(navLink, function(index, value){
+      value.setAttribute('href', "#region" + (index + 10));
+    });
+    //tabContentのid属性の値を変更/日本区域をクリックすると都道府県表示
+    $.each(tabContent, function(index, value){
+      value.setAttribute("id", "region" + (index + 10));
+    });
+    $(function(){
+    // 千葉県の処理
+    $(".prefecture12").on('click', function(){
+      $('.returnBtn, .prefectureLink12').show();
+      $('.nav-list, .prefecturesAll').hide();
+      $(".returnBtn").on('click', function(){
+        $('.returnBtn, .prefectureLink12').hide();
+        $('.nav-list, .prefecturesAll').show();
+      });
+    });
+    // 東京都の処理
+    $(".prefecture13").on('click', function(){
+      $('.returnBtn, .prefectureLink13').show();
+      $('.nav-list, .prefecturesAll').hide();
+      $(".returnBtn").on('click', function(){
+        $('.returnBtn, .prefectureLink13').hide();
+        $('.nav-list, .prefecturesAll').show();
+      });
+    });
+    // 神奈川県の処理
+    $(".prefecture14").on('click', function(){
+      $('.returnBtn, .prefectureLink14').show();
+      $('.nav-list, .prefecturesAll').hide();
+      $(".returnBtn").on('click', function(){
+        $('.returnBtn, .prefectureLink14').hide();
+        $('.nav-list, .prefecturesAll').show();
+      });
+    });
+    });
+    // 市町村をクリックすると入力フォームに反映、検索可能
+    $(function(){
+      $(".cityAll").on('click', function(){
+        var element = document.getElementById('q_masseurs_cities_name_eq')
+        element.value = this.textContent
+      });
+    });
+  });
+});
+
+//popoverの設定
+$('[data-toggle="popover"]').popover({
+  html: true,
+  container: 'body',
+  content: $("#popover-clone"),
+  trigger: 'click'
+});
+
+</script>

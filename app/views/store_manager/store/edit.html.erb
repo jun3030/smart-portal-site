@@ -38,10 +38,10 @@
                       <%= sif.file_field :store_image, multiple: true %><br>
                     <% end %>
                   <% else %>
-                      <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <%= sif.label :store_image, class:"mr-2" %><br>
-                        <%= sif.file_field :store_image, multiple: true %>
-                      <% end %>
+                    <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
+                      <%= sif.label :store_image, class:"mr-2" %><br>
+                      <%= sif.file_field :store_image, multiple: true %>
+                    <% end %>
                   <% end %>
                 <% else %>
                   <%= sf.fields_for :store_images do |sif| %>
