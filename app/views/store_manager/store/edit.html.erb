@@ -35,18 +35,18 @@
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>
                       <%= sif.label :store_image, class:"mr-2" %><br>
-                      <%= sif.file_field :store_image, multiple: true %><br>
+                      <%= sif.file_field :store_image, id: :store_img_field, multiple: true %><br>
                     <% end %>
                   <% else %>
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
                         <%= sif.label :store_image, class:"mr-2" %><br>
-                        <%= sif.file_field :store_image, multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field, multiple: true %>
                       <% end %>
                   <% end %>
                 <% else %>
                   <%= sf.fields_for :store_images do |sif| %>
                     <%= sif.label :store_image, class:"mr-2" %><br>
-                    <%= sif.file_field :store_image, multiple: true %><br>
+                    <%= sif.file_field :store_image, id: :store_img_field, multiple: true %><br>
                     <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
                     <div class="field mt-3">
                       <%= sif.check_box :remove_store_image %>&ensp;画像の削除</span>
@@ -55,6 +55,35 @@
                   <% end %>
                 <% end %>
               </div>
+
+              <!-- 店舗画像のプレビュー -->
+
+              <% if @store.store_images.pluck(:store_image).any? %>
+                <%= image_tag @store.store_images.find(1).store_image[0].url, id: :store_img_prev %>
+              <% end %>
+
+　　　　　　　　 <script>
+
+              $(function() {
+                function readURL(input) {
+                    if (input.files) {
+                    var reader = new FileReader();
+                    reader.onload = function (event) {
+                      console.log(e);
+                      $('#store_img_prev').attr('src', event.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                    }
+                }
+                $("#store_img_field").change(function(){
+
+                    readURL(this);
+                });
+              });
+
+              </script>
+
+
 
               <div class="field mt-3">
                 <% unless @store.store_images.pluck(:sm_image).any? %>
@@ -91,3 +120,5 @@
     </div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
