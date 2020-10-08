@@ -3,6 +3,7 @@ class Store < ApplicationRecord
   has_many :masseurs, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :store_images, dependent: :destroy
+  has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :masseurs
   accepts_nested_attributes_for :store_images
   accepts_nested_attributes_for :plans

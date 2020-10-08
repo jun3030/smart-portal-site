@@ -49,6 +49,9 @@ ja:
           plan_content: プラン内容
           plan_time: プラン時間
           plan_price: プラン料金
+        store/message:
+          title: 件名
+          content: 内容
   # 全てのmodelで共通して使用するattributesを定義
   attributes:
     id: ID

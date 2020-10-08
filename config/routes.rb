@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     # end
 
 
-    
+
 
   # Admin↓========================================================================================
     namespace :admin do
@@ -53,7 +53,13 @@ Rails.application.routes.draw do
     namespace :store_manager do
       get "/:id/top", to: 'top_page#top'
       patch "update_calendar_status", to: 'top_page#update_calendar_status'
-      resources :store
+      resources :store do
+        member do
+          resources :message, except: [:edit, :update]
+          get "message/reply"
+          get "message/create_reply"
+        end
+      end
       resources :plans
       resources :masseurs, except: :show
       # 出張範囲のrouting↓========================================================================================
@@ -68,5 +74,5 @@ Rails.application.routes.draw do
     namespace :smart_yoyaku do
       post "webhook", to: 'webhook#update_order_plan'
     end
-    
+
 end
