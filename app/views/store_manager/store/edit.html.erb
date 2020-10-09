@@ -45,7 +45,6 @@
                       <hr>
                     <% end %>
                   <% else %>
-<<<<<<< HEAD
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
                         <%= sif.label :store_image, class:"mr-2" %>画像なしidなし<br>
                         <div class="hidden_field">
@@ -57,12 +56,6 @@
                         </end>
                         <hr>
                       <% end %>
-=======
-                    <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                      <%= sif.label :store_image, class:"mr-2" %><br>
-                      <%= sif.file_field :store_image, multiple: true %>
-                    <% end %>
->>>>>>> 9b2dd71091704413786d55c353dd43f5a3e51940
                   <% end %>
                 <% else %>
                   <%= sf.fields_for :store_images do |sif| %>
@@ -118,7 +111,6 @@
       <%= link_to "top", root_path %>
     </div>
   </div>
-<<<<<<< HEAD
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -143,17 +135,26 @@ $(document).on('turbolinks:load', function(){
                   </div>`
       return html;
     }
-    function readURL(input) {
-      $('#store_img_field1').change(function() {
 
-        console.log("test");
-      });
-    }
+    $('.hidden_field').change(function(event) {
+      storeImgFieldId = event.target.id
+      file = event.target.files[0]
+      reader = new FileReader(),
+      $preview = $("#img_field");
 
-
+      reader.onload = (function(file) {
+        return function(e) {
+        $preview.empty();
+        $preview.append($('<img>').attr({
+          src: e.target.result,
+          width: "50%",
+          class: "preview",
+          title: file.name
+        }));
+        };
+      })(file);
+      reader.readAsDataURL(file);
+    });
   });
 })
 </script>
-=======
-</div>
->>>>>>> 9b2dd71091704413786d55c353dd43f5a3e51940
