@@ -34,13 +34,27 @@
                 <% unless @store.store_images.pluck(:store_image).any? %>
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>
-                      <%= sif.label :store_image, class:"mr-2" %><br>
-                      <%= sif.file_field :store_image, id: :store_img_field, multiple: true %><br>
+                      <%= sif.label :store_image, class:"mr-2" %>画像なしnil<br>
+                      <div class="hidden_field">
+                      <%= sif.file_field :store_image, id: :store_img_field1, multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field2, multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field3, multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field4, multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field5, multiple: true %>
+                      </div>
+                      <hr>
                     <% end %>
                   <% else %>
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <%= sif.label :store_image, class:"mr-2" %><br>
-                        <%= sif.file_field :store_image, id: :store_img_field, multiple: true %>
+                        <%= sif.label :store_image, class:"mr-2" %>画像なしidなし<br>
+                        <div class="hidden_field">
+                        <%= sif.file_field :store_image, id: :store_img_field1, multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field2, multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field3, multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field4, multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field5, multiple: true %>
+                        </end>
+                        <hr>
                       <% end %>
                   <% end %>
                 <% else %>
@@ -56,32 +70,9 @@
                 <% end %>
               </div>
 
-              <!-- 店舗画像のプレビュー -->
+              <!-- プレビュー -->
 
-              <% if @store.store_images.pluck(:store_image).any? %>
-                <%= image_tag @store.store_images.find(1).store_image[0].url, id: :store_img_prev %>
-              <% end %>
-
-　　　　　　　　 <script>
-
-              $(function() {
-                function readURL(input) {
-                    if (input.files) {
-                    var reader = new FileReader();
-                    reader.onload = function (event) {
-                      console.log(e);
-                      $('#store_img_prev').attr('src', event.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                    }
-                }
-                $("#store_img_field").change(function(){
-
-                    readURL(this);
-                });
-              });
-
-              </script>
+              <div id="img_field" onClick="$('#store_img_field1').click()">test</div>
 
 
 
@@ -117,8 +108,41 @@
           </div>
         </div>
       <%= link_to "キャンセル", store_managers_show_path(current_store_manager), class:"top_space" %>
+      <%= link_to "top", root_path %>
     </div>
   </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+<script>
+$(document).on('turbolinks:load', function(){
+  $(function(){
+    //プレビューのhtmlを定義
+    function buildHTML(count) {
+      var html = `<div class="preview-box" id="preview-box__${count}">
+                    <div class="upper-box">
+                      <img src="" alt="preview">
+                    </div>
+                    <div class="lower-box">
+                      <div class="update-box">
+                        <label class="edit_btn">編集</label>
+                      </div>
+                      <div class="delete-box" id="delete_btn_${count}">
+                        <span>削除</span>
+                      </div>
+                    </div>
+                  </div>`
+      return html;
+    }
+    function readURL(input) {
+      $('#store_img_field1').change(function() {
+
+        console.log("test");
+      });
+    }
+
+
+  });
+})
+</script>

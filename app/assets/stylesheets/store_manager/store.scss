@@ -1,3 +1,19 @@
 // Place all the styles related to the store_manager/store controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#img_field {
+
+    border: solid 1px #EDBC6C;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 400px;
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color:#EEEEEE;
+    overflow: hidden;
+    border: 1px solid #b5b5b5;
+    transition: 0.3s ease-out;
+  }
