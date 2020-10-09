@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_13_152530) do
+ActiveRecord::Schema.define(version: 2020_10_06_154344) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -119,6 +119,14 @@ ActiveRecord::Schema.define(version: 2020_09_13_152530) do
 
   create_table "prefectures", force: :cascade do |t|
     t.string "name"
+    t.integer "region_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["region_id"], name: "index_prefectures_on_region_id"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "area"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -224,6 +232,7 @@ ActiveRecord::Schema.define(version: 2020_09_13_152530) do
   add_foreign_key "favorites", "users"
   add_foreign_key "masseurs", "stores"
   add_foreign_key "plan_images", "plans"
+  add_foreign_key "prefectures", "regions"
   add_foreign_key "reviews", "masseurs"
   add_foreign_key "reviews", "users"
   add_foreign_key "social_profiles", "users"

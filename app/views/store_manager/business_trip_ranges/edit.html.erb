@@ -9,17 +9,30 @@
         <table class="prefecture table table-hover">
           <thead>
             <!--今は東京のみを表示しているがDBには全都道府県が入っている-->
-            <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all.where(id: 13), :id, :name, include_hidden: false do |prefecture| %>
+            <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all.where(id: [12, 13, 14]), :id, :name, include_hidden: false do |prefecture| %>
             <tr>
               <th>
-                <%= prefecture.check_box + prefecture.text %>
+                <div id="menu<%= prefecture.object.id %>">
+                  <span class="check_box"><%= prefecture.check_box %></span>
+                  <span class="text"><%= prefecture.text %></span>
+                </div>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="city-check-boxes">
-                <div id="city-list"><%= render partial: 'cities', locals: { f: f, prefecture: prefecture } %></div>
+                <div id="city-list<%= prefecture.object.id %>">
+                  <%= f.collection_check_boxes :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
+                    <% if prefecture.object.id == city.object.prefecture_id %>
+                      <ul class="city-check-box">
+                          <li class="city-check-box-item">
+                          <div id="boxes"><%= city.check_box + city.text %></div>
+                          </li>
+                      </ul>
+                    <% end %>
+                  <% end %>
+                </div>
               </td>
             </tr>
             <% end %>
@@ -36,16 +49,62 @@
   </div>
 </div>
 
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script>
 
-// ↓今のところ東京とそれに紐づく市町村の処理のみ
+$(function () {
+
+  // メニュー領域外をクリックしたらメニューを閉じる
+  $(function(){
+    $("#menu12 .text").on('click', function(){
+      $("#city-list12").slideToggle('fast');
+    });
+  });
+
+  $(function(){
+    $('#menu13 .text').on('click', function(){
+      $("#city-list13").slideToggle('fast');
+    });
+  });
+
+  $(function(){
+    $('#menu14 .text').on('click', function(){
+      $("#city-list14").slideToggle('fast');
+    });
+  });
+});
+
+// 千葉県に紐づく市/区の処理
 $(function() {
     // 1. 「全選択」する
-    $('#prefecture_prefecture_ids_13').on('click', function() {
-      $("input[name='masseur[city_ids][]']").prop('checked', this.checked);
+    for (let i = 1; i < 61; i++) {
+      city_ids = "input[id='masseur_city_ids_" + i + "']"
+    $('#prefecture_prefecture_ids_12').on('click', function() {
+      $("input[id='masseur_city_ids_" + i + "']").prop('checked', this.checked);
     });
     // 2. 「全選択」以外のチェックボックスがクリックされたら、
-    $("input[name='masseur[city_ids][]']").on('click', function() {
+    $("input[id='masseur_city_ids_" + i + "']").on('click', function() {
+      if ($('#boxes :checked').length == $('#boxes :input').length) {
+        // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_12').prop('checked', true);
+      } else {
+        // 1つでもチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_12').prop('checked', false);
+      }
+    });
+    }
+})
+
+// 東京都に紐づく市/区の処理
+$(function() {
+    // 1. 「全選択」する
+    for (let i = 61; i < 123; i++) {
+      city_ids = "input[id='masseur_city_ids_" + i + "']"
+    $('#prefecture_prefecture_ids_13').on('click', function() {
+      $("input[id='masseur_city_ids_" + i + "']").prop('checked', this.checked);
+    });
+    // 2. 「全選択」以外のチェックボックスがクリックされたら、
+    $("input[id='masseur_city_ids_" + i + "']").on('click', function() {
       if ($('#boxes :checked').length == $('#boxes :input').length) {
         // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
         $('#prefecture_prefecture_ids_13').prop('checked', true);
@@ -54,6 +113,28 @@ $(function() {
         $('#prefecture_prefecture_ids_13').prop('checked', false);
       }
     });
+    }
+})
+
+// 神奈川県に紐づく市/区の処理
+$(function() {
+    // 1. 「全選択」する
+    for (let i = 123; i < 184; i++) {
+      city_ids = "input[id='masseur_city_ids_" + i + "']"
+    $('#prefecture_prefecture_ids_14').on('click', function() {
+      $("input[id='masseur_city_ids_" + i + "']").prop('checked', this.checked);
+    });
+    // 2. 「全選択」以外のチェックボックスがクリックされたら、
+    $("input[id='masseur_city_ids_" + i + "']").on('click', function() {
+      if ($('#boxes :checked').length == $('#boxes :input').length) {
+        // 全てのチェックボックスにチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_14').prop('checked', true);
+      } else {
+        // 1つでもチェックが入っていたら、「全選択」 = checked
+        $('#prefecture_prefecture_ids_14').prop('checked', false);
+      }
+    });
+    }
 })
 
 </script>

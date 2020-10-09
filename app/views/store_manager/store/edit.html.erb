@@ -45,6 +45,7 @@
                       <hr>
                     <% end %>
                   <% else %>
+<<<<<<< HEAD
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
                         <%= sif.label :store_image, class:"mr-2" %>画像なしidなし<br>
                         <div class="hidden_field">
@@ -56,6 +57,12 @@
                         </end>
                         <hr>
                       <% end %>
+=======
+                    <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
+                      <%= sif.label :store_image, class:"mr-2" %><br>
+                      <%= sif.file_field :store_image, multiple: true %>
+                    <% end %>
+>>>>>>> 9b2dd71091704413786d55c353dd43f5a3e51940
                   <% end %>
                 <% else %>
                   <%= sf.fields_for :store_images do |sif| %>
@@ -111,6 +118,7 @@
       <%= link_to "top", root_path %>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
@@ -146,3 +154,6 @@ $(document).on('turbolinks:load', function(){
   });
 })
 </script>
+=======
+</div>
+>>>>>>> 9b2dd71091704413786d55c353dd43f5a3e51940
