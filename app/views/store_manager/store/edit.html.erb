@@ -34,25 +34,23 @@
                 <% unless @store.store_images.pluck(:store_image).any? %>
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>
-                      <%= sif.label :store_image, class:"mr-2" %>画像なしnil<br>
+                      <%= sif.label :store_image, class:"label-box", for: "store_img_field0" , id: "label-box--0" %>画像なしnil<br>
                       <div class="hidden_field">
-                      <%= sif.file_field :store_image, id: :store_img_field1, multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field2, multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field3, multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field4, multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field5, multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
                       </div>
                       <hr>
                     <% end %>
                   <% else %>
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <%= sif.label :store_image, class:"mr-2" %>画像なしidなし<br>
+                        <%= sif.label :store_image, class:"label-box", for: "store_img_field0" , id: "label-box--0" %>画像なしidなし<br>
                         <div class="hidden_field">
-                        <%= sif.file_field :store_image, id: :store_img_field1, multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field2, multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field3, multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field4, multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field5, multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
                         </end>
                         <hr>
                       <% end %>
@@ -137,7 +135,7 @@ $(document).on('turbolinks:load', function(){
     }
 
     $('.hidden_field').change(function(event) {
-      storeImgFieldId = event.target.id
+      storeImgFieldId = event.target.id.replace(/[^0-9]/g, '');
       file = event.target.files[0]
       reader = new FileReader(),
       $preview = $("#img_field");
