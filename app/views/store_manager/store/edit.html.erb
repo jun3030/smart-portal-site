@@ -34,31 +34,37 @@
                 <% unless @store.store_images.pluck(:store_image).any? %>
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>
-                      <%= sif.label :store_image, class:"label-box", for: "store_img_field0" , id: "label-box--0" %>画像なしnil<br>
+                      <%= sif.label :store_image, class:"label-box", for: "store_img_field_0" , id: "label-box--0" %>画像なしnil<br>
                       <div class="hidden_field">
-                        <%= sif.file_field :store_image, id: :store_img_field1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                        <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
                       </div>
                       <hr>
                     <% end %>
                   <% else %>
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <%= sif.label :store_image, class:"label-box", for: "store_img_field0" , id: "label-box--0" %>画像なしidなし<br>
+                        <%= sif.label :store_image, class:"label-box", for: "store_img_field_0" , id: "label-box--0" %>画像なしidなし<br>
                         <div class="hidden_field">
-                          <%= sif.file_field :store_image, id: :store_img_field1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
                         </end>
                         <hr>
                       <% end %>
                   <% end %>
                 <% else %>
                   <%= sf.fields_for :store_images do |sif| %>
-                    <%= sif.label :store_image, class:"mr-2" %><br>
-                    <%= sif.file_field :store_image, id: :store_img_field, multiple: true %><br>
+                    <%= sif.label :store_image, class:"label-box", for: "store_img_field_0" , id: "label-box--0" %>画像あり更新<br>
+                      <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                      <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
                     <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
                     <div class="field mt-3">
                       <%= sif.check_box :remove_store_image %>&ensp;画像の削除</span>
@@ -69,8 +75,10 @@
               </div>
 
               <!-- プレビュー -->
+              <div class="prev-content">
+                <div class="label-content"></div>
+              </div>
 
-              <div id="img_field" onClick="$('#store_img_field1').click()">test</div>
 
 
 
@@ -113,6 +121,7 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+"
 <script>
 $(document).on('turbolinks:load', function(){
   $(function(){
@@ -134,25 +143,45 @@ $(document).on('turbolinks:load', function(){
       return html;
     }
 
+    // ラベルのwidth操作
+    function setLabel() {
+      //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
+      var prevContent = $('.prev-content');
+      labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+      $('.label-content').css('width', labelWidth);
+    }
+
     $('.hidden_field').change(function(event) {
-      storeImgFieldId = event.target.id.replace(/[^0-9]/g, '');
+      //file_fieldのidの数字だけ取得
+      var id = event.target.id.replace(/[^0-9]/g, '');
+
+      //labelボックスのidとforを更新
+      $('.label-box').attr({id: `label-box--${id}`,for: `store_img_field_${id}`});
+
+      //選択したfileのオブジェクトを取得
       file = event.target.files[0]
       reader = new FileReader(),
-      $preview = $("#img_field");
 
-      reader.onload = (function(file) {
-        return function(e) {
-        $preview.empty();
-        $preview.append($('<img>').attr({
-          src: e.target.result,
-          width: "50%",
-          class: "preview",
-          title: file.name
-        }));
-        };
-      })(file);
+      //readAsDataURLで指定したFileオブジェクトを読み込む
       reader.readAsDataURL(file);
+
+      //読み込み時に発火するイベント
+      reader.onload = function() {
+        var image = this.result;
+        //プレビューが元々なかった場合はhtmlを追加
+        if ($(`#preview-box__${id}`).length == 0) {
+          var count = $('.preview-box').length;
+          var html = buildHTML(id);
+          //プレビュー群にプレビューを追加
+          $(".prev-content").append(html);
+        }
+        //イメージを追加
+        $(`#preview-box__${id} img`).attr('src', `${image}`);
+      }
+
     });
   });
 })
 </script>
+
+
