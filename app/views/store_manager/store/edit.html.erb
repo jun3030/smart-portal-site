@@ -34,41 +34,64 @@
                 <% unless @store.store_images.pluck(:store_image).any? %>
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>
-                      <%= sif.label :store_image, class:"label-box", for: "store_img_field_0" , id: "label-box--0" %>画像なしnil<br>
-                      <div class="hidden_field">
-                        <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                        <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                      <div class="post__drop__box__container">
+                        <div class="prev-content"></div>
+                        <div class="label-content">
+                          <label class="label-box" for="store_img_field_0" id="label-box--0">
+                            <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像なしnil</pre>
+                          </label><br>
+                          <div class="hidden_content">
+                            <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                          </div>
+                          <hr>
+                        </div>
                       </div>
-                      <hr>
                     <% end %>
                   <% else %>
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <%= sif.label :store_image, class:"label-box", for: "store_img_field_0" , id: "label-box--0" %>画像なしidなし<br>
-                        <div class="hidden_field">
+                        <div class="post__drop__box__container">
+                          <div class="prev-content"></div>
+                          <div class="label-content">
+                            <label class="label-box" for="store_img_field_0" id="label-box--0">
+                              <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像なしidなし</pre>
+                            </label><br>
+                            <div class="hidden_field">
+                              <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                            </div>
+                            <hr>
+                          </di>
+                        </div>
+                      <% end %>
+                  <% end %>
+                <% else %>
+                  <%= sf.fields_for :store_images do |sif| %>
+                    <div class="post__drop__box__container">
+                      <div class="prev-content"></div>
+                      <div class="label-content">
+                        <label class="label-box" for="store_img_field_0" id="label-box--0">
+                          <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像あり更新</pre>
+                        </label><br>
+                        <div class="hidden_content">
                           <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
                           <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
                           <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
                           <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
                           <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
-                        </end>
-                        <hr>
-                      <% end %>
-                  <% end %>
-                <% else %>
-                  <%= sf.fields_for :store_images do |sif| %>
-                    <%= sif.label :store_image, class:"label-box", for: "store_img_field_0" , id: "label-box--0" %>画像あり更新<br>
-                      <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                      <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
-                    <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
-                    <div class="field mt-3">
-                      <%= sif.check_box :remove_store_image %>&ensp;画像の削除</span>
-                      <p class="image_notice">※画像を削除する場合はチェックボックスにチェックを入れてください。</p>
+                        </div>
+                        <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
+                        <div class="field mt-3">
+                          <%= sif.check_box :remove_store_image %>&ensp;画像の削除</span>
+                          <p class="image_notice">※画像を削除する場合はチェックボックスにチェックを入れてください。</p>
+                        </div>
+                      </div>
                     </div>
                   <% end %>
                 <% end %>
@@ -173,7 +196,8 @@ $(document).on('turbolinks:load', function(){
           var count = $('.preview-box').length;
           var html = buildHTML(id);
           //プレビュー群にプレビューを追加
-          $(".prev-content").append(html);
+          var prevContent = $('.label-content').prev();
+          $(prevContent).append(html);
         }
         //イメージを追加
         $(`#preview-box__${id} img`).attr('src', `${image}`);
