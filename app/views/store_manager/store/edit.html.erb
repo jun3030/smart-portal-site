@@ -34,6 +34,7 @@
                 <% unless @store.store_images.pluck(:store_image).any? %>
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>
+                      <div class="store-image-title">店舗写真</div>
                       <div class="post__drop__box__container">
                         <div class="prev-content"></div>
                         <div class="label-content">
@@ -53,6 +54,7 @@
                     <% end %>
                   <% else %>
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
+                        <div class="store-image-title">店舗写真</div>
                         <div class="post__drop__box__container">
                           <div class="prev-content"></div>
                           <div class="label-content">
@@ -73,6 +75,7 @@
                   <% end %>
                 <% else %>
                   <%= sf.fields_for :store_images do |sif| %>
+                    <div class="store-image-title">店舗写真</div>
                     <div class="post__drop__box__container">
                       <div class="prev-content"></div>
                       <div class="label-content">
