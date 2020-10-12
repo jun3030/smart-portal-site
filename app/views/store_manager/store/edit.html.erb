@@ -40,12 +40,12 @@
                           <label class="label-box" for="store_img_field_0" id="label-box--0">
                             <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像なしnil</pre>
                           </label><br>
-                          <div class="hidden_content">
-                            <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
-                            <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                            <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                            <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                            <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                          <div class="hidden_field">
+                            <%= sif.file_field :store_image, id: :store_img_field_0, multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_1, multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_2, multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_3, multiple: true %>
+                            <%= sif.file_field :store_image, id: :store_img_field_4, multiple: true %>
                           </div>
                           <hr>
                         </div>
@@ -60,11 +60,11 @@
                               <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像なしidなし</pre>
                             </label><br>
                             <div class="hidden_field">
-                              <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
-                              <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                              <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                              <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                              <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_0, multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_1, multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_2, multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_3, multiple: true %>
+                              <%= sif.file_field :store_image, id: :store_img_field_4, multiple: true %>
                             </div>
                             <hr>
                           </di>
@@ -79,12 +79,12 @@
                         <label class="label-box" for="store_img_field_0" id="label-box--0">
                           <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像あり更新</pre>
                         </label><br>
-                        <div class="hidden_content">
-                          <%= sif.file_field :store_image, id: :store_img_field_0, name: "store[store_images_attributes][0][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field_1, name: "store[store_images_attributes][1][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field_2, name: "store[store_images_attributes][2][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field_3, name: "store[store_images_attributes][3][store_image][]", multiple: true %>
-                          <%= sif.file_field :store_image, id: :store_img_field_4, name: "store[store_images_attributes][4][store_image][]", multiple: true %>
+                        <div class="hidden_field">
+                          <%= sif.file_field :store_image, id: :store_img_field_0, multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_1, multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_2, multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_3, multiple: true %>
+                          <%= sif.file_field :store_image, id: :store_img_field_4, multiple: true %>
                         </div>
                         <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
                         <div class="field mt-3">
@@ -146,64 +146,92 @@
 
 "
 <script>
-$(document).on('turbolinks:load', function(){
-  $(function(){
-    //プレビューのhtmlを定義
-    function buildHTML(count) {
-      var html = `<div class="preview-box" id="preview-box__${count}">
-                    <div class="upper-box">
-                      <img src="" alt="preview">
-                    </div>
-                    <div class="lower-box">
-                      <div class="update-box">
-                        <label class="edit_btn">編集</label>
-                      </div>
-                      <div class="delete-box" id="delete_btn_${count}">
-                        <span>削除</span>
-                      </div>
-                    </div>
-                  </div>`
-      return html;
-    }
+//プレビューのhtmlを定義
+function buildHTML(count) {
+  var html = `<div class="preview-box" id="preview-box__${count}">
+                <div class="upper-box">
+                  <img src="" alt="preview">
+                </div>
+                <div class="lower-box">
 
-    // ラベルのwidth操作
-    function setLabel() {
-      //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
-      var prevContent = $('.prev-content');
-      labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
-      $('.label-content').css('width', labelWidth);
-    }
+                  <div class="delete-box" id="delete_btn_${count}">
+                    <span>削除</span>
+                  </div>
+                </div>
+              </div>`
+  return html;
+}
 
-    $('.hidden_field').change(function(event) {
-      //file_fieldのidの数字だけ取得
-      var id = event.target.id.replace(/[^0-9]/g, '');
+// ラベルのwidth操作
+function setLabel() {
+  //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
+  var prevContent = $('.label-content').prev();
+  labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+  $('.label-content').css('width', labelWidth);
+}
 
-      //labelボックスのidとforを更新
-      $('.label-box').attr({id: `label-box--${id}`,for: `store_img_field_${id}`});
+//ファイル要素が変更されるたびに発火
+jQuery(document).on('change', 'input[type=file]', function (event) {
+  //hidden-fieldのidの数値のみ取得
+    var id = $(this).attr('id').replace(/[^0-9]/g, '');
+  //選択したfileのオブジェクトを取得
+    var file = this.files[0];
+    var reader = new FileReader();
+  //readAsDataURLで指定したFileオブジェクトを読み込む
+    reader.readAsDataURL(file);
 
-      //選択したfileのオブジェクトを取得
-      file = event.target.files[0]
-      reader = new FileReader(),
-
-      //readAsDataURLで指定したFileオブジェクトを読み込む
-      reader.readAsDataURL(file);
-
-      //読み込み時に発火するイベント
-      reader.onload = function() {
-        var image = this.result;
-        //プレビューが元々なかった場合はhtmlを追加
+    reader.onload = function() {
+    var image = this.result;
+    //プレビューが元々なかった場合はhtmlを追加
         if ($(`#preview-box__${id}`).length == 0) {
           var count = $('.preview-box').length;
           var html = buildHTML(id);
-          //プレビュー群にプレビューを追加
+          //ラベルの直前のプレビュー群にプレビューを追加
           var prevContent = $('.label-content').prev();
           $(prevContent).append(html);
         }
         //イメージを追加
         $(`#preview-box__${id} img`).attr('src', `${image}`);
-      }
+        var count = $('.preview-box').length;
+        //プレビューが5個あったらラベルを隠す
+        if (count == 5) {
+          $('.label-content').hide();
+        }
+        //ラベルのwidth操作
+        setLabel();
+        //ラベルのidとforの値を変更
+        if(count < 5){
+          //プレビューの数でラベルのオプションを更新する
+          $('.label-box').attr({id: `label-box--${count}`,for: `store_img_field_${count}`});
+        }
+    }
+    // 画像の削除
+    $(document).on('click', '.delete-box', function() {
+      var count = $('.preview-box').length;
+      setLabel(count);
+      //item_images_attributes_${id}_image から${id}に入った数字のみを抽出
+      var id = $(this).attr('id').replace(/[^0-9]/g, '');
+      //取得したidに該当するプレビューを削除
+      $(`#preview-box__${id}`).remove();
+      console.log("new")
+      //フォームの中身を削除
+      $(`#item_images_attributes_${id}_image`).val("");
 
+      //削除時のラベル操作
+      var count = $('.preview-box').length;
+      //5個めが消されたらラベルを表示
+      if (count == 4) {
+        $('.label-content').show();
+      }
+      setLabel(count);
+
+      if(id < 5){
+        //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
+        $('.label-box').attr({id: `label-box--${id}`,for: `store_img_field_${id}`});
+      }
     });
-  });
-})
+});
+
+
+
 </script>
