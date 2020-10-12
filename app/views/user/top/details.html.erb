@@ -304,8 +304,9 @@
             <tr>
               <td>写真</td>
               <td>
-                店長：<%= @store.store_manager.name %><br>
+                店長：<%= @store.store_manager.name %>　　　
                 <!--コメント：PayPay, Line Pay, クレジットカード使用可 -->
+                店長への問い合わせは<%= link_to "こちら", new_store_manager_message_path %>
               </td>
             </tr>
             <tr>
