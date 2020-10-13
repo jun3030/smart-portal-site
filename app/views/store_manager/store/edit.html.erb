@@ -235,6 +235,24 @@ jQuery(document).on('change', 'input[type=file]', function (event) {
     });
 });
 
+// 投稿編集時
+// 画像が一枚でも登録されていたら
+if ( $("#store_image0").length > 0 ) {
+  const targetElem = document.querySelectorAll('#store_image_edit img');
+  const targetCount = targetElem.length;
+
+  var count = $('.preview-box').length;
+  var html = buildHTML(id);
+  //ラベルの直前のプレビュー群にプレビューを追加
+  var prevContent = $('.label-content').prev();
+  $(prevContent).append(html);
+
+  $.each(targetElem, function(index, val) {
+    var currentSrc = val.getAttribute("src");
+    $(`#preview-box__${index} img`).attr('src', `${currentSrc}`);
+  })
+}
+
 
 
 </script>
