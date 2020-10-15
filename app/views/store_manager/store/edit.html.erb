@@ -246,8 +246,9 @@ jQuery(document).on('change', 'input[type=file]', function (event) {
 if ( $("#store_image0").length > 0 ) {
   const targetElem = document.querySelectorAll('#store_image_edit img');
   const targetCount = targetElem.length;
-  console.log(targetElem);
 
+  // 登録済画像データだけの配列（DB用）
+  var registered_images_ids =[]
 
   $.each(targetElem, function(index, val) {
     var currentSrc = val.getAttribute("src");
