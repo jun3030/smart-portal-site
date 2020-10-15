@@ -77,7 +77,22 @@
                   <%= sf.fields_for :store_images do |sif| %>
                     <div class="store-image-title">店舗写真</div>
                     <div class="post__drop__box__container">
-                      <div class="prev-content"></div>
+                      <div class="prev-content">
+
+                        <% @store_images.store_image.each do |image| %>
+                          <div class="preview-box" id="preview-box__${count}">
+                            <div class="upper-box">
+                              <%= image_tag image.url, width: "112", height: "112", alt: "preview" %>
+                            </div>
+                            <div class="lower-box">
+                              <div class="delete-box" id="delete_btn_${count}">
+                                <span>削除</span>
+                              </div>
+                            </div>
+                          </div>
+                        <% end %>
+
+                      </div>
                       <div class="label-content">
                         <label class="label-box" for="store_img_field_0" id="label-box--0">
                           <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像あり更新</pre>
@@ -88,11 +103,6 @@
                           <%= sif.file_field :store_image, id: :store_img_field_2, multiple: true %>
                           <%= sif.file_field :store_image, id: :store_img_field_3, multiple: true %>
                           <%= sif.file_field :store_image, id: :store_img_field_4, multiple: true %>
-                        </div>
-                        <div id="store_image_edit">
-                          <% @count_store_image.times do |n| %>
-                            <img id="store_image<%= n %>" src="<%= @store_images.store_image[n].url %>" data-imagesrc="<%= @store_images.store_image[n].url %>" >
-                          <% end %>
                         </div>
                         <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
                         <div class="field mt-3">
@@ -105,10 +115,7 @@
                 <% end %>
               </div>
 
-              <!-- プレビュー -->
-              <div class="prev-content">
-                <div class="label-content"></div>
-              </div>
+
 
 
 
