@@ -131,11 +131,13 @@
                       <div class="sm-image-title">店長写真</div>
                         <div class="sm-image-post-drop-box-container">
                           <div class="sm-image-prev-content">
-                            <div id="sm_image-preview">クリックしてファイルをアップロード</div>
+                            <div id="sm_image-preview"></div>
                           </div>
                           <div class="sm-image-label-content">
+                            <label class="sm-image-label-box" for="store_store_images_attributes_1_sm_image" id="sm-image-label-box--0">
+                              <pre class="sm-image-label-box__text-visible">クリックしてファイルをアップロード/画像なしnil</pre>
+                            </label><br>
                             <div class="hidden_field">
-                              <%= sif.label :sm_image, class:"mr-2" %><br>
                               <%= sif.file_field :sm_image, multiple: true %><br>
                             </div>
                           </div>
@@ -333,32 +335,61 @@ if ( $("#store_image0").length > 0 ) {
 }
 
 // 店長写真プレビュー表示
-$('#sm_image-preview').on('click',function(){
-  $('#store_store_images_attributes_1_sm_image').trigger("click");
-  $("#store_store_images_attributes_1_sm_image").change(function(event) {
-    //選択したfileのオブジェクトを取得
-    var file = this.files[0];
-    var reader = new FileReader();
-    var id = $(this).attr('id').replace(/[^0-9]/g, '');
+$("#store_store_images_attributes_1_sm_image").change(function(event) {
+  //選択したfileのオブジェクトを取得
+  var file = this.files[0];
+  var reader = new FileReader();
+  var id = $(this).attr('id').replace(/[^0-9]/g, '');
 
-    //readAsDataURLで指定したFileオブジェクトを読み込む
-    reader.readAsDataURL(file);
-    reader.onload = function() {
-      var image = this.result;
-      //プレビューが元々なかった場合はhtmlを追加
-        if ($(`#sm-image-preview-box__${id}`).length == 0) {
-          var count = $('.sm-image-preview-box').length;
-          var html = buildHTMLSmImage(id);
-          //ラベルの直前のプレビュー群にプレビューを追加
-          var prevContent = $('.sm-image-label-content').prev();
-          $(prevContent).append(html);
-        }
-        //イメージを追加
-        $(`#sm-image-preview-box__${id} img`).attr('src', `${image}`);
+  //readAsDataURLで指定したFileオブジェクトを読み込む
+  reader.readAsDataURL(file);
+  reader.onload = function() {
+    var image = this.result;
+    console.log(image);
+    //プレビューが元々なかった場合はhtmlを追加
+      if ($(`#sm-image-preview-box__${id}`).length == 0) {
         var count = $('.sm-image-preview-box').length;
-    }
-  });
+        var html = buildHTMLSmImage(id);
+        //ラベルの直前のプレビュー群にプレビューを追加
+        var prevContent = $('.sm-image-label-content').prev();
+        $(prevContent).append(html);
+      }
+      //イメージを追加
+      $(`#sm-image-preview-box__${id} img`).attr('src', `${image}`);
+      var count = $('.sm-image-preview-box').length;
+      //プレビューが5個あったらラベルを隠す
+      if (count == 1) {
+        $('.sm-image-label-content').hide();
+      }
+      //ラベルのwidth操作
+      setLabel();
 
+      // 画像の削除
+      $(document).on('click', '.sm-image-delete-box', function() {
+        var count = $('.sm-image-preview-box').length;
+        setLabel(count);
+        //item_images_attributes_${id}_image から${id}に入った数字のみを抽出
+        var id = $(this).attr('id').replace(/[^0-9]/g, '');
+        //取得したidに該当するプレビューを削除
+        $(`#sm-image-preview-box__${id}`).remove();
+        console.log("new")
+        //フォームの中身を削除
+        $(`#item_images_attributes_${id}_image`).val("");
+
+        //削除時のラベル操作
+        var count = $('.preview-box').length;
+        //5個めが消されたらラベルを表示
+        if (count == 0) {
+          $('.sm-image-label-content').show();
+        }
+        setLabel(count);
+
+        if(id < 5){
+          //削除された際に、空っぽになったfile_fieldをもう一度入力可能にする
+          $('.sm-image-label-box').attr({id: `sm-image-label-box--${id}`,for: `store_store_images_attributes_1_sm_image`});
+        }
+      });
+  }
 });
 
 </script>
