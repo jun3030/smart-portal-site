@@ -128,14 +128,16 @@
 
                     <!-- 画像なしnil -->
                     <%= sf.fields_for :store_images do |sif| %>
-                      <div class="store-image-title">店舗写真</div>
-                        <div class="post__drop__box__container">
-                          <div class="prev-content">
+                      <div class="sm-image-title">店長写真</div>
+                        <div class="sm-image-post-drop-box-container">
+                          <div class="sm-image-prev-content">
                             <div id="sm_image-preview">クリックしてファイルをアップロード</div>
                           </div>
-                          <div class="hidden_field">
-                            <%= sif.label :sm_image, class:"mr-2" %><br>
-                            <%= sif.file_field :sm_image, multiple: true %><br>
+                          <div class="sm-image-label-content">
+                            <div class="hidden_field">
+                              <%= sif.label :sm_image, class:"mr-2" %><br>
+                              <%= sif.file_field :sm_image, multiple: true %><br>
+                            </div>
                           </div>
                         </div>
                     <% end %>
@@ -148,17 +150,16 @@
 
                       <!-- 画像なしidなし -->
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <div class="store-image-title">店舗写真</div>
+                        <div class="store-image-title">店長写真</div>
                           <div class="post__drop__box__container">
                             <div class="prev-content">
                               <div id="sm_image-preview">クリックしてファイルをアップロード</div>
                             </div>
-                            <label class="label-box" for="store_img_field_0" id="label-box--0">
-                              <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像あり更新</pre>
-                            </label><br>
-                            <div class="hidden_field">
-                              <%= sif.label :sm_image, class:"mr-2" %><br>
-                              <%= sif.file_field :sm_image, id: :sm_img_field_0, multiple: true %>
+                            <div class="sm-image-label-content">
+                              <div class="hidden_field">
+                                <%= sif.label :sm_image, class:"mr-2" %><br>
+                                <%= sif.file_field :sm_image, id: :sm_img_field_0, multiple: true %>
+                              </div>
                             </div>
                           </div>
                       <% end %>
@@ -172,14 +173,16 @@
 
                   <!-- 画像あり更新 -->
                   <%= sf.fields_for :store_images do |sif| %>
-                    <div class="store-image-title">店舗写真</div>
+                    <div class="store-image-title">店長写真</div>
                       <div class="post__drop__box__container">
                         <div class="prev-content">
-                          <div id="sm_image-preview">クリックしてファイルをアップロード</div>
+                          <div id="sm_image-preview">クリックしてファイルをアップロード/画像なしidなし</div>
                         </div>
-                        <div class="hidden_field">
-                          <%= sif.label :sm_image, class:"mr-2" %><br>
-                          <%= sif.file_field :sm_image, multiple: true %><br>
+                        <div class="sm-image-label-content">
+                          <div class="hidden_field">
+                            <%= sif.label :sm_image, class:"mr-2" %><br>
+                            <%= sif.file_field :sm_image, multiple: true %><br>
+                          </div>
                         </div>
                       </div>
                     <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
@@ -207,7 +210,7 @@
 
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-
+"
 <script>
 //プレビューのhtmlを定義
 function buildHTML(count) {
@@ -225,6 +228,21 @@ function buildHTML(count) {
   return html;
 }
 
+function buildHTMLSmImage(count) {
+  var html = `<div class="sm-image-preview-box" id="sm-image-preview-box__${count}">
+                <div class="sm-image-upper-box">
+                  <img src="" alt="preview">
+                </div>
+                <div class="sm-image-lower-box">
+
+                  <div class="sm-image-delete-box" id="sm-image-delete_btn_${count}">
+                    <span>削除</span>
+                  </div>
+                </div>
+              </div>`
+  return html;
+}
+
 // ラベルのwidth操作
 function setLabel() {
   //プレビューボックスのwidthを取得し、maxから引くことでラベルのwidthを決定
@@ -233,8 +251,11 @@ function setLabel() {
   $('.label-content').css('width', labelWidth);
 }
 
-//ファイル要素が変更されるたびに発火
-jQuery(document).on('change', 'input[type=file]', function (event) {
+//店舗写真のfile_fieldをまとめて変数に代入
+var storeImgField = "input[id=store_img_field_0][type=file], input[id=store_img_field_1][type=file], input[id=store_img_field_2][type=file], input[id=store_img_field_3][type=file], input[id=store_img_field_4][type=file]"
+
+//店舗写真が変更されるたびに発火
+jQuery(document).on('change', storeImgField, function (event) {
   console.log(this.files);
   //hidden-fieldのidの数値のみ取得
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
@@ -310,9 +331,33 @@ if ( $("#store_image0").length > 0 ) {
     $(`#preview-box__${index} img`).attr('src', `${currentSrc}`);
   })
 }
+
 // 店長写真プレビュー表示
 $('#sm_image-preview').on('click',function(){
-  $('#sample').trigger("click");
+  $('#store_store_images_attributes_1_sm_image').trigger("click");
+  $("#store_store_images_attributes_1_sm_image").change(function(event) {
+    //選択したfileのオブジェクトを取得
+    var file = this.files[0];
+    var reader = new FileReader();
+    var id = $(this).attr('id').replace(/[^0-9]/g, '');
+
+    //readAsDataURLで指定したFileオブジェクトを読み込む
+    reader.readAsDataURL(file);
+    reader.onload = function() {
+      var image = this.result;
+      //プレビューが元々なかった場合はhtmlを追加
+        if ($(`#sm-image-preview-box__${id}`).length == 0) {
+          var count = $('.sm-image-preview-box').length;
+          var html = buildHTMLSmImage(id);
+          //ラベルの直前のプレビュー群にプレビューを追加
+          var prevContent = $('.sm-image-label-content').prev();
+          $(prevContent).append(html);
+        }
+        //イメージを追加
+        $(`#sm-image-preview-box__${id} img`).attr('src', `${image}`);
+        var count = $('.sm-image-preview-box').length;
+    }
+  });
 
 });
 
