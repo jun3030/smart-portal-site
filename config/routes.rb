@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     root            to: "user/top#index"
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
+    get "/messages", to: "user/top#messages", as: :messages
+    get "/messages/:id", to: "user/top#message_show", as: :message_show
   # devise↓ =====================================================================================
     devise_for :admins, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
@@ -54,10 +56,11 @@ Rails.application.routes.draw do
       get "/:id/top", to: 'top_page#top'
       patch "update_calendar_status", to: 'top_page#update_calendar_status'
       resources :store do
-        member do
-          resources :message, except: [:edit, :update]
-          get "message/reply"
-          get "message/create_reply"
+        resources :messages do
+          member do
+            get "reply"
+            post "create_reply"
+          end
         end
       end
       resources :plans

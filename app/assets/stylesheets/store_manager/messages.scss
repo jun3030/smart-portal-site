@@ -1,3 +1,284 @@
-// Place all the styles related to the store_manager::messages controller here.
+// Place all the styles related to the Top controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.box29 {
+  margin: 2em 0;
+  background: #C0C0C0;
+}
+.box29 .box-title {
+  font-size: 1.2em;
+  background: #808080;
+  padding: 4px;
+  text-align: center;
+  color: #FFF;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+.box29 p {
+  padding: 15px 20px;
+  margin: 0;
+}
+
+.star_rate {
+  padding-top: 15px;
+  padding-left: 10px;
+}
+
+.list-head .list-sort {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-tabs>li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+.list-head .list-sort li.on a {
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-bottom: 1px solid #fff;
+  color: #222;
+}
+.list-head .list-sort li a {
+  color: #27b;
+  display: block;
+  padding: none;
+  position: relative;
+}
+.nav-tabs>li>a {
+  margin-right: 2px;
+  line-height: 1.42857143;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.nav>li>a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.list-mgr-img-box {
+  float: left;
+  position: relative;
+}
+.list-mgr-img-text{
+  padding-left: 120px;
+}
+.m_top_space {
+  padding-top: 30px;
+}
+.s_top_space {
+  padding-top: 10px;
+}
+.posted_text {
+  padding-left: 20px;
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.box2 {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  font-weight: bold;
+  color: #6091d3;/*文字色*/
+  background: #FFF;
+  border: solid 1px black;/*線*/
+  border-radius: 10px;/*角の丸み*/
+}
+.box2 p {
+  margin: 0;
+  padding: 0;
+}
+.service-head .ttl-main-page {
+  display: table;
+}
+.ttl-main-page {
+  font-size: 22px;
+}
+.service-head .ttl-main-page i, .service-head .ttl-main-page span {
+    display: table-cell;
+    vertical-align: middle;
+}
+i.icon-l.ctg-icon_aircon {
+    width: 52px;
+    height: 52px;
+    background-image: url("https://mdn.mozillademos.org/files/6457/mdn_logo_only_color.png");
+    background-repeat: no-repeat;
+    background-size: 697px 697px;
+    background-position: -53px -53px;
+}
+.center{
+  width: 940px;
+}
+.cenrer-block{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.service-content01{
+  min-height: 390px;
+}
+.change-photo {
+  float: left;
+  height: 363px;
+  margin-right: 20px;
+  position: relative;
+  width: 430px;
+}
+.change-photo .main-photo img {
+  border: solid 1px #d5d4d4;
+  width: 430px;
+  height: 322px;
+}
+.service-link {
+  border-collapse: separate;
+  border-spacing: 2px;
+  display: table;
+  margin: 0 -2px 10px;
+  table-layout: fixed;
+  width: 944px;
+}
+.service-link .shortcut-on {
+  background: #fae9c4;
+}
+.service-link a {
+  display: table-cell;
+  padding: 10px 6px;
+  text-align: center;
+}
+.service-link a {
+  color: #222;
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-menu-down:before {
+  content: "↓";
+}
+.mb-large {
+  margin-bottom: 40px;
+}
+.content-h2 {
+  font-weight: 400;
+  font-size: 1.8rem;
+  border-left: solid 5px #f06f18;
+  background: #f6efe3;
+  margin-bottom: 20px;
+  padding: 7px 10px;
+}
+.box-content{
+  line-height: 1.5;
+  margin: 10px 10px 20px 10px;
+}
+
+// detailsページ //
+
+.csr-btn {
+  float: right;
+}
+
+.area-action {
+  float: left;
+}
+
+.width_image {
+  width: 430px;
+  max-width: 100%;
+  height: 300px;
+  max-height: 100%;
+}
+
+.smole_image{
+  width: 50px;
+  max-width: 100%;
+  height: 40px;
+  max-height: 100%;
+}
+.smole_image:hover {
+  opacity: 0.5 ;
+  border: 0.5px solid;
+  border-color: #9aa137;
+}
+.p_top {
+  margin-top: 20px;
+}
+
+.right_width {
+  max-width: 35%;
+}
+
+.top_space_m_10 {
+  margin-top: 10px;
+}
+
+.details_plan_name {
+  width: 150px;
+  max-width: 100%;
+}
+
+.details_plan_content {
+  width: 790px;
+  max-width: 100%;
+}
+
+.image_solid {
+  border: 0.5px solid;
+  border-color: #C0C0C0;
+}
+
+.img-circle{
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  background-position: center center;
+  border: 1px solid #C0C0C0;
+}
+
+.m-bottom-10 {
+  margin-bottom: 10px;
+}
+// shopページ //
+.width_660 {
+  width: 660px;
+}
+
+
+.all_store_store_image{
+  width: 100px;
+  max-width: 100%;
+  height: 100px;
+  max-height: 100%;
+  border-radius: 50%;
+  border: 1px solid #efefef;
+  margin-top: 10px;
+}
+
+// 出張範囲の表示部分
+.area {
+  width: 15%;
+}
+
+.prefecture_name {
+  font-weight:bold;
+  font-size: 14px;
+}
+
+.town {
+  font-size: 14px;
+}

@@ -36,6 +36,14 @@ class User::TopController < User::Base
     end
   end
 
+  def messages
+    @messages = Message.where(user_id: current_user.id).order(created_at: "ASC")
+  end
+
+  def message_show
+    @message = Message.find(params[:id])
+  end
+
   private
 
     # ヘッダーとトップページのカテゴリ一覧表示用

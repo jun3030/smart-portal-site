@@ -1,0 +1,26 @@
+<div class="center cenrer-block">
+  <div class="service-head"><br>
+    <% flash.each do |message_type, msg| %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="price" class="service-price">
+    <h2 class="content-h2"><%= @message.title %></h2>
+    <div class="box-content">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>To: <%= Store.find(@message.store_id).store_manager.name %></td>
+            <td><%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+          </tr>
+          <tr>
+            <td><%= @message.content %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

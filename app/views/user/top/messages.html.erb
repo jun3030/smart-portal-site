@@ -1,0 +1,33 @@
+<div class="center cenrer-block">
+  <div class="service-head"><br>
+    <% flash.each do |message_type, msg| %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="price" class="service-price">
+    <h2 class="content-h2">メッセージ一覧</h2>
+    <div class="box-content">
+        <br>
+        <h5>送信済メッセージ / 受信メッセージ</h5>
+        <br>
+      <table class="table">
+        <% @messages.each do |m| %>
+          <tbody>
+            <tr>
+              <td>To: <%= Store.find(m.store_id).store_manager.name %></td>
+              <td><%= link_to m.title, message_show_path(m.id) %></td>
+              <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
+              <td>
+                <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
+                                    data: { confirm: "削除してよろしいですか？" },class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

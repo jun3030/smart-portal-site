@@ -1,0 +1,26 @@
+<div id="price" class="service-price">
+  <div class="box-content">
+    <%= form_with(model: @message, url: store_manager_store_messages_path(@store), local: true, method: :post) do |f| %>
+    <% flash.each do |message_type, msg| %>
+      <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
+    <% end %>
+      <h2 class="content-h2">店舗への問い合わせ</h2>
+      <h5>
+        To: <%= @store.store_name %>　<%= @store.store_manager.name %>店長<br>
+        From: <%= current_user.name %>
+      </h5>
+      <%= f.label :title, class: "" %>
+      <%= f.text_field :title, class: "form-control" %><br>
+
+      <%= f.label :content, class: "" %>
+      <%= f.text_area :content, class: "form-control" %>
+
+      <%= f.hidden_field :message_status, value: "問い合わせ" %>
+      <%= f.hidden_field :store_id, value: @store.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+      <%= f.submit "メッセージを送信する", class: "" %>
+      <%= link_to "戻る", details_path(@store), class: "btn btn-lg btn-default" %>
+    <% end %>
+  </div>
+</div>

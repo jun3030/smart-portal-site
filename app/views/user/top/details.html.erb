@@ -1,6 +1,11 @@
 <section>
 <div class="center cenrer-block">
-  <div class="service-head">
+  <div class="service-head"><br>
+    <% flash.each do |message_type, msg| %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+    <% end %>
     <h1 class="ttl-main-page top_space_m_10" itemprop="name">
     <!--<i class="icon-l ctg-icon_aircon"></i>-->
     <span class="center_span"><%= @store.store_name %></span>
@@ -52,7 +57,7 @@
           <div class="wrap-feature flex-low">
             <div class="performance flex-low">
               <div class="item-mark">
-               <!-- <p>返答の速さ</p> -->
+                <!-- <p>返答の速さ</p> -->
               </div>
               <div class="item-mark">
                 <!-- <p>施術実績</p> -->
@@ -306,7 +311,7 @@
               <td>
                 店長：<%= @store.store_manager.name %>　　　
                 <!--コメント：PayPay, Line Pay, クレジットカード使用可 -->
-                店長への問い合わせは<%= link_to "こちら", new_store_manager_message_path %>
+                店舗への問い合わせは<%= link_to "こちら", new_store_manager_store_message_path(@store) %>
               </td>
             </tr>
             <tr>
