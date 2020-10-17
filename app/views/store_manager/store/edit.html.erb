@@ -123,26 +123,74 @@
               <div class="field mt-3">
                 <% unless @store.store_images.pluck(:sm_image).any? %>
                   <% if @store.store_images.where(sm_image: nil).present? %>
+
+
+
+                    <!-- 画像なしnil -->
                     <%= sf.fields_for :store_images do |sif| %>
-                      <%= sif.label :sm_image, class:"mr-2" %><br>
-                      <%= sif.file_field :sm_image, multiple: true %><br>
+                      <div class="store-image-title">店舗写真</div>
+                        <div class="post__drop__box__container">
+                          <div class="prev-content">
+                            <div id="sm_image-preview">クリックしてファイルをアップロード</div>
+                          </div>
+                          <div class="hidden_field">
+                            <%= sif.label :sm_image, class:"mr-2" %><br>
+                            <%= sif.file_field :sm_image, multiple: true %><br>
+                          </div>
+                        </div>
                     <% end %>
+
+
+
                   <% else %>
+
+
+
+                      <!-- 画像なしidなし -->
                       <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <%= sif.label :sm_image, class:"mr-2" %><br>
-                        <%= sif.file_field :sm_image, multiple: true %>
+                        <div class="store-image-title">店舗写真</div>
+                          <div class="post__drop__box__container">
+                            <div class="prev-content">
+                              <div id="sm_image-preview">クリックしてファイルをアップロード</div>
+                            </div>
+                            <label class="label-box" for="store_img_field_0" id="label-box--0">
+                              <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像あり更新</pre>
+                            </label><br>
+                            <div class="hidden_field">
+                              <%= sif.label :sm_image, class:"mr-2" %><br>
+                              <%= sif.file_field :sm_image, id: :sm_img_field_0, multiple: true %>
+                            </div>
+                          </div>
                       <% end %>
+
+
+
                   <% end %>
                 <% else %>
+
+
+
+                  <!-- 画像あり更新 -->
                   <%= sf.fields_for :store_images do |sif| %>
-                    <%= sif.label :sm_image, class:"mr-2" %><br>
-                    <%= sif.file_field :sm_image, multiple: true %><br>
+                    <div class="store-image-title">店舗写真</div>
+                      <div class="post__drop__box__container">
+                        <div class="prev-content">
+                          <div id="sm_image-preview">クリックしてファイルをアップロード</div>
+                        </div>
+                        <div class="hidden_field">
+                          <%= sif.label :sm_image, class:"mr-2" %><br>
+                          <%= sif.file_field :sm_image, multiple: true %><br>
+                        </div>
+                      </div>
                     <span class="image_notice">※画像の更新をする場合は添付する画像を選択してください。</span>
                     <div class="field mt-3">
                       <%= sif.check_box :remove_sm_image %>&ensp;画像の削除</span>
                       <p class="image_notice">※画像を削除する場合はチェックボックスにチェックを入れてください。</p>
                     </div>
                   <% end %>
+
+
+
                 <% end %>
               </div>
             <div class="actions mt-5 text-center">
@@ -262,5 +310,10 @@ if ( $("#store_image0").length > 0 ) {
     $(`#preview-box__${index} img`).attr('src', `${currentSrc}`);
   })
 }
+// 店長写真プレビュー表示
+$('#sm_image-preview').on('click',function(){
+  $('#sample').trigger("click");
+
+});
 
 </script>
