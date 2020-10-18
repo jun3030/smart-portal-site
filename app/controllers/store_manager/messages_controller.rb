@@ -1,6 +1,7 @@
 class StoreManager::MessagesController < ApplicationController
 
-  before_action :set_store, only:[:new, :create]
+  before_action :set_store, only:[:new, :create, :index]
+  before_action :set_message, only:[:show, :destroy]
 
   def new
     @message = Message.new
@@ -18,13 +19,13 @@ class StoreManager::MessagesController < ApplicationController
   end
 
   def index
+    @messages = Message.where(store_id: @store.id).order(created_at: "ASC")
   end
 
   def show
   end
 
   def destroy
-    @message = Message.find(params[:id])
     @message.destroy
     flash[:success] = "メッセージを削除しました。"
     redirect_to messages_url
@@ -39,6 +40,10 @@ class StoreManager::MessagesController < ApplicationController
   private
     def set_store
       @store = Store.find(params[:store_id])
+    end
+
+    def set_message
+      @message = Message.find(params[:id])
     end
 
     def message_params

@@ -1,0 +1,49 @@
+<div class="text_width">
+  <h1 class="left_logo">Smart Potal</h1>
+  <div class="right_bottun">
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-warning btn_space" %>
+  </div>
+  <div class="hader_space">
+    <div class="">
+      <ul class="header_ul_space ">
+        <li>
+          <%= link_to "マイページ", store_manager_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "予約の確認", store_managers_index_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "登録内容の編集", store_managers_show_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <a class="header_line_a">メッセージ確認</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="top_space">
+  <div class="text_width text_left">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-success mt-5 text_left"><%= message %></div>
+    <% end %>
+    <div class="box-content">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>From: <%= User.find(@message.user_id).name %></td>
+            <td></td>
+            <td><%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+          </tr>
+          <tr>
+            <td colspan="3"><%= @message.title %></td>
+          </tr>
+          <tr>
+            <td colspan="3"><%= @message.content %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<%= render template: "layouts/store_managers"%>

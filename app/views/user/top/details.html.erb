@@ -311,7 +311,9 @@
               <td>
                 店長：<%= @store.store_manager.name %>　　　
                 <!--コメント：PayPay, Line Pay, クレジットカード使用可 -->
-                店舗への問い合わせは<%= link_to "こちら", new_store_manager_store_message_path(@store) %>
+                <% if user_signed_in? %>
+                  店舗への問い合わせは<%= link_to "こちら", new_store_manager_store_message_path(@store) %>
+                <% end %>
               </td>
             </tr>
             <tr>

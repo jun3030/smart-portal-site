@@ -1,0 +1,53 @@
+<div class="text_width">
+  <h1 class="left_logo">Smart Potal</h1>
+  <div class="right_bottun">
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-warning btn_space" %>
+  </div>
+  <div class="hader_space">
+    <div class="">
+      <ul class="header_ul_space ">
+        <li>
+          <%= link_to "マイページ", store_manager_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "予約の確認", store_managers_index_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "登録内容の編集", store_managers_show_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <a class="header_line_a">メッセージ確認</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="top_space">
+  <div class="text_width text_left">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-success mt-5 text_left"><%= message %></div>
+    <% end %>
+    <h1 class="top_space bottom_space">メッセージ一覧</h1>
+    <div class="box-content">
+        <br>
+        <h5>送信済メッセージ / 受信メッセージ</h5>
+        <br>
+      <table class="table">
+        <% @messages.each do |m| %>
+          <tbody>
+            <tr>
+              <td>From: <%= User.find(m.user_id).name %></td>
+              <td><%= link_to m.title, store_manager_store_message_path(m.store_id, m.id) %></td>
+              <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
+              <td>
+                <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
+                                    data: { confirm: "削除してよろしいですか？" },class: "btn btn-danger btn-sm" %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<%= render template: "layouts/store_managers"%>

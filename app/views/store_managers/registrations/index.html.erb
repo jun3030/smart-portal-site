@@ -131,7 +131,7 @@ $('#calendar').fullCalendar({
           course_time = event.course_time
           charge = event.charge
           request = event.request
-          
+
           $('#modalTitle').text(event.title);
           $('#modalBody .start span').text(startDate);
           $('#modalBody .end span').text(endDate);
@@ -143,12 +143,12 @@ $('#calendar').fullCalendar({
           $('#modalBody .course_time span').text(course_time);
           $('#modalBody .charge span').text(charge);
           $('#modalBody .request span').text(request);
-          
+
           $('#fullCalModal').modal('show');
         },
         events: '/store_managers/<%= @id %>/reservations.json',
         // header表示切替
-        
+
         viewRender : function(view, element) {
           // 月表示の時
           if (view.type == "month") {
@@ -157,7 +157,7 @@ $('#calendar').fullCalendar({
           }
           // 週表示の時
           if (view.type == "agendaWeek") {
-            
+
             document.getElementsByClassName('fc-prev-button fc-button fc-state-default fc-corner-left')[0].textContent = "前週"
             document.getElementsByClassName('fc-next-button fc-button fc-state-default fc-corner-right')[0].textContent = "次週"
           }
