@@ -80,22 +80,7 @@
                     <div class="store-image-title">店舗写真</div>
                     <p class="image_notice">※最大5枚までアップロードできます</p>
                     <div class="post__drop__box__container">
-                      <div class="prev-content">
-
-                        <% @store_images.store_image.each do |image| %>
-                          <div class="preview-box" id="preview-box__${count}">
-                            <div class="upper-box">
-                              <%= image_tag image.url, width: "112", height: "112", alt: "preview" %>
-                            </div>
-                            <div class="lower-box">
-                              <div class="delete-box" id="delete_btn_${count}">
-                                <span>削除</span>
-                              </div>
-                            </div>
-                          </div>
-                        <% end %>
-
-                      </div>
+                      <div class="prev-content"></div>
                       <div class="label-content">
                         <label class="label-box" for="store_img_field_0" id="label-box--0">
                           <pre class="label-box__text-visible">クリックしてファイルをアップロード/画像あり更新</pre>
@@ -117,18 +102,9 @@
                   <hr>
                 <% end %>
               </div>
-
-
-
-
-
-
               <div class="field mt-3">
                 <% unless @store.store_images.pluck(:sm_image).any? %>
                   <% if @store.store_images.where(sm_image: nil).present? %>
-
-
-
                     <!-- 画像なしnil -->
                     <%= sf.fields_for :store_images do |sif| %>
                       <div class="sm-image-title">店長写真</div>
@@ -147,38 +123,27 @@
                           </div>
                         </div>
                     <% end %>
-
-
                   <% else %>
-
-
-
-                      <!-- 画像なしidなし -->
-                      <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
-                        <div class="sm-image-title">店長写真</div>
-                        <p class="image_notice">※最大1枚までアップロードできます</p>
-                        <div class="sm-image-post-drop-box-container">
-                          <div class="sm-image-prev-content">
-                            <div id="sm_image-preview"></div>
-                          </div>
-                          <div class="sm-image-label-content">
-                            <label class="sm-image-label-box" for="store_store_images_attributes_1_sm_image" id="sm-image-label-box--0">
-                              <pre class="sm-image-label-box__text-visible">クリックしてファイルをアップロード/画像なしidなし</pre>
-                            </label><br>
-                            <div class="hidden_field">
-                              <%= sif.file_field :sm_image, multiple: true %><br>
-                            </div>
+                    <!-- 画像なしidなし -->
+                    <%= sf.fields_for :store_images, @store.store_images.build do |sif| %>
+                      <div class="sm-image-title">店長写真</div>
+                      <p class="image_notice">※最大1枚までアップロードできます</p>
+                      <div class="sm-image-post-drop-box-container">
+                        <div class="sm-image-prev-content">
+                          <div id="sm_image-preview"></div>
+                        </div>
+                        <div class="sm-image-label-content">
+                          <label class="sm-image-label-box" for="store_store_images_attributes_1_sm_image" id="sm-image-label-box--0">
+                            <pre class="sm-image-label-box__text-visible">クリックしてファイルをアップロード/画像なしidなし</pre>
+                          </label><br>
+                          <div class="hidden_field">
+                            <%= sif.file_field :sm_image, multiple: true %><br>
                           </div>
                         </div>
-                      <% end %>
-
-
-
+                      </div>
+                    <% end %>
                   <% end %>
                 <% else %>
-
-
-
                   <!-- 画像あり更新 -->
                   <%= sf.fields_for :store_images do |sif| %>
                     <div class="sm-image-title">店長写真</div>
@@ -201,9 +166,6 @@
                       <p class="image_notice">※登録中画像を削除する場合はチェックボックスにチェックを入れてください。</p>
                     </div>
                   <% end %>
-
-
-
                 <% end %>
               </div>
             <div class="actions mt-5 text-center">
