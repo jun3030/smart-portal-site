@@ -12,6 +12,9 @@ class StoreManager::StoreController < StoreManager::Base
 
   def edit
     @store = current_store_manager.store
+    @store_images = @store.store_images.first
+    @count_store_image = @store_images.store_image.count
+    @count_sm_image = @store_images.sm_image.count
   end
 
   def update
