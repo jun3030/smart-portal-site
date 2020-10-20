@@ -78,11 +78,6 @@
                   </div>
               <% end %>
 
-              <script>
-
-              </script>
-
-
               <h5 class="mt-5 mb-3">【施術プラン】</h5>
               <i>プランは後ほど追加登録することができます。</i>
               <%= sf.fields_for :plans do |pf| %>
@@ -105,8 +100,8 @@
                   <%= pf.label :plan_price, class:"mr-2"%><span class="badge badge-danger">必須</span>&ensp;<i>単位は「円（税込）」となります。</i>
                   <%= pf.number_field :plan_price, placeholder: "例）10000", class:"form-control", required: true %>
                 </div>
-                <!-- Plan画像入力欄 -->
 
+                <!-- Plan画像入力欄 -->
                 <%= pf.fields_for :plan_images do |pif| %>
                   <div class="field mt-3">
                     <%= pif.label :plan_image, class:"mr-2" %><br>
@@ -127,10 +122,4 @@
       <%= render template: "layouts/store_managers"%>
     </div>
   </div>
-<<<<<<< HEAD
 </div>
-
-<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-=======
-</div>
->>>>>>> 9b2dd71091704413786d55c353dd43f5a3e51940
