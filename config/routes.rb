@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     # end
 
 
-    
+
 
   # Admin↓========================================================================================
     namespace :admin do
@@ -68,5 +68,5 @@ Rails.application.routes.draw do
     namespace :smart_yoyaku do
       post "webhook", to: 'webhook#update_order_plan'
     end
-    
+
 end
