@@ -1,5 +1,6 @@
 class Store < ApplicationRecord
   belongs_to :store_manager
+  has_many :reviews, dependent: :destroy
   has_many :masseurs, dependent: :destroy
   has_many :plans, dependent: :destroy
   has_many :store_images, dependent: :destroy

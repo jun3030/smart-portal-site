@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_06_154344) do
+ActiveRecord::Schema.define(version: 2020_10_22_230717) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -132,13 +132,13 @@ ActiveRecord::Schema.define(version: 2020_10_06_154344) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "review"
-    t.float "rate"
-    t.integer "masseur_id"
-    t.integer "user_id"
+    t.integer "user_id", null: false
+    t.integer "store_id", null: false
+    t.string "content"
+    t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["masseur_id"], name: "index_reviews_on_masseur_id"
+    t.index ["store_id"], name: "index_reviews_on_store_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_154344) do
   add_foreign_key "masseurs", "stores"
   add_foreign_key "plan_images", "plans"
   add_foreign_key "prefectures", "regions"
-  add_foreign_key "reviews", "masseurs"
+  add_foreign_key "reviews", "stores"
   add_foreign_key "reviews", "users"
   add_foreign_key "social_profiles", "users"
   add_foreign_key "store_images", "stores"

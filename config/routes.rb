@@ -53,7 +53,9 @@ Rails.application.routes.draw do
     namespace :store_manager do
       get "/:id/top", to: 'top_page#top'
       patch "update_calendar_status", to: 'top_page#update_calendar_status'
-      resources :store
+      resources :store do
+        resources :review
+      end
       resources :plans
       resources :masseurs, except: :show
       # 出張範囲のrouting↓========================================================================================
