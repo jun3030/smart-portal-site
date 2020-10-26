@@ -44,6 +44,10 @@ class User::TopController < User::Base
     @message = Message.find(params[:id])
   end
 
+  def message_new
+    @message = Message.find(params[:id])
+  end
+
   private
 
     # ヘッダーとトップページのカテゴリ一覧表示用

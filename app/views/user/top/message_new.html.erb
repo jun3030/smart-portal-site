@@ -1,0 +1,33 @@
+<div class="center cenrer-block">
+  <div class="service-head"><br>
+    <% flash.each do |message_type, msg| %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="price" class="service-price">
+    <div class="box-content">
+      <%= form_with(model: @message, url: "#", local: true, method: :post) do |f| %>
+        <h2 class="content-h2">店舗への問い合わせ</h2>
+        <h5>
+
+        </h5>
+        <%= f.label :title, class: "" %>
+        <%= f.text_field :title, class: "form-control" %><br>
+
+        <%= f.label :content, class: "" %>
+        <%= f.text_area :content, size: "20x10", class: "form-control" %>
+
+        <%= f.hidden_field :message_status, value: "問い合わせ" %>
+
+        <%= f.hidden_field :user_id, value: current_user.id %>
+
+        <div class="text-right"><br>
+          <%= f.submit "メッセージを送信する", class: "message-submit-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
