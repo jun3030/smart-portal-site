@@ -45,7 +45,7 @@ class User::TopController < User::Base
   end
 
   def message_new
-    @message = Message.find(params[:id])
+    @message = Message.new
   end
 
   private

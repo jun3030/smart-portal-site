@@ -88,3 +88,12 @@
   font-weight: bold;
   border-radius:5px;
 }
+
+.message-submit-btn {
+  background-color: #f06f18;
+  padding: 10px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  border-radius:5px;
+}

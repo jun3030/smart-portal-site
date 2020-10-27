@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     get "/store/:id", to: "user/top#details", as: :details
     get "/messages", to: "user/top#messages", as: :messages
     get "/messages/:id", to: "user/top#message_show", as: :message_show
+    resources :store, only: :index do
+      get "/messages/new", to: "user/top#message_new", as: :message_new
+    end
   # devise↓ =====================================================================================
     devise_for :admins, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
