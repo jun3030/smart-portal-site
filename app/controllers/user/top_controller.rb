@@ -45,7 +45,19 @@ class User::TopController < User::Base
   end
 
   def message_new
+    @store = Store.find(params[:store_id])
     @message = Message.new
+  end
+
+  def message_create
+    @store = Store.find(params[:store_id])
+    @message = Message.new(message_params)
+    if @message.save
+      flash[:success] = "メッセージを送信しました。"
+      redirect_to details_url(@store)
+    else
+      render :message_new
+    end
   end
 
   private
@@ -61,5 +73,9 @@ class User::TopController < User::Base
       if @store.store_manager.order_plan.nil?
         raise ActiveRecord::RecordNotFound, "こちらのページは現在表示することができません。"
       end
+    end
+
+    def message_params
+      params.require(:message).permit(:title, :content, :message_status, :store_id, :user_id)
     end
 end

@@ -14,7 +14,7 @@ class StoreManager::MessagesController < ApplicationController
       redirect_to details_url(@store)
     else
       flash[:danger] = "メッセージの送信に失敗しました。"
-      render :new
+      render template: "top/message_new"
     end
   end
 
