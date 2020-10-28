@@ -1,6 +1,6 @@
 <div class="center cenrer-block">
   <div id="price" class="service-price">
-    <div class="box-content">
+    <div class="box-content"><br>
       <%= form_with(model: @message, url: store_message_create_path(@store), local: true, method: :post) do |f| %>
         <%= render "shared/error_messages", object: f.object %>
 

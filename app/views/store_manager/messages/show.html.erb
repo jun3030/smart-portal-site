@@ -27,23 +27,35 @@
     <% flash.each do |message_type, message| %>
       <div class="alert alert-success mt-5 text_left"><%= message %></div>
     <% end %>
-    <div class="box-content">
+    <div class="box-content box24">
       <table class="table">
         <tbody>
           <tr>
-            <td>From: <%= User.find(@message.user_id).name %></td>
-            <td></td>
-            <td><%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+            <td>受信日：<%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
           </tr>
           <tr>
-            <td colspan="3"><%= @message.title %></td>
+            <td>件名：<%= @message.title %></td>
           </tr>
           <tr>
-            <td colspan="3"><%= @message.content %></td>
+            <td><%= @message.content %></td>
           </tr>
         </tbody>
       </table>
     </div>
+    <h5><%= User.find(@message.user_id).name %></h5>
+
+    <%= form_with(model: @message, url: "#", local: true, method: :post) do |f| %>
+        <%= render "shared/error_messages", object: f.object %>
+        <br>
+        <%= f.text_area :reply, size: "30x5", class: "form-control" %><br>
+
+        <%= f.hidden_field :message_status, value: "問い合わせ" %>
+        <%= f.hidden_field :store_id, value: "#" %>
+        <%= f.hidden_field :user_id, value: "#" %>
+
+        <%= f.submit "メッセージを返信する", class: "btn btn-warning btn-lg" %>
+
+      <% end %>
   </div>
 </div>
 <%= render template: "layouts/store_managers"%>
