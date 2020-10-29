@@ -42,8 +42,4 @@ class StoreManager::MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:title, :content, :message_status, :store_id, :user_id)
     end
-
-    def reply_params
-      params.require(:message).permit(:reply)
-    end
 end

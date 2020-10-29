@@ -27,7 +27,7 @@
     <% flash.each do |message_type, message| %>
       <div class="alert alert-success mt-5 text_left"><%= message %></div>
     <% end %>
-    <div class="box-content box24">
+    <div class="box-content message-box">
       <table class="table">
         <tbody>
           <tr>
@@ -43,6 +43,24 @@
       </table>
     </div>
     <h5><%= User.find(@message.user_id).name %></h5>
+
+    <% if @message.id == @message.user_id %>
+      <% @replies.each do |r| %>
+        <div class="box-content reply-box">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><%= r.reply %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+      <div class="text-right">
+        <h5><%= Store.find(@message.store_id).store_manager.name %></h5>
+      </div>
+    <% end %>
+
 
     <%= form_with(model: @reply, url: store_manager_store_message_replies_path(@store, @message), local: true, method: :post) do |f| %>
         <%= render "shared/error_messages", object: f.object %>

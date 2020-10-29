@@ -99,7 +99,7 @@
   border-radius:5px;
 }
 
-.box24 {
+.message-box {
     position: relative;
     padding: 0.5em 0.7em;
     margin: 2em 0;
@@ -108,7 +108,7 @@
     font-weight: bold;
     border-radius: 10px;
 }
-.box24:after {
+.message-box:after {
     position: absolute;
     content: '';
     top: 100%;
@@ -118,7 +118,31 @@
     width: 0;
     height: 0;
 }
-.box24 p {
+.message-box p {
+    margin: 0;
+    padding: 0;
+}
+
+.reply-box {
+    position: relative;
+    padding: 0.5em 0.7em;
+    margin: 2em 0;
+    background: #e0edff;
+    color: #fff0c6;
+    font-weight: bold;
+    border-radius: 10px;
+}
+.reply-box:after {
+    position: absolute;
+    content: '';
+    top: 100%;
+    right: 30px;
+    border: 15px solid transparent;
+    border-top: 15px solid #e0edff;
+    width: 0;
+    height: 0;
+}
+.reply-box p {
     margin: 0;
     padding: 0;
 }
