@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_062808) do
+ActiveRecord::Schema.define(version: 2020_10_29_041449) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -118,10 +118,6 @@ ActiveRecord::Schema.define(version: 2020_10_28_062808) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "group_id"
-    t.string "reply"
-    t.integer "room_id"
-    t.index ["group_id"], name: "index_messages_on_group_id"
     t.index ["store_id"], name: "index_messages_on_store_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -158,6 +154,18 @@ ActiveRecord::Schema.define(version: 2020_10_28_062808) do
     t.string "area"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.string "reply"
+    t.integer "store_id", null: false
+    t.integer "user_id", null: false
+    t.integer "message_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["message_id"], name: "index_replies_on_message_id"
+    t.index ["store_id"], name: "index_replies_on_store_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -260,11 +268,13 @@ ActiveRecord::Schema.define(version: 2020_10_28_062808) do
   add_foreign_key "favorites", "masseurs"
   add_foreign_key "favorites", "users"
   add_foreign_key "masseurs", "stores"
-  add_foreign_key "messages", "groups"
   add_foreign_key "messages", "stores"
   add_foreign_key "messages", "users"
   add_foreign_key "plan_images", "plans"
   add_foreign_key "prefectures", "regions"
+  add_foreign_key "replies", "messages"
+  add_foreign_key "replies", "stores"
+  add_foreign_key "replies", "users"
   add_foreign_key "reviews", "masseurs"
   add_foreign_key "reviews", "users"
   add_foreign_key "social_profiles", "users"
