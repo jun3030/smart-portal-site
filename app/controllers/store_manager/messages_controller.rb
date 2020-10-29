@@ -30,21 +30,6 @@ class StoreManager::MessagesController < ApplicationController
     redirect_to messages_url
   end
 
-  def reply
-    @message = Message.find(params[:message_id])
-    @reply = Message.new
-  end
-
-  def create_reply
-    @reply = Message.new(reply_params)
-    if @reply.save
-      flash[:success] = "メッセージを送信しました。"
-      redirect_to store_manager_store_messages_url(@store)
-    else
-      render :reply
-    end
-  end
-
   private
     def set_store
       @store = Store.find(params[:store_id])

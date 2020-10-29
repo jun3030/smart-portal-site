@@ -1,0 +1,2 @@
+module StoreManager::RepliesHelper
+end

@@ -27,27 +27,35 @@
     <% flash.each do |message_type, message| %>
       <div class="alert alert-success mt-5 text_left"><%= message %></div>
     <% end %>
-    <h1 class="top_space bottom_space">メッセージ一覧</h1>
-    <div class="box-content">
-        <br>
-        <h5>送信済メッセージ / 受信メッセージ</h5>
-        <br>
+    <div class="box-content box24">
       <table class="table">
-        <% @messages.each do |m| %>
-          <tbody>
-            <tr>
-              <td>From: <%= User.find(m.user_id).name %></td>
-              <td><%= link_to m.title, new_store_manager_store_message_reply_path(m.store_id, m.id) %></td>
-              <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
-              <td>
-                <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
-                                    data: { confirm: "削除してよろしいですか？" },class: "btn btn-danger btn-sm" %>
-              </td>
-            </tr>
-          </tbody>
-        <% end %>
+        <tbody>
+          <tr>
+            <td>受信日：<%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+          </tr>
+          <tr>
+            <td>件名：<%= @message.title %></td>
+          </tr>
+          <tr>
+            <td><%= @message.content %></td>
+          </tr>
+        </tbody>
       </table>
     </div>
+    <h5><%= User.find(@message.user_id).name %></h5>
+
+    <%= form_with(model: @reply, url: store_manager_store_message_replies_path(@store, @message), local: true, method: :post) do |f| %>
+        <%= render "shared/error_messages", object: f.object %>
+        <br>
+        <%= f.text_area :reply, size: "30x5", class: "form-control" %><br>
+
+        <%= f.hidden_field :message_id, value: @message.id %>
+        <%= f.hidden_field :store_id, value: current_store_manager.id %>
+        <%= f.hidden_field :user_id, value: @message.user_id %>
+
+        <%= f.submit "メッセージを返信する", class: "btn btn-warning btn-lg" %>
+
+      <% end %>
   </div>
 </div>
 <%= render template: "layouts/store_managers"%>

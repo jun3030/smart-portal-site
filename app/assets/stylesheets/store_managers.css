@@ -103,9 +103,10 @@
     position: relative;
     padding: 0.5em 0.7em;
     margin: 2em 0;
-    background: #e6f4ff;
-    color: #5c98d4;
+    background: #fff0c6;
+    color: #fff0c6;
     font-weight: bold;
+    border-radius: 10px;
 }
 .box24:after {
     position: absolute;
@@ -113,7 +114,7 @@
     top: 100%;
     left: 30px;
     border: 15px solid transparent;
-    border-top: 15px solid #e6f4ff;
+    border-top: 15px solid #fff0c6;
     width: 0;
     height: 0;
 }

@@ -61,8 +61,7 @@ Rails.application.routes.draw do
       patch "update_calendar_status", to: 'top_page#update_calendar_status'
       resources :store do
         resources :messages do
-          get "/reply", to: "messages#reply", as: :reply
-          post "/reply", to: "messages#create_reply", as: :create_reply
+          resources :replies, only: [:new, :create, :destroy]
         end
       end
       resources :plans
