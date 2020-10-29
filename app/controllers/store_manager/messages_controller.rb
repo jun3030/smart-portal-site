@@ -1,22 +1,21 @@
 class StoreManager::MessagesController < ApplicationController
 
-  before_action :set_store, only:[:new, :create, :index]
-  before_action :set_message, only:[:show, :destroy]
+  before_action :set_store, only:[:new, :create, :index, :reply, :create_reply]
+  before_action :set_message, only:[:destroy]
 
-  def new
-    @message = Message.new
-  end
+  # def new
+  #   @message = Message.new
+  # end
 
-  def create
-    @message = Message.new(message_params)
-    if @message.save
-      flash[:success] = "メッセージを送信しました。"
-      redirect_to details_url(@store)
-    else
-      flash[:danger] = "メッセージの送信に失敗しました。"
-      render template: "top/message_new"
-    end
-  end
+  # def create
+  #   @message = Message.new(message_params)
+  #   if @message.save
+  #     flash[:success] = "メッセージを送信しました。"
+  #     redirect_to details_url(@store)
+  #   else
+  #     render :new
+  #   end
+  # end
 
   def index
     @messages = Message.where(store_id: @store.id).order(created_at: "ASC")
@@ -32,9 +31,18 @@ class StoreManager::MessagesController < ApplicationController
   end
 
   def reply
+    @message = Message.find(params[:message_id])
+    @reply = Message.new
   end
 
   def create_reply
+    @reply = Message.new(reply_params)
+    if @reply.save
+      flash[:success] = "メッセージを送信しました。"
+      redirect_to store_manager_store_messages_url(@store)
+    else
+      render :reply
+    end
   end
 
   private
@@ -48,5 +56,9 @@ class StoreManager::MessagesController < ApplicationController
 
     def message_params
       params.require(:message).permit(:title, :content, :message_status, :store_id, :user_id)
+    end
+
+    def reply_params
+      params.require(:message).permit(:reply)
     end
 end
