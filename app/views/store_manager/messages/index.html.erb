@@ -39,10 +39,6 @@
               <td>From: <%= User.find(m.user_id).name %></td>
               <td><%= link_to m.title, new_store_manager_store_message_reply_path(m.store_id, m.id) %></td>
               <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
-              <td>
-                <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
-                                    data: { confirm: "削除してよろしいですか？" },class: "btn btn-danger btn-sm" %>
-              </td>
             </tr>
           </tbody>
         <% end %>

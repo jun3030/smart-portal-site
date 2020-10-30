@@ -5,10 +5,10 @@ Rails.application.routes.draw do
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
     get "/messages", to: "user/top#messages", as: :messages
-    get "/messages/:id", to: "user/top#message_show", as: :message_show
     resources :store, only: :index do
       get "/messages/new", to: "user/top#message_new", as: :message_new
       post "messages", to: "user/top#message_create", as: :message_create
+      get "messages/:id", to: "user/top#message_show", as: :message_show
     end
   # devise↓ =====================================================================================
     devise_for :admins, ActiveAdmin::Devise.config
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
       get "/:id/top", to: 'top_page#top'
       patch "update_calendar_status", to: 'top_page#update_calendar_status'
       resources :store do
-        resources :messages do
+        resources :messages, only: [:index, :delete] do
           resources :replies, only: [:new, :create, :destroy]
         end
       end

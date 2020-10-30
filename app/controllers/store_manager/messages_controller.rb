@@ -21,9 +21,6 @@ class StoreManager::MessagesController < ApplicationController
     @messages = Message.where(store_id: @store.id).order(created_at: "ASC")
   end
 
-  def show
-  end
-
   def destroy
     @message.destroy
     flash[:success] = "メッセージを削除しました。"

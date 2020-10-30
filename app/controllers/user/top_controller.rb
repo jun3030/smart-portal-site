@@ -42,6 +42,7 @@ class User::TopController < User::Base
 
   def message_show
     @message = Message.find(params[:id])
+    @replies = Reply.where(message_id: @message.id).order(created_at: "ASC")
   end
 
   def message_new
@@ -76,6 +77,6 @@ class User::TopController < User::Base
     end
 
     def message_params
-      params.require(:message).permit(:title, :content, :message_status, :store_id, :user_id)
+      params.require(:message).permit(:title, :content, :store_id, :user_id)
     end
 end

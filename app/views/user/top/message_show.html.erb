@@ -1,20 +1,16 @@
-<div class="center cenrer-block">
-  <div class="service-head"><br>
-    <% flash.each do |message_type, msg| %>
-      <div class="alert alert-success">
-        <%= msg %>
-      </div>
+<div class="top_space">
+  <div class="text_width text_left">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-success mt-5 text_left"><%= message %></div>
     <% end %>
-  </div>
-
-  <div id="price" class="service-price">
-    <h2 class="content-h2"><%= @message.title %></h2>
-    <div class="box-content">
+    <div class="box-content message-box">
       <table class="table">
         <tbody>
           <tr>
-            <td>To: <%= Store.find(@message.store_id).store_manager.name %></td>
-            <td><%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+            <td>受信日：<%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+          </tr>
+          <tr>
+            <td>件名：<%= @message.title %></td>
           </tr>
           <tr>
             <td><%= @message.content %></td>
@@ -22,5 +18,22 @@
         </tbody>
       </table>
     </div>
+    <h5><%= User.find(@message.user_id).name %></h5>
+
+
+      <% @replies.each do |r| %>
+        <div class="box-content reply-box">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><%= r.reply %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-right">
+          <h5><%= Store.find(r.store_id).store_manager.name %></h5>
+        </div>
+      <% end %><br>
   </div>
 </div>

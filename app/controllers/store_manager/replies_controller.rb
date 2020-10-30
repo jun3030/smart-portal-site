@@ -12,10 +12,17 @@ class StoreManager::RepliesController < ApplicationController
     @reply = Reply.new(reply_params)
     if @reply.save
       flash[:success] = "メッセージを送信しました。"
-      redirect_to store_manager_store_messages_path(@store)
+      redirect_to new_store_manager_store_message_reply_url(@reply.store_id, @reply.message_id)
     else
       render :new
     end
+  end
+
+  def destroy
+    @reply = Reply.find(params[:id])
+    @reply.destroy
+    flash[:success] = "メッセージを削除しました。"
+    redirect_to new_store_manager_store_message_reply_url(@reply.store_id, @reply.message_id)
   end
 
   private
