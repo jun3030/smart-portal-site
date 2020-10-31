@@ -91,10 +91,68 @@
 
 
 /* 口コミ機能/index */
-.container-review {
-
+.ttl-hold-info {
+  font-size: 25px;
+  margin-bottom: 30px;
 }
 
-.review-group {
+.wrap-user {
+  float: left;
+  margin-bottom: 8px;
+}
 
+.pull-left {
+  float: left!important;
+}
+
+.nickname {
+  float: left;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-top: 3px;
+}
+
+.wrap-voice .voice-content {
+  border-radius: 4px;
+  border: solid 1px #f6d999;
+  display: inline-block;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.wrap-voice .voice-content:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 70px;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #f6d999;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.wrap-voice .voice-content:after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 70px;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.wrap-voice {
+  margin-bottom:20px;
+}
+
+.voice-situation {
+  padding-top: 19px;
+  text-align: right;
 }

@@ -768,12 +768,15 @@
         <div class="box-content">
         <table class="table">
         <h2 class="content-h2">口コミ</h2>
+        <h1 class="ttl-hold-info">店舗の口コミ一覧</h1>
         <% @reviews.each do |review| %>
             <div class="review-group>
                 <div class="wrap-user">
                     <img class="pull-left" src="../../../images/icon_reviewer.png" height="41" width="41">
                     <p class="nickname"><%= User.find(review.user_id).name %></p>
                 </div>
+
+                <p class="voice-situation">利用時期：2020年6月</p>
 
                 <div class="wrap-voice">
                     <div class="voice-content">
