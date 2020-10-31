@@ -1,13 +1,15 @@
 class User::ReviewController < User::Base
   before_action :set_categories
+  before_action :set_store
 
   def index
+    @reviews = Store.find(params[:store_id]).reviews
   end
 
   def new
     @store = Store.find(params[:store_id])
     @review = @store.reviews.build
-    @reviews = @store.reviews
+    @reviews = Review.all
   end
 
   def create
@@ -22,11 +24,18 @@ class User::ReviewController < User::Base
     end
   end
 
+  def show
+  end
+
   private
 
   # ヘッダーとトップページのカテゴリ一覧表示用
   def set_categories
     @categories = Category.all
+  end
+
+  def set_store
+    @store = Store.find(params[:store_id])
   end
 
   def review_params

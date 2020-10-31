@@ -144,7 +144,9 @@
 
     <div id="review" class="service-review">
       <h2 class="content-h2">口コミ</h2>
-        <p><%= link_to "コメントを書く", user_store_review_new_path(@store.id) %></p>
+        <% if current_user.present? %>
+          <p><%= link_to "口コミを書く", user_store_review_new_path(@store.id) %></p>
+        <% end %>
         <p><%= link_to "全〇〇件の口コミを見る", user_store_review_index_path(@store.id) %></p>
         <p><%= link_to "予約日時を入力する", "#", class:"btn btn-warning btn-lg"%></p>
     </div>
