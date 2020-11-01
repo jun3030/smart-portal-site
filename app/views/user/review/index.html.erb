@@ -773,7 +773,7 @@
           <div class="review-group>
             <div class="wrap-user">
               <img class="pull-left" src="../../../images/icon_reviewer.png" height="41" width="41">
-              <p class="nickname"><%= User.find(review.user_id).name %></p>
+              <p class="nickname"><%= User.find(review.user_id).name %>さん</p>
             </div>
               <p class="voice-situation">投稿期間：<%= review.created_at.strftime('%Y/%m/%d') %></p>
 

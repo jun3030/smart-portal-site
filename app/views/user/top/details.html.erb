@@ -144,11 +144,52 @@
 
     <div id="review" class="service-review">
       <h2 class="content-h2">口コミ</h2>
+        <div id="storecommit" class="service-price">
+          <div class="box-content">
+            <table class="table">
+              <h1 class="ttl-hold-info">店舗の口コミ</h1>
+              <% @reviews.first(5).each do |review| %>
+                <div class="review-group>
+                  <div class="wrap-user">
+                    <img class="pull-left" src="../../../images/icon_reviewer.png" height="41" width="41">
+                    <p class="nickname"><%= User.find(review.user_id).name %>さん</p>
+                  </div>
+                  <p class="voice-situation">投稿期間：<%= review.created_at.strftime('%Y/%m/%d') %></p>
+
+                  <div class="wrap-voice">
+                    <div class="voice-content">
+                      <div class="star-rate star-rate5">
+                        <span id="star-rate-<%= review.id %>"></span>
+                        <span><%= review.rate %>点</span>
+                      </div>
+                      <div class="text-voice">
+                        <%= link_to review.content, user_store_review_show_path(@store.id, review.id) %>
+                      </div>
+                    </div>
+                  </div>
+                  <script>
+                    $('#star-rate-<%= review.id %>').raty({
+                        size: 36,
+                        starOff: "/assets/star-off.png",
+                        starOn: "/assets/star-on.png",
+                        starHalf: "/assets/star-half.png",
+                        half: true,
+                        readOnly: true,
+                        score: <%= review.rate %>,
+                    });
+                  </script>
+                </div>
+              <% end %>
+            </table>
+          </div>
+        </div>
         <% if current_user.present? %>
           <p><%= link_to "口コミを書く", user_store_review_new_path(@store.id) %></p>
         <% end %>
-        <p><%= link_to "全#{Review.all.count}件の口コミを見る", user_store_review_index_path(@store.id) %></p>
-        <p><%= link_to "予約日時を入力する", "#", class:"btn btn-warning btn-lg"%></p>
+        <div class="text-center">
+          <p class="more-read"><%= link_to "全#{Review.all.count}件の口コミを見る", user_store_review_index_path(@store.id) %></p>
+          <p><%= link_to "予約日時を入力する", "#", class:"btn btn-warning btn-lg"%></p>
+        </div>
     </div>
 
     <!--<div id="detail-service" class="mb-large">
