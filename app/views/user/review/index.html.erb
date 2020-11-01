@@ -762,33 +762,31 @@
     };
     }));
 </script>
-
 <div class="center cenrer-block">
-    <div id="storecommit" class="service-price">
-        <div class="box-content">
-        <table class="table">
+  <div id="storecommit" class="service-price">
+    <div class="box-content">
+      <table class="table">
         <h2 class="content-h2">口コミ</h2>
         <h1 class="ttl-hold-info">店舗の口コミ一覧</h1>
         <% @reviews.each do |review| %>
-            <div class="review-group>
-                <div class="wrap-user">
-                    <img class="pull-left" src="../../../images/icon_reviewer.png" height="41" width="41">
-                    <p class="nickname"><%= User.find(review.user_id).name %></p>
-                </div>
+          <div class="review-group>
+            <div class="wrap-user">
+              <img class="pull-left" src="../../../images/icon_reviewer.png" height="41" width="41">
+              <p class="nickname"><%= User.find(review.user_id).name %></p>
+            </div>
+              <p class="voice-situation">利用時期：2020年6月</p>
 
-                <p class="voice-situation">利用時期：2020年6月</p>
-
-                <div class="wrap-voice">
-                    <div class="voice-content">
-                    <div class="star-rate star-rate5">
-                        <span id="star-rate-<%= review.id %>"></span>
-                        <span><%= review.rate %>点</span>
-                    </div>
-                    <div class="text-voice">
-                        <%= link_to review.content, user_store_review_show_path(@store.id, review.id) %>
-                    </div>
-                    </div>
+              <div class="wrap-voice">
+                <div class="voice-content">
+                  <div class="star-rate star-rate5">
+                    <span id="star-rate-<%= review.id %>"></span>
+                    <span><%= review.rate %>点</span>
+                  </div>
+                  <div class="text-voice">
+                    <%= link_to review.content, user_store_review_show_path(@store.id, review.id) %>
+                  </div>
                 </div>
+              </div>
             <script>
                 $('#star-rate-<%= review.id %>').raty({
                     size: 36,
@@ -800,9 +798,9 @@
                     score: <%= review.rate %>,
                 });
             </script>
-            </div>
+          </div>
         <% end %>
-        </table>
-        </div>
+      </table>
     </div>
+  </div>
 </div>
