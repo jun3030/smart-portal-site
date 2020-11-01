@@ -105,6 +105,10 @@
   float: left!important;
 }
 
+.star-rate {
+  margin-bottom:7px;
+}
+
 .nickname {
   float: left;
   margin-bottom: 5px;
