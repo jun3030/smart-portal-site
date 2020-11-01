@@ -40,7 +40,7 @@ class User::ReviewController < User::Base
   end
 
   def review_params
-    params.require(:review).permit(:store_id, :user_id, :content, :rate)
+    params.require(:review).permit(:store_id, :user_id, :title, :content, :rate)
   end
 
 
