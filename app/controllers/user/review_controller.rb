@@ -28,6 +28,12 @@ class User::ReviewController < User::Base
     @review = Review.find(params[:id])
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
 
   # ヘッダーとトップページのカテゴリ一覧表示用

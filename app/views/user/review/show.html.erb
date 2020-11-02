@@ -9,7 +9,13 @@
               <img class="pull-left" src="../../../../images/icon_reviewer.png" height="41" width="41">
               <p class="nickname"><%= User.find(@review.user_id).name %></p>
             </div>
-              <p class="voice-situation">投稿期間：<%= @review.created_at.strftime('%Y/%m/%d') %></p>
+              <p class="voice-situation">
+                投稿期間：<%= @review.created_at.strftime('%Y/%m/%d') %>
+                <% if current_user.id == @review.user_id %>
+                  <%= link_to "編集", user_store_review_edit_path(@store.id, @review.id) %>
+                  <%= link_to "削除" %>
+                <% end %>
+              </p>
 
               <div class="wrap-voice">
                 <div class="voice-content">
