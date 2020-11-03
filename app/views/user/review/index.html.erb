@@ -19,7 +19,7 @@
                     <span><%= review.rate %>点</span>
                   </div>
                   <div class="text-voice">
-                    <%= link_to review.content, user_store_review_show_path(@store.id, review.id) %>
+                    <%= link_to review.content, user_store_review_show_path(params[:store_id], review.id) %>
                   </div>
                 </div>
               </div>

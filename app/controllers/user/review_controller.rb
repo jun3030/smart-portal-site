@@ -1,6 +1,6 @@
 class User::ReviewController < User::Base
   before_action :set_categories
-  before_action :set_store
+  before_action :set_store, only: [:new, :create, :edit]
 
   def index
     @reviews = Store.find(params[:store_id]).reviews
@@ -29,9 +29,19 @@ class User::ReviewController < User::Base
   end
 
   def edit
+    @review = Review.find(params[:id])
   end
 
   def update
+    @store = Store.find(params[:store_id])
+    if @review = @store.reviews.update(review_params)
+      debugger
+      flash[:success] = "口コミを更新しました。"
+      redirect_to user_store_review_show_path
+    else
+      flash[:danger] = "口コミが更新されませんでした。"
+      render :edit
+    end
   end
 
   private
@@ -48,6 +58,4 @@ class User::ReviewController < User::Base
   def review_params
     params.require(:review).permit(:store_id, :user_id, :title, :content, :rate)
   end
-
-
 end

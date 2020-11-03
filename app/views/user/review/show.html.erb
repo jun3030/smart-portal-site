@@ -3,7 +3,10 @@
     <div class="box-content">
       <table class="table">
         <h2 class="content-h2">口コミ</h2>
-        <h1 class="ttl-hold-info"><%= User.find(@review.user_id).name %>さんの口コミ</h1>
+          <% flash.each do |message_type, msg| %>
+            <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
+          <% end %>
+        <h1 class="ttl-hold-info"><%= User.find(@review.user_id).name %>さんの口コミ : <%= @review.title %></h1>
           <div class="review-group>
             <div class="wrap-user">
               <img class="pull-left" src="../../../../images/icon_reviewer.png" height="41" width="41">
@@ -11,12 +14,12 @@
             </div>
               <p class="voice-situation">
                 投稿期間：<%= @review.created_at.strftime('%Y/%m/%d') %>
-                <% if current_user.id == @review.user_id %>
-                  <%= link_to "編集", user_store_review_edit_path(@store.id, @review.id) %>
+
+                <% if current_user.present? && current_user.id == @review.user_id %>
+                  <%= link_to "編集", user_store_review_edit_path(params[:store_id], @review.id) %>
                   <%= link_to "削除" %>
                 <% end %>
               </p>
-
               <div class="wrap-voice">
                 <div class="voice-content">
                   <div class="star-rate star-rate5">

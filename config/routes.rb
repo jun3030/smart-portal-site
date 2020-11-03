@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       get "/user/store/:store_id/review/new", to: "user/review#new", as: :user_store_review_new
       get "/user/store/:store_id/review/:id/edit", to: "user/review#edit", as: :user_store_review_edit
       get "/user/store/:store_id/review/:id", to: "user/review#show", as: :user_store_review_show
-      patch "/user/store/:store_id/review/:id", to: "user/review#update"
+      patch "/user/store/:store_id/review/:id", to: "user/review#update", as: :user_store_review_update
       delete "/user/store/:store_id/review/:id", to: "user/review#destroy"
     end
 
