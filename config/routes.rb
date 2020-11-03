@@ -60,7 +60,7 @@ Rails.application.routes.draw do
       get "/:id/top", to: 'top_page#top'
       patch "update_calendar_status", to: 'top_page#update_calendar_status'
       resources :store do
-        resources :messages, only: [:index, :destroy] do
+        resources :messages, only: [:index, :destroy, :update] do
           resources :replies, only: [:new, :create, :destroy]
         end
       end

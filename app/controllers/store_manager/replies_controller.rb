@@ -6,6 +6,7 @@ class StoreManager::RepliesController < ApplicationController
   def new
     @reply = Reply.new
     @replies = Reply.where(message_id: @message.id).order(created_at: "ASC")
+    params[:checked]
   end
 
   def create

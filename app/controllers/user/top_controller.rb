@@ -77,6 +77,6 @@ class User::TopController < User::Base
     end
 
     def message_params
-      params.require(:message).permit(:title, :content, :store_id, :user_id)
+      params.require(:message).permit(:title, :content, :store_id, :user_id, :checked)
     end
 end
