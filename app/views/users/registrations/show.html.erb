@@ -5,7 +5,7 @@
         <div class="alert alert-success mt-5"><%= msg %></div>
       <% end %>
       <h3 class="text-center my-5">〜<%= "#{current_user.name}" %>さんのマイページ〜</h3>
-      <h6 class="text-center my-5"><%= link_to "メッセージ一覧", messages_path %></h6>
+      <h6 class="text-center my-5"><%= link_to "メッセージ一覧", messages_path(current_user.id) %></h6>
       <hr>
       <h4 class="my-4 text-center">【ご登録内容】</h4>
       <div class="jumbotron">

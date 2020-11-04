@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root            to: "user/top#index"
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
-    get "/messages", to: "user/top#messages", as: :messages
+    get "user/:id/messages", to: "user/top#messages", as: :messages
     resources :store, only: :index do
       get "/messages/new", to: "user/top#message_new", as: :message_new
       post "messages", to: "user/top#message_create", as: :message_create
