@@ -161,7 +161,7 @@
   text-align: right;
 }
 
-/* 口コミ機能/ishow */
+/* 口コミ機能/show */
 .text-center-show {
   text-align:center;
   padding:20px 0px;
@@ -178,4 +178,23 @@
 
 .form-group {
   padding:5px 0px;
+}
+
+.rating-box {
+  padding:30px;
+  border: 0.5px solid silver;
+}
+
+.review-update-btn {
+  display: block;
+  margin: 20px;
+  box-shadow: 0 3px 0 0 #c8580d;
+  background-color: #f06f18;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  padding: 10px;
+  width: 290px;
+  border-radius: 5px;
+
 }

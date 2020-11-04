@@ -1,6 +1,6 @@
 class User::ReviewController < User::Base
   before_action :set_categories
-  before_action :set_store, only: [:index, :new, :create, :edit, :show]
+  before_action :set_store, only: [:index, :new, :create, :edit, :show, :destroy]
 
   def index
     @reviews = Store.find(params[:store_id]).reviews
@@ -46,6 +46,16 @@ class User::ReviewController < User::Base
       redirect_to user_store_review_show_path
     else
       flash[:danger] = "口コミが更新されませんでした。"
+      render :edit
+    end
+  end
+
+  def destroy
+    if @store.reviews.find(params[:id]).destroy
+      flash[:success] = '口コミを削除しました。'
+      redirect_to details_path(@store.id)
+    else
+      flash[:danger] = '削除に失敗しました。再度やり直してください。'
       render :edit
     end
   end

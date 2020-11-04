@@ -7,7 +7,7 @@
           <%= msg %>
         </div>
       <% end %>
-      <h3 class="review-title"><%= @store.store_name %></h3>
+      <h3 class="review-title"><%= User.find(@review.user_id).name %>さんの口コミ編集</h3>
       <div class="rating-box">
         <%= form_with model: @review, url: user_store_review_update_path, method: :patch, local: true do |f|  %>
 
@@ -37,7 +37,7 @@
             </div>
           </div>
 
-          <%= f.submit '口コミを編集する', class: "review-create-btn" %>
+          <%= f.submit '口コミを編集する', class: "review-update-btn" %>
         <% end %>
       </div>
     </div>
