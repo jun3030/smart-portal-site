@@ -72,6 +72,8 @@
       <%= f.hidden_field :message_id, value: @message.id %>
       <%= f.hidden_field :store_id, value: current_store_manager.id %>
       <%= f.hidden_field :user_id, value: @message.user_id %>
+      <%= f.hidden_field :checked, value: "未読" %>
+      <%= f.hidden_field :reply_from, value: "store_manager" %>
 
       <%= f.submit "メッセージを返信する", class: "btn btn-warning btn-lg" %>
       <%= link_to "一覧に戻る", store_manager_store_messages_path(@store), class: "btn btn-light btn-lg" %>

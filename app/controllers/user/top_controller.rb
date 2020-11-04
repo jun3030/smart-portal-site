@@ -43,6 +43,8 @@ class User::TopController < User::Base
   def message_show
     @message = Message.find(params[:id])
     @replies = Reply.where(message_id: @message.id).order(created_at: "ASC")
+    @reply = Reply.new
+    @reply_store = Store.find(params[:store_id])
   end
 
   def message_new

@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Smartポータル</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'user', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
+  </head>
+<body>
+  <% content_for :content do %>
+    <%= render 'layouts/header' %>
+
 <div id="price" class="service-price">
   <div class="box-content">
     <%= form_with(model: @message, url: store_manager_store_messages_path(@store), local: true, method: :post) do |f| %>
@@ -24,3 +36,9 @@
     <% end %>
   </div>
 </div>
+
+    <%= render 'layouts/fotter' %>
+  <% end %>
+  <%= render template: "layouts/user" %>
+</body>
+</html>
