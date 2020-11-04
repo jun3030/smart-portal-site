@@ -45,13 +45,13 @@
     <h5><%= User.find(@message.user_id).name %></h5>
 
 
-      <% @replies.each do |r| %>
+    <% @replies.each do |r| %>
+      <!-- store_managerからの返信 -->
+      <% if r.reply_from == "store_manager" %>
         <div class="box-content reply-box">
           <table class="table">
             <tbody>
-              <tr>
-                <td><%= r.reply %></td>
-              </tr>
+              <tr><td><%= r.reply %></td></tr>
               <tr>
                 <td align="right"><%= link_to "削除", store_manager_store_message_reply_path(r.store_id, r.message_id, r.id),
                                                       method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
@@ -62,8 +62,20 @@
         <div class="text-right">
           <h5><%= Store.find(r.store_id).store_manager.name %></h5>
         </div>
+      <!-- userからの返信 -->
+      <% else %>
+        <div class="box-content message-box">
+          <table class="table">
+            <tbody>
+              <tr><td><%= r.reply %></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h5><%= User.find(r.user_id).name %></h5>
       <% end %>
+    <% end %>
 
+    <!-- 返信フォーム -->
     <%= form_with(model: @reply, url: store_manager_store_message_replies_path(@store, @message), local: true, method: :post) do |f| %>
       <%= render "shared/error_messages", object: f.object %>
       <br>

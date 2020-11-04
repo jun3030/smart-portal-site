@@ -27,9 +27,7 @@
         <div class="box-content reply-box">
           <table class="table">
             <tbody>
-              <tr>
-                <td><%= r.reply %></td>
-              </tr>
+              <tr><td><%= r.reply %></td></tr>
             </tbody>
           </table>
         </div>
@@ -41,8 +39,10 @@
         <div class="box-content message-box">
           <table class="table">
             <tbody>
+              <tr><td><%= r.reply %></td></tr>
               <tr>
-                <td><%= r.reply %></td>
+                <td align="right"><%= link_to "削除", store_manager_store_message_reply_path(r.store_id, r.message_id, r.id),
+                                                      method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
               </tr>
             </tbody>
           </table>

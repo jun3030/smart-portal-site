@@ -10,14 +10,16 @@ class StoreManager::RepliesController < ApplicationController
 
   def create
     @reply = Reply.new(reply_params)
-    if reply_params[:reply_form] == "store_manager" #store_managerが返信した場合
+    #store_managerが返信した場合
+    if reply_params[:reply_from] == "store_manager"
       if @reply.save
         flash[:success] = "メッセージを返信しました。"
         redirect_to new_store_manager_store_message_reply_url(@reply.store_id, @reply.message_id)
       else
         render :new
       end
-    else #userが返信した場合
+    #userが返信した場合
+    else
       if @reply.save
         flash[:success] = "メッセージを返信しました。"
         redirect_to store_message_show_path(@reply.store_id, @reply.message_id)

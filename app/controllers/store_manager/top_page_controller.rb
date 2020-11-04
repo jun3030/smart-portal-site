@@ -7,7 +7,8 @@ class StoreManager::TopPageController < StoreManager::Base
       flash.now[:notice] = "現在ご利用中のプランは【無料プラン】となっており、#{@store.store_name}様のページは非公開となっております。<br>
                             「登録内容の編集」から有料プランをご契約いただきますとページが公開され、お客様からのご予約が可能となります。".html_safe
     end
-    @messages = Message.where(checked: 0, store_id: @store.id).count
+    @messages = Message.where(checked: "未読", store_id: @store.id).count
+    @overtime_notice = Attendance.where(overtime_status: "申請中", confirmation: @user.name).count
   end
 
   def update_calendar_status

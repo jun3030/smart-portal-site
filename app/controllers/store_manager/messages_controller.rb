@@ -4,19 +4,19 @@ class StoreManager::MessagesController < ApplicationController
   before_action :set_store, only:[:new, :create, :index, :update]
   before_action :set_message, only:[:destroy, :update]
 
-  def new
-    @message = Message.new
-  end
+  # def new
+  #   @message = Message.new
+  # end
 
-  def create
-    @message = Message.new(message_params)
-    if @message.save
-      flash[:success] = "メッセージを送信しました。"
-      redirect_to details_url(@store)
-    else
-      render :new
-    end
-  end
+  # def create
+  #   @message = Message.new(message_params)
+  #   if @message.save
+  #     flash[:success] = "メッセージを送信しました。"
+  #     redirect_to details_url(@store)
+  #   else
+  #     render :new
+  #   end
+  # end
 
   def index
     @messages = Message.where(store_id: @store.id).order(created_at: "ASC")
