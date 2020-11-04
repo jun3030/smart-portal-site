@@ -187,7 +187,9 @@
 
 .review-update-btn {
   display: block;
-  margin: 20px;
+
+  margin: 20px auto;
+  margin-top:40px;
   box-shadow: 0 3px 0 0 #c8580d;
   background-color: #f06f18;
   color: #fff;
@@ -196,5 +198,9 @@
   padding: 10px;
   width: 290px;
   border-radius: 5px;
+}
 
+.return-show-page-btn {
+  text-align:center;
+  padding:30px;
 }

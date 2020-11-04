@@ -36,10 +36,10 @@
               <%= f.text_area :content, class: "form-control", placeholder: "1~300文字で入力してください" %>
             </div>
           </div>
-
           <%= f.submit '口コミを編集する', class: "review-update-btn" %>
         <% end %>
       </div>
+      <div class="return-show-page-btn"><%= link_to "←戻る", user_store_review_show_path(@store.id) %></div>
     </div>
   </div>
 </div>
@@ -56,4 +56,3 @@ $(function () {
   });
 });
 </script>
-

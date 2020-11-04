@@ -40,6 +40,7 @@
         <div class="text-center">
           <%= link_to "店舗の詳細へ戻る", details_path(@store.id) %>
         </div>
+        <%= paginate @reviews %>
       </table>
     </div>
   </div>
