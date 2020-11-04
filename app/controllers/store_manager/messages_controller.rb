@@ -1,4 +1,4 @@
-class User::MessagesController < User::Base
+class StoreManager::MessagesController < ApplicationController
 
   before_action :set_categories, only:[:new, :create, :index, :update]
   before_action :set_store, only:[:new, :create, :index, :update]
