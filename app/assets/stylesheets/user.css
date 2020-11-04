@@ -161,11 +161,21 @@
   text-align: right;
 }
 
-.more-read {
-
-}
-
+/* 口コミ機能/ishow */
 .text-center-show {
   text-align:center;
   padding:20px 0px;
+}
+
+/* 口コミ機能/edit*/
+.evaluation-form {
+  padding:10px 0px;
+}
+
+#star {
+  padding-left:120px;
+}
+
+.form-group {
+  padding:5px 0px;
 }
