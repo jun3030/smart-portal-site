@@ -39,7 +39,7 @@
               <td>From: <%= User.find(m.user_id).name %></td>
               <%= form_with(model: @message, url: store_manager_store_message_path(m.store_id, m.id), local: true, method: :patch) do |f| %>
                 <%= f.hidden_field :checked, value: "既読" %>
-                <td><%= f.submit m.title %></td>
+                <td><%= f.submit m.title, class: "clear" %></td>
               <% end %>
               <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
             </tr>
