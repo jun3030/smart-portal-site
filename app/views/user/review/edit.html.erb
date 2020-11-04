@@ -1,52 +1,58 @@
 <div class="center cenrer-block">
-  <div id="storecommit" class="service-price">
-    <div class="box-content">
-      <table class="table">
-        <% flash.each do |message_type, msg| %>
-          <div class="alert alert-success">
-            <%= msg %>
-          </div>
-        <% end %>
-        <%= form_with model: @review, url: user_store_review_update_path, method: :patch, local: true do |f|  %>
-
-            <%= f.hidden_field :store_id, id: @store.id %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-
-
-            <%= f.label :title, "タイトル" %>
-            <%= f.text_field :title %>
-
-            <!-- 評価 -->
-            <div class="review" id="star">
-              <%= f.label :rate, "評価" %>
-              <%= f.number_field :rate, id: :review_star %>
-            </div>
-
-            <!-- レビュー内容 -->
-            <div class="form-group row">
-              <%= f.label :content, "レビュー内容", class: "col-sm-2 col-form-label" %>
-              <div class="col-sm-10">
-                  <%= f.text_area :content, class: "text-field form-control" %>
-              </div>
-            </div>
-
-            <%= f.submit '口コミを投稿する', class: "review-create-btn" %>
-          <% end %>
-
-        <%= render 'layouts/raty.html.erb' %>
-        <script>
-        $(function () {
-            $('#star').raty({　　　
-              size: 36,
-              starOff: "/assets/star-off.png",
-              starOn: "/assets/star-on.png",
-              starHalf: "/assets/star-half.png",
-              scoreName: "review[rate]",
-              half: true,
-            });
-          });
-        </script>
-      </table>
+  <% flash.each do |message_type, msg| %>
+    <div class="alert alert-success">
+      <%= msg %>
     </div>
+  <% end %>
+
+  <div class="center cenrer-block">
+
+  <h3 class="review-title"><%= @store.store_name %></h3>
+
+  <div class="rating-box">
+    <%= form_with model: @review, url: user_store_review_update_path, method: :patch, local: true do |f|  %>
+
+      <%= f.hidden_field :store_id, id: @store.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+
+
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title %>
+
+      <!-- 評価 -->
+      <div class="review" id="star">
+        <%= f.label :rate, "評価" %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+
+      <!-- レビュー内容 -->
+      <div class="form-group row">
+        <%= f.label :content, "レビュー内容", class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-10">
+            <%= f.text_area :content, class: "text-field form-control" %>
+        </div>
+      </div>
+
+      <%= f.submit '口コミを投稿する', class: "review-create-btn" %>
+    <% end %>
   </div>
+
+</div>
+
+<%= render 'layouts/raty.html.erb' %>
+<script>
+
+$(function () {
+  $('#star').raty({　　　
+    size: 36,
+    starOff: "/assets/star-off.png",
+    starOn: "/assets/star-on.png",
+    starHalf: "/assets/star-half.png",
+    scoreName: "review[rate]",
+    half: true,
+  });
+});
+
+</script>
+
 </div>

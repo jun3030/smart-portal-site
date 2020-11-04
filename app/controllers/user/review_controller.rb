@@ -1,6 +1,6 @@
 class User::ReviewController < User::Base
   before_action :set_categories
-  before_action :set_store, only: [:new, :create, :edit]
+  before_action :set_store, only: [:index, :new, :create, :edit, :show]
 
   def index
     @reviews = Store.find(params[:store_id]).reviews
@@ -26,6 +26,13 @@ class User::ReviewController < User::Base
 
   def show
     @review = Review.find(params[:id])
+
+    @masseurs = @store.masseurs
+    # 閲覧中のstoreが持っている出張範囲(各マッサージ師が持っている出張範囲)を全て取得
+    @ranges = @masseurs.map { |masseur| masseur.business_trip_ranges.pluck(:city_id).map {|id| City.find_by(id: id) }}
+    # 取得した出張範囲で被っている出張範囲を一つにする。 それぞれのIDを取得
+    @prefecture_ids = @ranges.flatten.uniq.map {|city| city.prefecture_id}
+    @city_ids = @ranges.flatten.uniq.map {|city| city.id}
   end
 
   def edit
@@ -34,8 +41,7 @@ class User::ReviewController < User::Base
 
   def update
     @store = Store.find(params[:store_id])
-    if @review = @store.reviews.update(review_params)
-      debugger
+    if @review = @store.reviews.find(params[:id]).update(review_params)
       flash[:success] = "口コミを更新しました。"
       redirect_to user_store_review_show_path
     else
