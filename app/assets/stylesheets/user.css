@@ -167,6 +167,12 @@
   padding:20px 0px;
 }
 
+/* 口コミ機能/new */
+.more-read-new {
+  text-align:center;
+  padding:30px;
+}
+
 /* 口コミ機能/edit*/
 .evaluation-form {
   padding:10px 0px;

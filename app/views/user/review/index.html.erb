@@ -3,6 +3,9 @@
     <div class="box-content">
       <table class="table">
         <h2 class="content-h2">口コミ</h2>
+        <% flash.each do |message_type, msg| %>
+          <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
+        <% end %>
         <h1 class="ttl-hold-info">店舗の口コミ一覧</h1>
         <% @reviews.each do |review| %>
           <div class="review-group>

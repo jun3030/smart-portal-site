@@ -16,10 +16,10 @@ class User::ReviewController < User::Base
     @store = Store.find(params[:store_id])
     @review = @store.reviews.build(review_params)
     if @review.save
-      flash.now[:success] = "口コミを投稿しました"
+      flash[:success] = "口コミを投稿しました。"
       redirect_to user_store_review_index_path(@store.id)
     else
-      flash[:danger] = "口コミが投稿できませんでした"
+      flash[:danger] = "口コミが投稿できませんでした。"
       render :new
     end
   end
@@ -45,7 +45,7 @@ class User::ReviewController < User::Base
       flash[:success] = "口コミを更新しました。"
       redirect_to user_store_review_show_path
     else
-      flash[:danger] = "口コミが更新されませんでした。"
+      flash.now[:danger] = "口コミが更新されませんでした。更新するには全ての項目を記入して下さい。"
       render :edit
     end
   end

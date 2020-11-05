@@ -3,11 +3,9 @@
     <div class="box-content">
       <h2 class="content-h2">口コミ</h2>
       <% flash.each do |message_type, msg| %>
-        <div class="alert alert-success">
-          <%= msg %>
-        </div>
+        <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
       <% end %>
-      <h3 class="review-title"><%= User.find(@review.user_id).name %>さんの口コミ編集</h3>
+      <h3 class="review-title"><%= User.find(Review.find(params[:id]).user_id).name %>さんの口コミ編集</h3>
       <div class="rating-box">
         <%= form_with model: @review, url: user_store_review_update_path, method: :patch, local: true do |f|  %>
 
