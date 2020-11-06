@@ -373,6 +373,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks
+  kaminari
   listen
   mini_magick
   momentjs-rails

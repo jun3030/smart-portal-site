@@ -167,6 +167,12 @@
   padding:20px 0px;
 }
 
+.return-show-page-button {
+  padding-top:10px;
+  margin-bottom:30px;
+  text-align:center;
+}
+
 /* 口コミ機能/new */
 .more-read-new {
   text-align:center;
@@ -210,3 +216,8 @@
   text-align:center;
   padding:30px;
 }
+
+.pagination {
+  margin-bottom: 70px;
+}
+

@@ -3,7 +3,7 @@ class User::ReviewController < User::Base
   before_action :set_store, only: [:index, :new, :create, :edit, :update, :show, :destroy]
 
   def index
-    @reviews = Store.find(params[:store_id]).reviews.page(params[:page]).per(4)
+    @reviews = Store.find(params[:store_id]).reviews.page(params[:page]).per(20)
   end
 
   def new
