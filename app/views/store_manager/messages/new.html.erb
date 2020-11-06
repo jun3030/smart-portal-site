@@ -1,44 +1,94 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Smartポータル</title>
-    <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'user', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
-  </head>
-<body>
-  <% content_for :content do %>
-    <%= render 'layouts/header' %>
-
-<div id="price" class="service-price">
-  <div class="box-content">
-    <%= form_with(model: @message, url: store_manager_store_messages_path(@store), local: true, method: :post) do |f| %>
-    <% flash.each do |message_type, msg| %>
-      <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
-    <% end %>
-      <h2 class="content-h2">店舗への問い合わせ</h2>
-      <h5>
-        To: <%= @store.store_name %>　<%= @store.store_manager.name %>店長<br>
-        From: <%= current_user.name %>
-      </h5>
-      <%= f.label :title, class: "" %>
-      <%= f.text_field :title, class: "form-control" %><br>
-
-      <%= f.label :content, class: "" %>
-      <%= f.text_area :content, class: "form-control" %>
-
-      <%= f.hidden_field :message_status, value: "問い合わせ" %>
-      <%= f.hidden_field :store_id, value: @store.id %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-
-      <%= f.submit "メッセージを送信する", class: "" %>
-      <%= link_to "戻る", details_path(@store), class: "btn btn-lg btn-default" %>
-    <% end %>
+<div class="text_width">
+  <h1 class="left_logo">Smart Potal</h1>
+  <div class="right_bottun">
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-warning btn_space" %>
+  </div>
+  <div class="hader_space">
+    <div class="">
+      <ul class="header_ul_space ">
+        <li>
+          <%= link_to "マイページ", store_manager_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "予約の確認", store_managers_index_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "登録内容の編集", store_managers_show_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <a class="header_line_a">メッセージ確認</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
+<div class="top_space">
+  <div class="text_width text_left">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-success mt-5 text_left"><%= message %></div>
+    <% end %>
+    <div class="box-content message-box">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>受信日：<%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+          </tr>
+          <tr>
+            <td>件名：<%= @message.title %></td>
+          </tr>
+          <tr>
+            <td><%= @message.content %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h5><%= User.find(@message.user_id).name %></h5>
 
-    <%= render 'layouts/fotter' %>
-  <% end %>
-  <%= render template: "layouts/user" %>
-</body>
-</html>
+
+    <% @replies.each do |r| %>
+      <!-- store_managerからの返信 -->
+      <% if r.message_status == "store_manager" %>
+        <div class="box-content reply-box">
+          <table class="table">
+            <tbody>
+              <tr><td><%= r.content %></td></tr>
+              <tr>
+                <td align="right"><%= link_to "削除", store_manager_store_message_path(r.store_id, r.id),
+                                                      method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-right">
+          <h5><%= Store.find(r.store_id).store_manager.name %></h5>
+        </div>
+      <!-- userからの返信 -->
+      <% else %>
+        <div class="box-content message-box">
+          <table class="table">
+            <tbody>
+              <tr><td><%= r.content %></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h5><%= User.find(r.user_id).name %></h5>
+      <% end %>
+    <% end %>
+
+    <!-- 返信フォーム -->
+    <%= form_with(model: @message, url: store_manager_store_messages_path(@store), local: true, method: :post) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      <br>
+      <%= f.text_area :reply, size: "30x5", class: "form-control" %><br>
+
+      <%= f.hidden_field :message_status, value: "store_manager" %>
+      <%= f.hidden_field :store_id, value: @store.id %>
+      <%= f.hidden_field :user_id, value: .id %>
+      <%= f.hidden_field :checked, value: "未読" %>
+
+      <%= f.submit "メッセージを返信する", class: "btn btn-warning btn-lg" %>
+      <%= link_to "一覧に戻る", store_manager_store_messages_path(@store), class: "btn btn-light btn-lg" %>
+    <% end %><br>
+  </div>
+</div>
+<%= render template: "layouts/store_managers"%>

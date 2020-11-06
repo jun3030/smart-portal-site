@@ -27,11 +27,8 @@
     <% flash.each do |message_type, message| %>
       <div class="alert alert-success mt-5 text_left"><%= message %></div>
     <% end %>
-    <h1 class="top_space bottom_space">メッセージ一覧</h1>
+    <h2 class="top_space bottom_space">メッセージ一覧</h2>
     <div class="box-content">
-        <br>
-        <h5>送信済メッセージ / 受信メッセージ</h5>
-        <br>
       <table class="table">
         <% @messages.each do |m| %>
           <tbody>
@@ -40,6 +37,11 @@
               <%= form_with(model: @message, url: store_manager_store_message_path(m.store_id, m.id),
                             local: true, method: :patch) do |f| %>
                 <%= f.hidden_field :checked, value: "既読" %>
+                <% @replies.each do |reply| %>
+                  <%= f.fields_for "replies[]", reply do |r| %>
+                    <%= r.hidden_field :checked, value: "既読" %>
+                  <% end %>
+                <% end %>
                 <td><%= f.submit m.title, class: "clear" %></td>
               <% end %>
               <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
