@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get "/messages/new", to: "user/top#message_new", as: :message_new
       post "messages", to: "user/top#message_create", as: :message_create
       get "messages/:id", to: "user/top#message_show", as: :message_show
+      patch "messages/update/:id", to: "user/top#message_update", as: :message_update
     end
   # devise↓ =====================================================================================
     devise_for :admins, ActiveAdmin::Devise.config

@@ -147,6 +147,21 @@
     padding: 0;
 }
 
+.clear {
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color: #1E90FF;
+}
+
+.clear:hover {
+    border: none;
+    outline: none;
+    background-color: #fff;
+    color: #4169E1;
+    text-decoration: underline;
+}
+
 li {
   list-style: none;
 }

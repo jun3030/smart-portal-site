@@ -1,28 +1,16 @@
 class StoreManager::MessagesController < ApplicationController
 
-  before_action :set_categories, only:[:new, :create, :index, :update]
-  before_action :set_store, only:[:new, :create, :index, :update]
+  before_action :set_store, only:[:index, :update]
   before_action :set_message, only:[:destroy, :update]
-
-  # def new
-  #   @message = Message.new
-  # end
-
-  # def create
-  #   @message = Message.new(message_params)
-  #   if @message.save
-  #     flash[:success] = "メッセージを送信しました。"
-  #     redirect_to details_url(@store)
-  #   else
-  #     render :new
-  #   end
-  # end
 
   def index
     @messages = Message.where(store_id: @store.id).order(created_at: "ASC")
     @replies = Reply.where(reply_from: "user")
+    @messages = Message.where(checked: "未読", store_id: @store.id).count
+    @replies = Reply.where(checked: "未読", store_id: @store.id).count
   end
 
+  # メッセージを開くと同時に既読にする
   def update
     @message.update_attributes(update_message_params)
     if Reply.where(reply_from: "user").present?
@@ -41,10 +29,6 @@ class StoreManager::MessagesController < ApplicationController
   end
 
   private
-    def set_categories
-      @categories = Category.all
-    end
-
     def set_store
       @store = Store.find(params[:store_id])
     end

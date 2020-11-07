@@ -15,7 +15,15 @@
           <tbody>
             <tr>
               <td>To: <%= Store.find(m.store_id).store_manager.name %></td>
-              <td><%= link_to m.title, store_message_show_path(m.store_id, m.id) %></td>
+              <%= form_with(model: @message, url: store_message_update_path(m.store_id, m.id),
+                            local: true, method: :patch) do |f| %>
+                <% @replies.each do |reply| %>
+                  <%= f.fields_for "replies[]", reply do |r| %>
+                    <%= r.hidden_field :checked, value: "既読" %>
+                  <% end %>
+                <% end %>
+                <td><%= f.submit m.title, class: "clear" %></td>
+              <% end %>
               <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
               <td>
                 <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,

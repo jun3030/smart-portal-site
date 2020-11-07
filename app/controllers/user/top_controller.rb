@@ -38,6 +38,7 @@ class User::TopController < User::Base
 
   def messages
     @messages = Message.where(user_id: current_user.id).order(created_at: "ASC")
+    @replies = Reply.where(reply_from: "store_manager")
   end
 
   def message_show
@@ -63,6 +64,19 @@ class User::TopController < User::Base
     end
   end
 
+  # メッセージを開くと同時に既読にする
+  def message_update
+    @store = Store.find(params[:store_id])
+    @message = Message.find(params[:id])
+    if Reply.where(reply_from: "store_manager").present?
+      update_reply_params.each do |id, item|
+        reply = Reply.find(id)
+        reply.update_attributes(item)
+      end
+    end
+    redirect_to store_message_show_path(@store, @message)
+  end
+
   private
 
     # ヘッダーとトップページのカテゴリ一覧表示用
@@ -80,5 +94,9 @@ class User::TopController < User::Base
 
     def message_params
       params.require(:message).permit(:title, :content, :store_id, :user_id, :checked)
+    end
+
+    def update_reply_params
+      params.permit(replies: [:checked])[:replies]
     end
 end
