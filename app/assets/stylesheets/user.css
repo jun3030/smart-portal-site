@@ -91,6 +91,24 @@
 
 
 /* 口コミ機能/index */
+.wrap-review-info {
+  text-align: right;
+  background: red;
+}
+
+.evaluation-graph {
+  margin-bottom: 0;
+}
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+.evaluation-graph .wrap-bar {
+  background: #f8f8f8;
+  height: 16px;
+  position: relative;
+  width: 200px;
+}
 .ttl-hold-info {
   font-size: 25px;
   margin-bottom: 30px;

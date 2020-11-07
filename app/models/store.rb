@@ -15,4 +15,22 @@ class Store < ApplicationRecord
 
   scope :categorized, -> (id) { includes(masseurs: :categories).where(categories: { id: id }) }
   scope :active, -> { includes(:store_manager).where.not(store_managers: {order_plan: nil}) }
+
+  # 店舗口コミの総合平均点
+  def avg_score
+    unless self.reviews.empty?
+      reviews.average(:rate).round(1).to_f
+    else
+      0.0
+    end
+  end
+
+  # 店舗口コミの総合平均点
+  def review_score_percentage
+    unless self.reviews.empty?
+      reviews.average(:rate).round(1).to_f*100/5
+    else
+      0.0
+    end
+  end
 end

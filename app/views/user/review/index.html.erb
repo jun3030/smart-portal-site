@@ -7,8 +7,39 @@
           <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
         <% end %>
         <h1 class="ttl-hold-info">店舗の口コミ一覧</h1>
-
-          <div id="star-rate-average"></div>
+        <div class="wrap-review-info">
+          <div class="star-rate star-rate-l">
+            <span id="star-rate-average"></span>
+            <span><%= @store.avg_score %></span>
+          </div>
+          <ul class="evaluation-graph list-unstyled">
+            <li class="item-bar">
+              <div class="star-kind"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>5</div>
+              <div class="wrap-bar"><span class="bar" style="width: 97.95918367346938%;"></span></div>
+              <a class="ct" href="/977025600/review/?star=5&amp;sort=top-review">48件</a>
+            </li>
+            <li class="item-bar">
+              <div class="star-kind"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>4</div>
+              <div class="wrap-bar"><span class="bar" style="width: 2.0408163265306123%;"></span></div>
+              <a class="ct" href="/977025600/review/?star=4&amp;sort=top-review">1件</a>
+            </li>
+            <li class="item-bar">
+              <div class="star-kind"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>3</div>
+              <div class="wrap-bar"><span class="bar" style="width: 0%;"></span></div>
+              <span class="ct">0件</span>
+            </li>
+            <li class="item-bar">
+              <div class="star-kind"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>2</div>
+              <div class="wrap-bar"><span class="bar" style="width: 0%;"></span></div>
+              <span class="ct">0件</span>
+            </li>
+            <li class="item-bar">
+              <div class="star-kind"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>1</div>
+              <div class="wrap-bar"><span class="bar" style="width: 0%;"></span></div>
+              <span class="ct">0件</span>
+            </li>
+          </ul>
+        </div>
 
         <% @reviews.each do |review| %>
           <div class="review-group>
@@ -22,7 +53,7 @@
                 <div class="voice-content">
                   <div class="star-rate star-rate5">
                     <span id="star-rate-<%= review.id %>"></span>
-                    <span><%= review.rate %>点</span>
+                    <span><%= review.rate %></span>
                   </div>
                   <div class="text-voice">
                     <%= link_to review.content, user_store_review_show_path(params[:store_id], review.id) %>
@@ -66,7 +97,7 @@ $('#star-rate-average').raty({
   starHalf: "/assets/star-half.png",
   half: true,
   readOnly: true,
-  score: "#{@store.reviews.average(:rate).to_f.round(1)}",
+  score: "<%= @store.avg_score %>",
   //注目ポイント↑ 平均点を算出し、round関数で切り上げ
 });
 </script>
