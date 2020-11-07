@@ -16,6 +16,8 @@
 // require js/bootstrap.min.js
 //= require bootstrap-sprockets
 //= require rails-ujs
+//= require chartkick
+//= require Chart.bundle
 // require turbolinks
 // require js/jquery-ui.min.js
 // require js/imagesloaded.pkgd.min.js
