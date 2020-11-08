@@ -4,10 +4,8 @@ class StoreManager::MessagesController < ApplicationController
   before_action :set_message, only:[:destroy, :update]
 
   def index
-    @messages = Message.where(store_id: @store.id).order(created_at: "ASC")
+    @messages = Message.where(store_id: @store.id).order(created_at: "DESC")
     @replies = Reply.where(reply_from: "user")
-    @messages = Message.where(checked: "未読", store_id: @store.id).count
-    @replies = Reply.where(checked: "未読", store_id: @store.id).count
   end
 
   # メッセージを開くと同時に既読にする

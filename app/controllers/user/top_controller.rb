@@ -37,7 +37,7 @@ class User::TopController < User::Base
   end
 
   def messages
-    @messages = Message.where(user_id: current_user.id).order(created_at: "ASC")
+    @messages = Message.where(user_id: current_user.id).order(created_at: "DESC")
     @replies = Reply.where(reply_from: "store_manager")
   end
 
