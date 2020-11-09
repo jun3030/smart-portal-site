@@ -29,6 +29,9 @@ class User::TopController < User::Base
     @prefecture_ids = @ranges.flatten.uniq.map {|city| city.prefecture_id}
     @city_ids = @ranges.flatten.uniq.map {|city| city.id}
 
+    # 閲覧中の口コミを取得
+    @reviews = Store.find(params[:id]).reviews
+
     @store_images = @store.store_images.first
     unless @store_images.nil?
       @count_store_image = @store_images.store_image.count

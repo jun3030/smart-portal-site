@@ -1,6 +1,5 @@
 class Masseur < ApplicationRecord
   belongs_to :store
-  has_many :reviews, dependent: :delete_all
   has_many :favorites, dependent: :delete_all
   has_many :business_trip_ranges, dependent: :delete_all
   has_many :cities, through: :business_trip_ranges

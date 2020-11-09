@@ -168,13 +168,14 @@ ActiveRecord::Schema.define(version: 2020_11_04_150829) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "review"
+    t.integer "user_id", null: false
+    t.integer "store_id", null: false
+    t.string "content"
     t.float "rate"
-    t.integer "masseur_id"
-    t.integer "user_id"
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["masseur_id"], name: "index_reviews_on_masseur_id"
+    t.index ["store_id"], name: "index_reviews_on_store_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -275,6 +276,7 @@ ActiveRecord::Schema.define(version: 2020_11_04_150829) do
   add_foreign_key "replies", "stores"
   add_foreign_key "replies", "users"
   add_foreign_key "reviews", "masseurs"
+  add_foreign_key "reviews", "stores"
   add_foreign_key "reviews", "users"
   add_foreign_key "social_profiles", "users"
   add_foreign_key "store_images", "stores"

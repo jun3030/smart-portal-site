@@ -16,10 +16,10 @@ class StoreManagers::RegistrationsController < Devise::RegistrationsController
       flash.now[:notice] = "「マッサージ師の登録情報変更」から施術カテゴリの登録を行ってください."
     end
     # 「ご契約中のシステムプランの確認」の遷移先
-    @order_plan_url = 
+    @order_plan_url =
       if current_store_manager.order_plan.nil?
         reserve_app_url + "/pay/choice_plan"
-      else  
+      else
         reserve_app_url + "/order_plan/#{current_store_manager.order_plan}"
       end
   end
@@ -30,7 +30,7 @@ class StoreManagers::RegistrationsController < Devise::RegistrationsController
     uri = `curl -v -X GET "#{url}" \
     -H 'Authorization: Bearer "#{current_store_manager.smart_token}"'`
     @api = JSON.parse(uri)["tasks"]
-    
+
     @id = current_store_manager.id
   end
 
@@ -45,6 +45,9 @@ class StoreManagers::RegistrationsController < Devise::RegistrationsController
     @store_image = @store.store_images.build
     @plan = @store.plans.build
     @plan_image = @plan.plan_images.build
+    @store_images = @store.store_images.first
+    @count_store_image = @store_images.store_image.count
+    @count_sm_image = @store_images.sm_image.count
   end
 
   # POST /resource
@@ -52,7 +55,7 @@ class StoreManagers::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     ActiveRecord::Base.transaction do
       resource.save
-      yield resource if block_given?  
+      yield resource if block_given?
       # StoreManagerのsaveが成功した場合
       if resource.persisted?
         @masseur = create_masseur
@@ -62,7 +65,7 @@ class StoreManagers::RegistrationsController < Devise::RegistrationsController
         unless JSON.parse(@response)["status"] == "200"
           raise StandardError, "予約システムでuserのcreateに失敗しました。"
         end
-        # @responseに含まれるtokenと各idを登録     
+        # @responseに含まれるtokenと各idを登録
         update_resourses(@response)
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
@@ -98,13 +101,13 @@ class StoreManagers::RegistrationsController < Devise::RegistrationsController
         @response = update_user(@name, @email, @password)
         unless JSON.parse(@response)["status"] == "200"
           raise StandardError, "予約システムでuserのupdateに失敗しました。"
-        end   
+        end
       else
         clean_up_passwords resource
         set_minimum_password_length
         respond_with resource
       end
-    end  
+    end
   end
 
   # DELETE /resource

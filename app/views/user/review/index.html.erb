@@ -1,0 +1,85 @@
+<div class="center cenrer-block">
+  <div id="storecommit" class="service-price">
+    <div class="box-content">
+      <table class="table">
+        <h2 class="content-h2">口コミ</h2>
+        <% flash.each do |message_type, msg| %>
+          <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
+        <% end %>
+        <h1 class="ttl-hold-info">店舗の口コミ一覧</h1>
+        <div class="wrap-review-info">
+          <div class="star-rate star-rate-l">
+            <span id="star-rate-average"></span>
+            <span><%= @store.avg_score %> 口コミ <%= @store.reviews.count %>件 </span>
+          </div>
+          <div class="review-graph">
+            <%= bar_chart @review_data, colors: ["orange"], width: "300px", height: "150px" %>
+          </div>
+        </div>
+        <div class="float-stop"></div>
+
+        <% @reviews.each do |review| %>
+          <div class="review-group>
+            <div class="wrap-user">
+              <img class="pull-left" src="../../../images/icon_reviewer.png" height="41" width="41">
+              <p class="nickname"><%= User.find(review.user_id).name %>さん</p>
+            </div>
+              <p class="voice-situation">投稿期間：<%= review.created_at.strftime('%Y/%m/%d') %></p>
+
+              <div class="wrap-voice">
+                <div class="voice-content">
+                  <div class="star-rate star-rate5">
+                    <span id="star-rate-<%= review.id %>"></span>
+                    <span><%= review.rate %></span>
+                  </div>
+                  <div class="text-voice">
+                    <%= link_to review.content, user_store_review_show_path(params[:store_id], review.id) %>
+                  </div>
+                </div>
+              </div>
+            <%= render 'layouts/raty.html.erb' %>
+            <script>
+                $('#star-rate-<%= review.id %>').raty({
+                    size: 36,
+                    starOff: "/assets/star-off.png",
+                    starOn: "/assets/star-on.png",
+                    starHalf: "/assets/star-half.png",
+                    half: true,
+                    readOnly: true,
+                    score: <%= review.rate %>,
+                });
+            </script>
+          </div>
+        <% end %>
+        <div class="text-center">
+          <%= paginate @reviews %>
+        </div>
+        <div class="return-show-page-button">
+          <%= link_to "←店舗の詳細へ戻る", details_path(@store.id) %>
+        </div>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- コード追加　Bootstrap CSS読み込みコード-->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+$('#star-rate-average').raty({
+  size: 36,
+  starOff: "/assets/star-off.png",
+  starOn: "/assets/star-on.png",
+  starHalf: "/assets/star-half.png",
+  readOnly: true,
+  score: "<%= @store.avg_score %>",
+});
+</script>
+
+<style>
+/* bootstrapの文字サイズ変更 */
+body {
+  font-size: 16px;
+}
+</style>

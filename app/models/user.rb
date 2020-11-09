@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :replies, dependent: :destroy
