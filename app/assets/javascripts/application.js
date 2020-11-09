@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.raty
 // require js/jquery-3.3.1.min.js
 // require js/bootstrap.min.js
 //= require bootstrap-sprockets
