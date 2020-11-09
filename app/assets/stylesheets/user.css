@@ -126,6 +126,10 @@
   margin-bottom: 8px;
 }
 
+.pull-left {
+  float: left!important;
+}
+
 .star-rate {
   margin-bottom:7px;
 }
