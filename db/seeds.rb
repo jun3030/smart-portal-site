@@ -46,12 +46,6 @@ Favorite.create!(user_id: 1,
                 masseur_id: 1
                )
 
-Review.create!(review: "so good",
-               rate: 3.5,
-               user_id: 1,
-               masseur_id: 1
-               )
-
 5.times do |n|
   Plan.create!(plan_name: "プラン#{n+1}",
                plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",

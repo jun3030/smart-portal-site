@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :social_profiles, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -10,7 +10,7 @@ class User < ApplicationRecord
   enum gender: { "male": 0, "female": 1, "other": 2 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :name, presence: true, length: { in: 1..30 }       
+  validates :name, presence: true, length: { in: 1..30 }
   validates :email, presence: true, length: { maximum: 100 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true

@@ -88,3 +88,160 @@
   font-weight: bold;
   border-radius:5px;
 }
+
+/* 口コミ機能/index */
+.wrap-review-info {
+  float: right;
+}
+
+.star-rate-l {
+  text-align:center;
+}
+
+.float-stop {
+  clear: both;
+}
+
+.evaluation-graph {
+  margin-bottom: 0;
+}
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+.evaluation-graph .wrap-bar {
+  background: #f8f8f8;
+  height: 16px;
+  position: relative;
+  width: 200px;
+}
+.ttl-hold-info {
+  font-size: 25px;
+  margin-bottom: 30px;
+}
+
+.wrap-user {
+  float: left;
+  margin-bottom: 8px;
+}
+
+.pull-left {
+  float: left!important;
+}
+
+.star-rate {
+  margin-bottom:7px;
+}
+
+.nickname {
+  float: left;
+  margin-bottom: 5px;
+  padding-left: 10px;
+  padding-top: 3px;
+}
+
+.wrap-voice .voice-content {
+  border-radius: 4px;
+  border: solid 1px #f6d999;
+  display: inline-block;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.wrap-voice .voice-content:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 70px;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #f6d999;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.wrap-voice .voice-content:after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 70px;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.wrap-voice {
+  margin-bottom:20px;
+}
+
+.voice-situation {
+  padding-top: 19px;
+  text-align: right;
+}
+
+.pagination {
+  margin-bottom: 70px;
+}
+
+/* 口コミ機能/show */
+.text-center-show {
+  text-align:center;
+  padding:20px 0px;
+}
+
+.return-show-page-button {
+  padding-top:10px;
+  margin-bottom:30px;
+  text-align:center;
+}
+
+/* 口コミ機能/new */
+.more-read-new {
+  text-align:center;
+  padding:30px;
+}
+
+/* 口コミ機能/edit*/
+.evaluation-form {
+  padding:10px 0px;
+}
+
+#star {
+  padding-left:120px;
+}
+
+.form-group {
+  padding:5px 0px;
+}
+
+.rating-box {
+  padding:30px;
+  border: 0.5px solid silver;
+}
+
+.review-update-btn {
+  display: block;
+
+  margin: 20px auto;
+  margin-top:40px;
+  box-shadow: 0 3px 0 0 #c8580d;
+  background-color: #f06f18;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  padding: 10px;
+  width: 290px;
+  border-radius: 5px;
+}
+
+.return-show-page-btn {
+  text-align:center;
+  padding:30px;
+}
+

@@ -44,6 +44,8 @@ gem 'omniauth-line'
 gem 'dotenv-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'kaminari'
+gem "chartkick"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

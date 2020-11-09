@@ -1,0 +1,98 @@
+<div class="center cenrer-block">
+  <div id="storecommit" class="service-price">
+    <div class="box-content">
+      <table class="table">
+        <h2 class="content-h2">口コミ</h2>
+          <% flash.each do |message_type, msg| %>
+            <div class="mt-4 alert alert-<%= message_type %>"><%= msg %></div>
+          <% end %>
+        <h1 class="ttl-hold-info"><%= User.find(@review.user_id).name %>さんの口コミ : <%= @review.title %></h1>
+          <div class="review-group>
+            <div class="wrap-user">
+              <img class="pull-left" src="../../../../images/icon_reviewer.png" height="41" width="41">
+              <p class="nickname"><%= User.find(@review.user_id).name %></p>
+            </div>
+              <p class="voice-situation">
+                投稿期間：<%= @review.created_at.strftime('%Y/%m/%d') %>
+
+                <% if current_user.present? && current_user.id == @review.user_id %>
+                  <%= link_to "編集", user_store_review_edit_path(params[:store_id], @review.id) %>
+                  <%= link_to "削除", "/user/store/#{params[:store_id]}/review/#{@review.id}", method: :delete, data: {confirm: "口コミを本当に削除しますか？"} %>
+                <% end %>
+              </p>
+              <div class="wrap-voice">
+                <div class="voice-content">
+                  <div class="star-rate star-rate5">
+                    <span id="star-rate-<%= @review.id %>"></span>
+                    <span><%= @review.rate %>点</span>
+                  </div>
+                  <div class="text-voice">
+                    <%= @review.content %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center-show">
+                <p class="more-read"><%= link_to "←口コミ一覧へ戻る", user_store_review_index_path(@store.id) %></p>
+                <p><%= link_to "予約日時を入力する", "#", class:"btn btn-warning btn-lg"%></p>
+              </div>
+
+              <div id="shop" class="service-price">
+                <h2 class="content-h2">この店舗について</h2>
+                <div class="box-content">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>写真</td>
+                        <td>店長：<%= @store.store_manager.name %><br><!--コメント：PayPay, Line Pay, クレジットカード使用可 --></td>
+                      </tr>
+                      <tr>
+                        <td>所在地</td>
+                        <td><%= @store.adress %></td>
+                      </tr>
+
+                      <tr>
+                        <td>店舗連絡先</td>
+                        <td><%= @store.store_phonenumber %></td>
+                      </tr>
+                      <tr>
+                        <td class="area">対応地域</td>
+                        <td class="area-service">
+                          <%= collection_check_boxes :prefecture, :prefecture_ids, Prefecture.all, :id, :name, include_hidden: false do |prefecture| %>
+                            <% @prefecture_ids.uniq.each do |prefecture_id| %>
+                              <% if prefecture.value == prefecture_id %>
+                                <div class="prefecture_name"><%= "＜" + prefecture.text + "＞" %></div>
+                              <% end %>
+                            <% end %>
+                          <%= collection_check_boxes :city, :city_ids, City.all, :id, :name, include_hidden: false do |city| %>
+                            <% if prefecture.object.id == city.object.prefecture_id %>
+                              <% @city_ids.each do |city_id| %>
+                                <% if city.value == city_id %>
+                                  <span class="town"><%= city.text + "/" %></span>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                          <% end %>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            <%= render 'layouts/raty.html.erb' %>
+            <script>
+                $('#star-rate-<%= @review.id %>').raty({
+                    size: 36,
+                    starOff: "/assets/star-off.png",
+                    starOn: "/assets/star-on.png",
+                    starHalf: "/assets/star-half.png",
+                    readOnly: true,
+                    score: <%= @review.rate %>,
+                });
+            </script>
+          </div>
+      </table>
+    </div>
+  </div>
+</div>
