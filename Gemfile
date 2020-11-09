@@ -44,7 +44,6 @@ gem 'omniauth-line'
 gem 'dotenv-rails'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'pry-rails'
 gem 'rb-readline'
 
 # Use Capistrano for deployment

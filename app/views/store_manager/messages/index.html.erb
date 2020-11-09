@@ -35,9 +35,13 @@
             <tr>
               <% if m.checked == "未読" %>
                 <td><img src="/images/new1.png" alt=""></td>
-              <% else %>
-                <td></td>
               <% end %>
+              <% m.replies.ids.each do |r| %>
+                <% if Reply.find(r).checked == "未読" %>
+                  <td><img src="/images/new1.png" alt=""></td>
+                <% end %>
+              <% end %>
+
               <td>From: <%= User.find(m.user_id).name %></td>
               <!-- タイトルをクリックすると既読になる -->
               <%= form_with(model: @message, url: store_manager_store_message_path(m.store_id, m.id),
