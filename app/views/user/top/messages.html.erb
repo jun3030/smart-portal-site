@@ -14,6 +14,13 @@
         <% @messages.each do |m| %>
           <tbody>
             <tr>
+              <% m.replies.ids.each do |r| %>
+                <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "store_manager" %>
+                  <td><img src="/images/new1.png" alt=""></td>
+                <% else %>
+                  <td></td>
+                <% end %>
+              <% end %>
               <td>To: <%= Store.find(m.store_id).store_manager.name %></td>
               <%= form_with(model: @message, url: store_message_update_path(m.store_id, m.id),
                             local: true, method: :patch) do |f| %>

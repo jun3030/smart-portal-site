@@ -33,12 +33,13 @@
         <% @messages.each do |m| %>
           <tbody>
             <tr>
-              <% if m.checked == "未読" %>
-                <td><img src="/images/new1.png" alt=""></td>
-              <% end %>
               <% m.replies.ids.each do |r| %>
-                <% if Reply.find(r).checked == "未読" %>
+                <% if m.checked == "未読" %>
                   <td><img src="/images/new1.png" alt=""></td>
+                <% elsif Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "user" %>
+                    <td><img src="/images/new1.png" alt=""></td>
+                <% else %>
+                  <td></td>
                 <% end %>
               <% end %>
 
