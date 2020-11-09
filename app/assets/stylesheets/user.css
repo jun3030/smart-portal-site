@@ -186,6 +186,10 @@
   text-align: right;
 }
 
+.pagination {
+  margin-bottom: 70px;
+}
+
 /* 口コミ機能/show */
 .text-center-show {
   text-align:center;
@@ -240,9 +244,5 @@
 .return-show-page-btn {
   text-align:center;
   padding:30px;
-}
-
-.pagination {
-  margin-bottom: 70px;
 }
 
