@@ -22,7 +22,7 @@ class User::ReviewController < User::Base
       flash[:success] = "口コミを投稿しました。"
       redirect_to user_store_review_index_path(@store.id)
     else
-      flash[:danger] = "口コミが投稿できませんでした。"
+      flash[:danger] = "口コミが投稿できませんでした。投稿するには全ての項目を埋めて下さい。"
       render :new
     end
   end

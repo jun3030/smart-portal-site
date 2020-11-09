@@ -192,7 +192,9 @@
           <% if current_user.present? && !@store.reviews.where(user_id: current_user.id).present? %>
             <p><%= link_to "口コミを書く", user_store_review_new_path(@store.id) %></p>
           <% else %>
-            <p><%= link_to "自分の口コミを見る", user_store_review_show_path(@store.id, Review.all.where(user_id: current_user.id).ids) %></p>
+            <% if current_user.present? %>
+              <p><%= link_to "自分の口コミを見る", user_store_review_show_path(@store.id, @store.reviews.where(user_id: current_user.id).ids) %></p>
+            <% end %>
           <% end %>
           <p class="more-read"><%= link_to "全#{@store.reviews.count}件の口コミを見る", user_store_review_index_path(@store.id) %></p>
           <p><%= link_to "予約日時を入力する", "#", class:"btn btn-warning btn-lg"%></p>
