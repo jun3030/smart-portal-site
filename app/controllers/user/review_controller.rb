@@ -4,6 +4,11 @@ class User::ReviewController < User::Base
 
   def index
     @reviews = Store.find(params[:store_id]).reviews.page(params[:page]).per(20)
+
+    # 店舗口コミのグラフ
+    review_hash = {5.0 => 0, 4.0 => 0, 3.0 => 0, 2.0 => 0, 1.0 => 0}
+    review_data = @store.reviews.group(:rate).order("count_all DESC").count
+    @review_data = review_hash.merge!(review_data).deep_stringify_keys
   end
 
   def new

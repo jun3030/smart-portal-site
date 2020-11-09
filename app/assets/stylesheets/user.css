@@ -92,8 +92,15 @@
 
 /* 口コミ機能/index */
 .wrap-review-info {
-  text-align: right;
-  background: red;
+  float: right;
+}
+
+.star-rate-l {
+  text-align:center;
+}
+
+.float-stop {
+  clear: both;
 }
 
 .evaluation-graph {
@@ -117,10 +124,6 @@
 .wrap-user {
   float: left;
   margin-bottom: 8px;
-}
-
-.pull-left {
-  float: left!important;
 }
 
 .star-rate {

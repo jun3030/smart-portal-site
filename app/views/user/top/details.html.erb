@@ -194,7 +194,7 @@
           <% else %>
             <p><%= link_to "自分の口コミを見る", user_store_review_show_path(@store.id, Review.all.where(user_id: current_user.id).ids) %></p>
           <% end %>
-          <p class="more-read"><%= link_to "全#{Review.all.count}件の口コミを見る", user_store_review_index_path(@store.id) %></p>
+          <p class="more-read"><%= link_to "全#{@store.reviews.count}件の口コミを見る", user_store_review_index_path(@store.id) %></p>
           <p><%= link_to "予約日時を入力する", "#", class:"btn btn-warning btn-lg"%></p>
         </div>
     </div>
