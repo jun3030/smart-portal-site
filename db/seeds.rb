@@ -26,27 +26,12 @@ StoreManager.create!(email: "store_manager@email.com",
                     password: "password"
                    )
 
-StoreManager.create!(email: "sample1@email.com",
-                    name: "sample1",
-                    password: "password",
-                    order_plan: 1
-
 
 Store.create!(store_name: "abc_store",
             adress: "japan-aichi-nagoya",
             store_phonenumber: "08012345678",
-            store_description: SecureRandom.alphanumeric(120),
+            store_description:  SecureRandom.alphanumeric(120),
             store_manager_id: 1
-          )
-
-Store.create!(store_name: "sample1の店舗",
-            adress: "京都府京都市中京区",
-            store_phonenumber: "09012345678",
-            store_description: "sample1の店舗sample1の店舗sample1の店舗",
-            store_manager_id: 2
-            calendar_id: 2,
-            calendar_secret_id: 2,
-            calendar_status: "released"
           )
 
 Masseur.create!(masseur_name: "cororo",
@@ -68,15 +53,6 @@ Favorite.create!(user_id: 1,
                plan_price: 4500,
                store_id: 1)
 end
-
-Plan.create!(plan_name: "プラン１",
-               plan_content: "肩こり改善",
-               plan_time: 60,
-               plan_price: 10000,
-               store_id: 2,
-               course_id: 2)
-
-
 
 # 実際にカテゴリとして使用するデータ
 Category.create!(category_name: "整体")
@@ -139,3 +115,28 @@ cities_14 = prefectures_api("https://opendata.resas-portal.go.jp/api/v1/cities?p
 cities_12["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 12)}
 cities_13["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 13)}
 cities_14["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 14)}
+
+
+StoreManager.create!(email: "sample1@email.com",
+                    name: "sample1",
+                    password: "password",
+                    order_plan: 1
+                    )
+
+Store.create!(store_name: "sample1の店舗",
+              adress: "京都府京都市中京区",
+              store_phonenumber: "09012345678",
+              store_description: SecureRandom.alphanumeric(120),
+              store_manager_id: 2,
+              calendar_id: 2,
+              calendar_secret_id: 2,
+              calendar_status: "released"
+              )
+
+5.times do |n|
+  Plan.create!(plan_name: "プラン#{n+1}",
+                plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
+                plan_time: 100,
+                plan_price: 4500,
+                store_id: 2)
+end
