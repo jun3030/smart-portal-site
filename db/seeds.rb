@@ -27,6 +27,7 @@ StoreManager.create!(email: "store_manager@email.com",
                    )
 
 
+
 Store.create!(store_name: "abc_store",
             adress: "japan-aichi-nagoya",
             store_phonenumber: "08012345678",
