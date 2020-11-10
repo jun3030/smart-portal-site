@@ -26,6 +26,10 @@ StoreManager.create!(email: "store_manager@email.com",
                     password: "password"
                    )
 
+StoreManager.create!(email: "sample1@email.com",
+                    name: "sample1",
+                    password: "password",
+                    order_plan: 1
 
 
 Store.create!(store_name: "abc_store",
@@ -33,6 +37,16 @@ Store.create!(store_name: "abc_store",
             store_phonenumber: "08012345678",
             store_description: SecureRandom.alphanumeric(120),
             store_manager_id: 1
+          )
+
+Store.create!(store_name: "sample1の店舗",
+            adress: "京都府京都市中京区",
+            store_phonenumber: "09012345678",
+            store_description: "sample1の店舗sample1の店舗sample1の店舗",
+            store_manager_id: 2
+            calendar_id: 2,
+            calendar_secret_id: 2,
+            calendar_status: "released"
           )
 
 Masseur.create!(masseur_name: "cororo",
@@ -54,6 +68,15 @@ Favorite.create!(user_id: 1,
                plan_price: 4500,
                store_id: 1)
 end
+
+Plan.create!(plan_name: "プラン１",
+               plan_content: "肩こり改善",
+               plan_time: 60,
+               plan_price: 10000,
+               store_id: 2,
+               course_id: 2)
+
+
 
 # 実際にカテゴリとして使用するデータ
 Category.create!(category_name: "整体")
