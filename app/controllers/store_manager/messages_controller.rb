@@ -5,7 +5,7 @@ class StoreManager::MessagesController < ApplicationController
 
   def index
     @messages = Message.where(store_id: @store.id).order(created_at: "DESC")
-    @replies = Reply.where(reply_from: "user")
+    @replies = Reply.where(store_id: @store.id, reply_from: "user")
   end
 
   # メッセージを開くと同時に既読にする
@@ -36,7 +36,7 @@ class StoreManager::MessagesController < ApplicationController
     end
 
     def message_params
-      params.require(:message).permit(:title, :content, :message_status, :store_id, :user_id, :checked)
+      params.require(:message).permit(:title, :content, :store_id, :user_id, :checked)
     end
 
     def update_message_params

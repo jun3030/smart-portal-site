@@ -14,13 +14,14 @@
         <% @messages.each do |m| %>
           <tbody>
             <tr>
-              <% m.replies.ids.each do |r| %>
-                <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "store_manager" %>
-                  <td><img src="/images/new1.png" alt=""></td>
-                <% else %>
-                  <td></td>
+              <td>
+                <% m.replies.ids.each do |r| %>
+                  <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "store_manager" %>
+                    <img src="/images/new1.png" alt="">
+                  <% end %>
                 <% end %>
-              <% end %>
+              </td>
+
               <td>To: <%= Store.find(m.store_id).store_manager.name %></td>
               <%= form_with(model: @message, url: store_message_update_path(m.store_id, m.id),
                             local: true, method: :patch) do |f| %>
@@ -31,7 +32,8 @@
                 <% end %>
                 <td><%= f.submit m.title, class: "clear" %></td>
               <% end %>
-              <td><%= m.created_at.strftime('%m/%d　%H:%M') %></td>
+              <td><%= m.created_at.strftime('%m/%d') %></td>
+              <td><%= m.created_at.strftime('%H:%M') %></td>
               <td>
                 <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
                                     data: { confirm: "削除してよろしいですか？" } %>

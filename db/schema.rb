@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_150829) do
+ActiveRecord::Schema.define(version: 2020_11_10_144812) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -100,7 +100,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_150829) do
   create_table "messages", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.string "message_status"
     t.integer "store_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -108,15 +107,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_150829) do
     t.string "checked"
     t.index ["store_id"], name: "index_messages_on_store_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.integer "message_id"
-    t.integer "visitor_id"
-    t.integer "visited_id"
-    t.boolean "checked", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "plan_images", force: :cascade do |t|
@@ -275,7 +265,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_150829) do
   add_foreign_key "replies", "messages"
   add_foreign_key "replies", "stores"
   add_foreign_key "replies", "users"
-  add_foreign_key "reviews", "masseurs"
   add_foreign_key "reviews", "stores"
   add_foreign_key "reviews", "users"
   add_foreign_key "social_profiles", "users"

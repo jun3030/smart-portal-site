@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :correct_user, only: [:show]
 
   def show
+    @replies = Reply.where(checked: "未読", user_id: current_user.id)
   end
 
   # GET /resource/sign_up
@@ -47,7 +48,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  protected 
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params

@@ -14,7 +14,7 @@ class StoreManager::RepliesController < ApplicationController
     if reply_params[:reply_from] == "store_manager"
       if @reply.save
         flash[:success] = "メッセージを返信しました。"
-        redirect_to new_store_manager_store_message_reply_url(@reply.store_id, @reply.message_id)
+        redirect_to store_manager_store_messages_path(@store)
       else
         render :new
       end
@@ -22,7 +22,7 @@ class StoreManager::RepliesController < ApplicationController
     else
       if @reply.save
         flash[:success] = "メッセージを返信しました。"
-        redirect_to store_message_show_path(@reply.store_id, @reply.message_id)
+        redirect_to messages_path(@reply.user_id)
       else
         render 'user/top/message_show'
       end
