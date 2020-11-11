@@ -26,8 +26,10 @@
               <%= form_with(model: @message, url: store_message_update_path(m.store_id, m.id),
                             local: true, method: :patch) do |f| %>
                 <% @replies.each do |reply| %>
-                  <%= f.fields_for "replies[]", reply do |r| %>
-                    <%= r.hidden_field :checked, value: "既読" %>
+                  <% if reply.message_id == m.id %>
+                    <%= f.fields_for "replies[]", reply do |r| %>
+                      <%= r.hidden_field :checked, value: "既読" %>
+                    <% end %>
                   <% end %>
                 <% end %>
                 <td><%= f.submit m.title, class: "clear" %></td>

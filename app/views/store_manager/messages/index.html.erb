@@ -53,8 +53,10 @@
                             local: true, method: :patch) do |f| %>
                 <%= f.hidden_field :checked, value: "既読" %>
                 <% @replies.each do |reply| %>
-                  <%= f.fields_for "replies[]", reply do |r| %>
-                    <%= r.hidden_field :checked, value: "既読" %>
+                  <% if reply.message_id == m.id %>
+                    <%= f.fields_for "replies[]", reply do |r| %>
+                      <%= r.hidden_field :checked, value: "既読" %>
+                    <% end %>
                   <% end %>
                 <% end %>
                 <td><%= f.submit m.title, class: "clear" %></td>

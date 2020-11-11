@@ -71,7 +71,7 @@ class User::TopController < User::Base
   def message_update
     @store = Store.find(params[:store_id])
     @message = Message.find(params[:id])
-    if Reply.where(reply_from: "store_manager").present?
+    if Reply.where(reply_from: "store_manager", message_id: @message.id).present?
       update_reply_params.each do |id, item|
         reply = Reply.find(id)
         reply.update_attributes(item)
