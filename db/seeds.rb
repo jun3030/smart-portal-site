@@ -172,16 +172,16 @@ Masseur.create!(masseur_name: "sample2",
 5.times do |n|
   Plan.create!(plan_name: "プラン#{n+1}",
                 plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
-                plan_time: 100,
-                plan_price: 4500,
+                plan_time: "#{n+1}0",
+                plan_price: "#{n+1}500",
                 store_id: 2)
 end
 
 5.times do |n|
   Plan.create!(plan_name: "プラン#{n+1}",
                 plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
-                plan_time: 100,
-                plan_price: 4500,
+                plan_time: "#{n+1}0",
+                plan_price: "#{n+1}500",
                 store_id: 3)
 end
 
