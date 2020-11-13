@@ -2,6 +2,8 @@ class User::TopController < User::Base
   include SmartYoyakuApi::User
   before_action :set_categories
   before_action :not_found, only: :details
+  before_action :set_store, only:[:message_new, :message_create, :message_update]
+  before_action :set_message, only:[:message_show, :message_update]
 
   def index
   end
@@ -45,19 +47,16 @@ class User::TopController < User::Base
   end
 
   def message_show
-    @message = Message.find(params[:id])
     @replies = Reply.where(message_id: @message.id).order(created_at: "ASC")
     @reply = Reply.new
     @reply_store = Store.find(params[:store_id])
   end
 
   def message_new
-    @store = Store.find(params[:store_id])
     @message = Message.new
   end
 
   def message_create
-    @store = Store.find(params[:store_id])
     @message = Message.new(message_params)
     if @message.save
       flash[:success] = "メッセージを送信しました。"
@@ -69,8 +68,6 @@ class User::TopController < User::Base
 
   # メッセージを開くと同時に既読にする
   def message_update
-    @store = Store.find(params[:store_id])
-    @message = Message.find(params[:id])
     if Reply.where(reply_from: "store_manager", message_id: @message.id).present?
       update_reply_params.each do |id, item|
         reply = Reply.find(id)
@@ -93,6 +90,14 @@ class User::TopController < User::Base
       if @store.store_manager.order_plan.nil?
         raise ActiveRecord::RecordNotFound, "こちらのページは現在表示することができません。"
       end
+    end
+
+    def set_store
+      @store = Store.find(params[:store_id])
+    end
+
+    def set_message
+      @message = Message.find(params[:id])
     end
 
     def message_params
