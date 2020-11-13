@@ -30,41 +30,45 @@
     <h2 class="top_space bottom_space">メッセージ一覧</h2>
     <div class="box-content">
       <table class="table">
-        <% @messages.each do |m| %>
-          <tbody>
-            <tr>
-              <td>
-                <% if m.replies.ids.present? %>
-                  <% m.replies.ids.each do |r| %>
-                    <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "user" %>
+        <% if @messages.present? %>
+          <% @messages.each do |m| %>
+            <tbody>
+              <tr>
+                <td>
+                  <% if m.replies.ids.present? %>
+                    <% m.replies.ids.each do |r| %>
+                      <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "user" %>
+                        <img src="/images/new1.png" alt="">
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <% if m.checked == "未読" %>
                       <img src="/images/new1.png" alt="">
                     <% end %>
                   <% end %>
-                <% else %>
-                  <% if m.checked == "未読" %>
-                    <img src="/images/new1.png" alt="">
-                  <% end %>
-                <% end %>
-              </td>
+                </td>
 
-              <td>From: <%= User.find(m.user_id).name %></td>
-              <!-- タイトルをクリックすると既読になる -->
-              <%= form_with(model: @message, url: store_manager_store_message_path(m.store_id, m.id),
-                            local: true, method: :patch) do |f| %>
-                <%= f.hidden_field :checked, value: "既読" %>
-                <% @replies.each do |reply| %>
-                  <% if reply.message_id == m.id %>
-                    <%= f.fields_for "replies[]", reply do |r| %>
-                      <%= r.hidden_field :checked, value: "既読" %>
+                <td>From: <%= User.find(m.user_id).name %></td>
+                <!-- タイトルをクリックすると既読になる -->
+                <%= form_with(model: @message, url: store_manager_store_message_path(m.store_id, m.id),
+                              local: true, method: :patch) do |f| %>
+                  <%= f.hidden_field :checked, value: "既読" %>
+                  <% @replies.each do |reply| %>
+                    <% if reply.message_id == m.id %>
+                      <%= f.fields_for "replies[]", reply do |r| %>
+                        <%= r.hidden_field :checked, value: "既読" %>
+                      <% end %>
                     <% end %>
                   <% end %>
+                  <td><%= f.submit m.title, class: "clear" %></td>
                 <% end %>
-                <td><%= f.submit m.title, class: "clear" %></td>
-              <% end %>
-              <td><%= m.created_at.strftime('%m/%d') %></td>
-              <td><%= m.created_at.strftime('%H:%M') %></td>
-            </tr>
-          </tbody>
+                <td><%= m.created_at.strftime('%m/%d') %></td>
+                <td><%= m.created_at.strftime('%H:%M') %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% else %>
+          <p>メッセージはありません。</p>
         <% end %>
       </table>
     </div>

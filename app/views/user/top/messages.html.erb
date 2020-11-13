@@ -11,37 +11,41 @@
     <h2 class="content-h2">メッセージ一覧</h2>
     <div class="box-content">
       <table class="table">
-        <% @messages.each do |m| %>
-          <tbody>
-            <tr>
-              <td>
-                <% m.replies.ids.each do |r| %>
-                  <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "store_manager" %>
-                    <img src="/images/new1.png" alt="">
-                  <% end %>
-                <% end %>
-              </td>
-
-              <td>To: <%= Store.find(m.store_id).store_manager.name %></td>
-              <%= form_with(model: @message, url: store_message_update_path(m.store_id, m.id),
-                            local: true, method: :patch) do |f| %>
-                <% @replies.each do |reply| %>
-                  <% if reply.message_id == m.id %>
-                    <%= f.fields_for "replies[]", reply do |r| %>
-                      <%= r.hidden_field :checked, value: "既読" %>
+        <% if @messages.present? %>
+          <% @messages.each do |m| %>
+            <tbody>
+              <tr>
+                <td>
+                  <% m.replies.ids.each do |r| %>
+                    <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "store_manager" %>
+                      <img src="/images/new1.png" alt="">
                     <% end %>
                   <% end %>
+                </td>
+
+                <td>To: <%= Store.find(m.store_id).store_manager.name %></td>
+                <%= form_with(model: @message, url: store_message_update_path(m.store_id, m.id),
+                              local: true, method: :patch) do |f| %>
+                  <% @replies.each do |reply| %>
+                    <% if reply.message_id == m.id %>
+                      <%= f.fields_for "replies[]", reply do |r| %>
+                        <%= r.hidden_field :checked, value: "既読" %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <td><%= f.submit m.title, class: "clear" %></td>
                 <% end %>
-                <td><%= f.submit m.title, class: "clear" %></td>
-              <% end %>
-              <td><%= m.created_at.strftime('%m/%d') %></td>
-              <td><%= m.created_at.strftime('%H:%M') %></td>
-              <td>
-                <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
-                                    data: { confirm: "削除してよろしいですか？" } %>
-              </td>
-            </tr>
-          </tbody>
+                <td><%= m.created_at.strftime('%m/%d') %></td>
+                <td><%= m.created_at.strftime('%H:%M') %></td>
+                <td>
+                  <%= link_to "削除", store_manager_store_message_path(m.store_id, m.id), method: :delete,
+                                      data: { confirm: "削除してよろしいですか？" } %>
+                </td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% else %>
+          <p>メッセージはありません。</p>
         <% end %>
       </table>
     </div>
