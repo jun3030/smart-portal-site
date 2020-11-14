@@ -1,7 +1,7 @@
 class StoreManager::RepliesController < ApplicationController
-
   before_action :set_store, only:[:new, :create]
   before_action :set_message, only:[:new, :create]
+  before_action :correct_store, only: :new
 
   def new
     @reply = Reply.new
@@ -47,5 +47,13 @@ class StoreManager::RepliesController < ApplicationController
 
     def reply_params
       params.require(:reply).permit(:reply, :store_id, :user_id, :message_id, :checked, :reply_from)
+    end
+
+    # urlに含まれるstore.idがcurrent_store_managerと紐づいていない場合警告
+    def correct_store
+      unless @store.id == current_store_manager.store.id
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to store_manager_url(current_store_manager)
+      end
     end
 end

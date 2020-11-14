@@ -52,7 +52,7 @@
     <% end %>
 
     <!-- 返信フォーム -->
-    <%= form_with(model: @reply, url: store_manager_store_message_replies_path(@reply_store, @message),
+    <%= form_with(model: @reply, url: store_manager_store_message_replies_path(@message.store_id, @message),
                   local: true, method: :post) do |f| %>
       <%= render "shared/error_messages", object: f.object %>
       <br>
