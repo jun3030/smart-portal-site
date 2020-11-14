@@ -2,6 +2,7 @@ class User::TopController < User::Base
   include SmartYoyakuApi::User
   before_action :set_categories
   before_action :not_found, only: :details
+  before_action :correct_user, only:[:messages]
   before_action :set_store, only:[:message_new, :message_create, :message_update]
   before_action :set_message, only:[:message_show, :message_update]
 
@@ -106,5 +107,10 @@ class User::TopController < User::Base
 
     def update_reply_params
       params.permit(replies: [:checked])[:replies]
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
     end
 end
