@@ -1,0 +1,28 @@
+<div class="center cenrer-block">
+  <div id="price" class="service-price">
+    <div class="box-content"><br>
+      <%= form_with(model: @message, url: store_message_create_path(@store), local: true, method: :post) do |f| %>
+        <%= render "shared/error_messages", object: f.object %>
+
+        <h2 class="content-h2">店舗への問い合わせ</h2>
+        <div style="line-height: 3em;">
+          <h6>宛先</h6>
+          <h5>　<%= @store.store_name %>　<%= @store.store_manager.name %></h5>
+        </div>
+        <%= f.label :title, class: "" %>
+        <%= f.text_field :title, class: "form-control" %><br>
+
+        <%= f.label :content, class: "" %>
+        <%= f.text_area :content, size: "30x5", class: "form-control" %>
+
+        <%= f.hidden_field :store_id, value: @store.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :checked, value: "未読" %>
+
+        <div class="text-right"><br>
+          <%= f.submit "メッセージを送信する", class: "message-submit-btn" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

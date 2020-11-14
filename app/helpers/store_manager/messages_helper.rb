@@ -1,0 +1,2 @@
+module StoreManager::MessagesHelper
+end

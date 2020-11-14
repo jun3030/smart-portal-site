@@ -5,6 +5,11 @@
     <% end %>
   <div class="text_left">
     <h1 class="top_space">マイページトップ</h1>
+    <% if @messages.present? || @replies.present? %>
+      <p><font color="#ff0000">　新着メッセージがあります。</font></p>
+    <% else %>
+      <p>　新着メッセージはありません。</p>
+  　<% end %>
   </div>
   <div class="text-right mb-4">
     <%= calendar_btn %>
