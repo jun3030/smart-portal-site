@@ -12,14 +12,16 @@ Admin.create!(email: "admin@email.com",
              password_confirmation: "password"
             )
 
-User.create!(name: "tester",
-            email: "tester@email.com",
+5.times do |n|
+User.create!(name: "tester#{n+1}",
+            email: "tester#{n+1}@email.com",
             address: "japan-aichi-nagoya",
             password: "password",
             password_confirmation: "password",
             nickname: "tester",
             gender: "male"
            )
+end
 
 StoreManager.create!(email: "store_manager@email.com",
                     name: "store_manager",
@@ -68,6 +70,9 @@ Category.create!(category_name: "オイルマッサージ")
 Category.create!(category_name: "その他")
 
 MasseurCategory.create!(masseur_id: 1, category_id: 1)
+MasseurCategory.create!(masseur_id: 1, category_id: 2)
+
+
 
 # 日本/地方データ
 Region.create!(area: "北海道")
@@ -116,7 +121,6 @@ cities_12["result"].each {|value| City.find_or_create_by(name: value["cityName"]
 cities_13["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 13)}
 cities_14["result"].each {|value| City.find_or_create_by(name: value["cityName"], prefecture_id: 14)}
 
-
 StoreManager.create!(email: "sample1@email.com",
                     name: "sample1",
                     password: "password",
@@ -149,18 +153,41 @@ Store.create!(store_name: "sample2の店舗",
               calendar_status: "released"
               )
 
+Masseur.create!(masseur_name: "sample1",
+                email: "sample1@email.com",
+                adress: "京都府京都市中京区",
+                password: "password",
+                password_confirmation: "password",
+                store_id: 2
+                )
+
+Masseur.create!(masseur_name: "sample2",
+                email: "sample2@email.com",
+                adress: "京都府京都市中京区",
+                password: "password",
+                password_confirmation: "password",
+                store_id: 3
+                )
+
 5.times do |n|
   Plan.create!(plan_name: "プラン#{n+1}",
                 plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
-                plan_time: 100,
-                plan_price: 4500,
+                plan_time: "#{n+1}0",
+                plan_price: "#{n+1}500",
                 store_id: 2)
 end
 
 5.times do |n|
   Plan.create!(plan_name: "プラン#{n+1}",
                 plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
-                plan_time: 100,
-                plan_price: 4500,
+                plan_time: "#{n+1}0",
+                plan_price: "#{n+1}500",
                 store_id: 3)
 end
+
+Review.create!(user_id: 1, store_id: 2, content: "まあまあ", rate: 5.0, title: "最高でした")
+Review.create!(user_id: 1, store_id: 3, content: "よかった", rate: 4.0, title: "良い良い")
+Review.create!(user_id: 2, store_id: 2, content: "また利用したいです", rate: 4.0, title: "気楽に頼めた")
+Review.create!(user_id: 2, store_id: 3, content: "まあまあ", rate: 5.0, title: "最高でした")
+Review.create!(user_id: 3, store_id: 2, content: "次も利用します", rate: 4.0, title: "安心して利用できました")
+Review.create!(user_id: 3, store_id: 3, content: "次も利用します", rate: 5.0, title: "安心して利用できました")
