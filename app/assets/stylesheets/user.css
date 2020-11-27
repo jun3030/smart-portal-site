@@ -33,6 +33,14 @@
   border-bottom: 1px solid #fff;
 }
 
+.fw-title {
+  margin-bottom: 20px;
+}
+
+.nav-item-sort {
+
+}
+
 .prefecturesAll, .cityAll {
   display:inline-block;
   padding:10px 24px;

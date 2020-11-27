@@ -33,4 +33,20 @@ class Store < ApplicationRecord
       0.0
     end
   end
+
+  ransacker :reviews_count do
+    query = '(SELECT COUNT(reviews.store_id) FROM reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
+    Arel.sql(query)
+  end
+
+  ransacker :reviews_evaluation do
+    query = '(SELECT AVG(reviews.rate) FROM reviews where reviews.store_id = stores.id GROUP BY reviews.store_id)'
+    Arel.sql(query)
+  end
+
+  ransacker :plan_cheap do
+    query = '(SELECT MIN(plans.plan_price) FROM plans where plans.store_id = stores.id GROUP BY plans.store_id)'
+    Arel.sql(query)
+  end
+
 end
