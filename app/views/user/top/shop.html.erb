@@ -73,10 +73,10 @@
         <div class="list_head">
           <h4 class="fw-title">店舗一覧</h4>
           <ul class="nav nav-tabs">
-            <li class="nav-link"><a href="/shop">全てのマッサージ</a></li>
-            <li class="nav-link"><a href="/shop?class=nav-link+active&q%5Bs%5D=plan_cheap+asc">料金が安い順</a></li>
-            <li class="nav-link"><a href="/shop?class=nav-link+active&q%5Bs%5D=reviews_count+desc">口コミが多い順</a></li>
-            <li class="nav-link"><a href="/shop?class=nav-link+active&q%5Bs%5D=reviews_evaluation+desc">口コミの評価が高い順</a></li>
+            <li class="nav-item-sort"><%= link_to "全てのマッサージ", shop_path %></li>
+            <li class="nav-item-sort"><%= sort_link(@search, :reviews_count, "口コミが多い順") %></li>
+            <li class="nav-item-sort"><%= sort_link(@search, :reviews_evaluation, "口コミ評価が高い順") %></li>
+            <li class="nav-item-sort"><%= sort_link(@search, :plan_cheap, "料金が安い順") %></li>
           </ul>
         </div>
         <!-- 検索結果表示 -->

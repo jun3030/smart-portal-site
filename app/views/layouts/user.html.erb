@@ -6,12 +6,12 @@
     <%= stylesheet_link_tag    'user', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'user', 'data-turbolinks-track': 'reload' %>
   </head>
-<body>
-  <% content_for :content do %>
-    <%= render 'layouts/header' %>
-    <%= yield %>
-    <%= render 'layouts/fotter' %>
-  <% end %>
-  <%= render template: "layouts/application" %>
-</body>
+  <body>
+    <% content_for :content do %>
+      <%= render 'layouts/header' %>
+      <%= yield %>
+      <%= render 'layouts/fotter' %>
+    <% end %>
+    <%= render template: "layouts/application" %>
+  </body>
 </html>
