@@ -17,8 +17,6 @@ class User::TopController < User::Base
     # マッサージ師の検索機能
     @search = Store.ransack(params[:q])
     @store_result = @search.result
-    # ソート機能
-
   end
 
   def details
