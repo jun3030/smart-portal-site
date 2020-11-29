@@ -2,6 +2,8 @@ class User::TopController < User::Base
   include SmartYoyakuApi::User
   before_action :set_categories
   before_action :not_found, only: :details
+  before_action :correct_user, only: :messages
+  before_action :correct_user2, only: :message_show
   before_action :set_store, only:[:message_new, :message_create, :message_update]
   before_action :set_message, only:[:message_show, :message_update]
 
@@ -49,7 +51,6 @@ class User::TopController < User::Base
   def message_show
     @replies = Reply.where(message_id: @message.id).order(created_at: "ASC")
     @reply = Reply.new
-    @reply_store = Store.find(params[:store_id])
   end
 
   def message_new
@@ -74,7 +75,7 @@ class User::TopController < User::Base
         reply.update_attributes(item)
       end
     end
-    redirect_to store_message_show_path(@store, @message)
+    redirect_to message_show_url(current_user.id, @message)
   end
 
   private
@@ -106,5 +107,18 @@ class User::TopController < User::Base
 
     def update_reply_params
       params.permit(replies: [:checked])[:replies]
+    end
+
+    # urlに含まれるuser.idがcurrent_userと紐づいていない場合警告
+    def correct_user
+      @user = User.find(params[:id])
+      flash[:danger] = "アクセス権限がありません。"
+      redirect_to(root_url) unless @user == current_user
+    end
+
+    def correct_user2
+      @user = User.find(params[:user_id])
+      flash[:danger] = "アクセス権限がありません。"
+      redirect_to(root_url) unless @user == current_user
     end
 end

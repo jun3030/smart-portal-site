@@ -1,7 +1,7 @@
 class StoreManager::MessagesController < ApplicationController
-
   before_action :set_store, only:[:index, :update]
   before_action :set_message, only:[:destroy, :update]
+  before_action :correct_store, only: :index
 
   def index
     @messages = Message.where(store_id: @store.id).order(created_at: "DESC")
@@ -17,7 +17,7 @@ class StoreManager::MessagesController < ApplicationController
         reply.update_attributes(item)
       end
     end
-    redirect_to new_store_manager_store_message_reply_path(@store, @message)
+    redirect_to new_store_manager_store_message_reply_url(@store, @message)
   end
 
   def destroy
@@ -45,5 +45,13 @@ class StoreManager::MessagesController < ApplicationController
 
     def update_reply_params
       params.permit(replies: [:checked])[:replies]
+    end
+
+    # urlに含まれるstore.idがcurrent_store_managerと紐づいていない場合警告
+    def correct_store
+      unless @store.id == current_store_manager.store.id
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to store_manager_url(current_store_manager)
+      end
     end
 end
