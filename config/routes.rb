@@ -5,10 +5,10 @@ Rails.application.routes.draw do
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
     get "user/:id/messages", to: "user/top#messages", as: :messages
+    get "user/:user_id/messages/:id", to: "user/top#message_show", as: :message_show
     resources :store, only: :index do
       get "/messages/new", to: "user/top#message_new", as: :message_new
       post "messages", to: "user/top#message_create", as: :message_create
-      get "messages/:id", to: "user/top#message_show", as: :message_show
       patch "messages/update/:id", to: "user/top#message_update", as: :message_update
     end
   # devise↓ =====================================================================================
