@@ -181,11 +181,7 @@ end
   Plan.create!(plan_name: "プラン#{n+1}",
                 plan_content: "PCやスマートフォンを使ったり鞄を持ったりと、日常の疲れが溜まりやすい肘から下をもみほぐす【ハンドリフレ】。肩や目が疲れやすい方に、頭から首にかけてもみほぐす【クイックヘッド】。ストレスが溜まりやすい方や頭からスッキリとリラックスしたい方にオススメ。",
                 plan_time: "#{n+1}0",
-<<<<<<< HEAD
                 plan_price: "#{n+2}500",
-=======
-                plan_price: "#{n+1}500",
->>>>>>> ddc0de3c3e8b5868c25664f841a72a3b09a534cd
                 store_id: 3)
 end
 
@@ -194,8 +190,4 @@ Review.create!(user_id: 1, store_id: 3, content: "よかった", rate: 4.0, titl
 Review.create!(user_id: 2, store_id: 2, content: "また利用したいです", rate: 4.0, title: "気楽に頼めた")
 Review.create!(user_id: 2, store_id: 3, content: "まあまあ", rate: 5.0, title: "最高でした")
 Review.create!(user_id: 3, store_id: 2, content: "次も利用します", rate: 4.0, title: "安心して利用できました")
-<<<<<<< HEAD
 Review.create!(user_id: 3, store_id: 3, content: "次も利用します", rate: 5.0, title: "安心して利用できました")
-=======
-Review.create!(user_id: 3, store_id: 3, content: "次も利用します", rate: 5.0, title: "安心して利用できました")
->>>>>>> ddc0de3c3e8b5868c25664f841a72a3b09a534cd
