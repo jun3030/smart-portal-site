@@ -72,27 +72,11 @@
       <div class="product-show-option">
         <div class="list_head">
           <h4 class="fw-title">店舗一覧</h4>
-          <ul class="list-sort nav nav-tabs">
-            <li class="on space_box">
-              <a herf="####">
-                <span class="sort-name"><%= category %></span>
-              </a>
-            </li>
-            <li class="on space_box">
-              <a herf="####">
-                <span class="sort-name"></span>
-              </a>
-            </li>
-            <li class="on space_box">
-              <a herf="####">
-                <span class="sort-name"></span>
-              </a>
-            </li>
-            <li class="on space_box">
-              <a herf="####">
-                <span class="sort-name"></span>
-              </a>
-            </li>
+          <ul class="nav nav-tabs">
+            <li class="nav-item-sort"><%= link_to "全てのマッサージ", shop_path %></li>
+            <li class="nav-item-sort"><%= sort_link(@search, :reviews_count, "口コミが多い順") %></li>
+            <li class="nav-item-sort"><%= sort_link(@search, :reviews_evaluation, "口コミ評価が高い順") %></li>
+            <li class="nav-item-sort"><%= sort_link(@search, :plan_cheap, "料金が安い順") %></li>
           </ul>
         </div>
         <!-- 検索結果表示 -->
@@ -118,10 +102,38 @@
                   <div class="pb-text ">
                     <p class="posted_text "><%= store.store_description %></p>
                   </div>
+                  <%= render 'layouts/raty.html.erb' %>
+                  <div class="service-detail list-mgr-star">
+                    <div class="detail-left list-mgr-detail-left">
+                      <div id="star-rate-<%= store.id %>" class="shop-review"></div>
+                      <span><%= store.avg_score %><%= link_to " 口コミ #{store.reviews.count}件", user_store_review_index_path(store.id) %></span>
+                      <script>
+                        $('#star-rate-<%= store.id %>').raty({
+                          size: 36,
+                          starOff: "/assets/star-off.png",
+                          starOn: "/assets/star-on.png",
+                          starHalf: "/assets/star-half.png",
+                          half: true,
+                          readOnly: true,
+                          score: <%= store.avg_score %>,
+                        });
+                      </script>
+                    </div>
+                    <div class="detail-right">
+                      <div class="service-price text-price">
+                        <%= store.plans.pluck(:plan_price).min %>
+                        <span>円（税込）</span>
+                      </div>
+                      <div>
+                        <%= link_to "料金と口コミを確認する", details_path(store), class: "link-detail-btn" %>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <hr>
         <% end %>
       </div>
     </section>
