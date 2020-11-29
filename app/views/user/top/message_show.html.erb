@@ -1,0 +1,72 @@
+<div class="top_space">
+  <div class="text_width text_left">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-success mt-5 text_left"><%= message %></div>
+    <% end %>
+
+    <div class="box-content message-box">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>作成日：<%= @message.created_at.strftime('%m/%d　%H:%M') %></td>
+          </tr>
+          <tr>
+            <td>件名：<%= @message.title %></td>
+          </tr>
+          <tr>
+            <td><%= @message.content %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h5><%= User.find(@message.user_id).name %></h5>
+
+    <% @replies.each do |r| %>
+      <!-- store_managerからの返信 -->
+      <% if r.reply_from == "store_manager" %>
+        <div class="box-content reply-box">
+          <table class="table">
+            <tbody>
+              <tr><td><%= r.reply %></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="text-right">
+          <h5><%= Store.find(r.store_id).store_manager.name %></h5>
+        </div>
+      <!-- userからの返信 -->
+      <% else %>
+        <div class="box-content message-box">
+          <table class="table">
+            <tbody>
+              <tr><td><%= r.reply %></td></tr>
+              <tr>
+                <td align="right"><%= link_to "削除", store_manager_store_message_reply_path(r.store_id, r.message_id, r.id),
+                                                      method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h5><%= User.find(r.user_id).name %></h5>
+      <% end %>
+    <% end %>
+
+    <!-- 返信フォーム -->
+    <%= form_with(model: @reply, url: store_manager_store_message_replies_path(@reply_store, @message),
+                  local: true, method: :post) do |f| %>
+      <%= render "shared/error_messages", object: f.object %>
+      <br>
+      <%= f.text_area :reply, size: "30x5", class: "form-control" %><br>
+
+      <%= f.hidden_field :message_id, value: @message.id %>
+      <%= f.hidden_field :store_id, value: @message.store_id %>
+      <%= f.hidden_field :user_id, value: @message.user_id %>
+      <%= f.hidden_field :checked, value: "未読" %>
+      <%= f.hidden_field :reply_from, value: "user" %>
+
+      <%= f.submit "メッセージを返信する", class: "btn btn-warning btn-lg" %>
+      <%= link_to "一覧に戻る", messages_path(@message.user_id), class: "btn btn-light btn-lg" %>
+    <% end %>
+    <br>
+  </div>
+</div>

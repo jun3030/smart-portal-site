@@ -1,6 +1,6 @@
 <section>
 <div class="center cenrer-block">
-  <% flash.each do |message_type, msg| %>
+  <% flash.each do |message_type, msg| %><br>
     <div class="alert alert-success">
       <%= msg %>
     </div>
@@ -57,7 +57,7 @@
           <div class="wrap-feature flex-low">
             <div class="performance flex-low">
               <div class="item-mark">
-               <!-- <p>返答の速さ</p> -->
+                <!-- <p>返答の速さ</p> -->
               </div>
               <div class="item-mark">
                 <!-- <p>施術実績</p> -->
@@ -329,8 +329,11 @@
             <tr>
               <td>写真</td>
               <td>
-                店長：<%= @store.store_manager.name %><br>
+                店長：<%= @store.store_manager.name %>　　　
                 <!--コメント：PayPay, Line Pay, クレジットカード使用可 -->
+                <% if user_signed_in? %>
+                  店舗への問い合わせは<%= link_to "こちら", store_message_new_path(@store) %>
+                <% end %>
               </td>
             </tr>
             <tr>

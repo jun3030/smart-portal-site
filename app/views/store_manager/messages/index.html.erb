@@ -1,0 +1,77 @@
+<div class="text_width">
+  <h1 class="left_logo">Smart Potal</h1>
+  <div class="right_bottun">
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"btn btn-warning btn_space" %>
+  </div>
+  <div class="hader_space">
+    <div class="">
+      <ul class="header_ul_space ">
+        <li>
+          <%= link_to "マイページ", store_manager_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "予約の確認", store_managers_index_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <%= link_to "登録内容の編集", store_managers_show_path(current_store_manager),  class:"header_line no_nuderline" %>
+        </li>
+        <li>
+          <a class="header_line_a">メッセージ確認</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="top_space">
+  <div class="text_width text_left">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-success mt-5 text_left"><%= message %></div>
+    <% end %>
+    <h2 class="top_space bottom_space">メッセージ一覧</h2>
+    <div class="box-content">
+      <table class="table">
+        <% if @messages.present? %>
+          <% @messages.each do |m| %>
+            <tbody>
+              <tr>
+                <td>
+                  <% if m.replies.ids.present? %>
+                    <% m.replies.ids.each do |r| %>
+                      <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "user" %>
+                        <img src="/images/new1.png" alt="">
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <% if m.checked == "未読" %>
+                      <img src="/images/new1.png" alt="">
+                    <% end %>
+                  <% end %>
+                </td>
+
+                <td>From: <%= User.find(m.user_id).name %></td>
+                <!-- タイトルをクリックすると既読になる -->
+                <%= form_with(model: @message, url: store_manager_store_message_path(m.store_id, m.id),
+                              local: true, method: :patch) do |f| %>
+                  <%= f.hidden_field :checked, value: "既読" %>
+                  <% @replies.each do |reply| %>
+                    <% if reply.message_id == m.id %>
+                      <%= f.fields_for "replies[]", reply do |r| %>
+                        <%= r.hidden_field :checked, value: "既読" %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  <td><%= f.submit m.title, class: "clear" %></td>
+                <% end %>
+                <td><%= m.created_at.strftime('%m/%d') %></td>
+                <td><%= m.created_at.strftime('%H:%M') %></td>
+              </tr>
+            </tbody>
+          <% end %>
+        <% else %>
+          <p>メッセージはありません。</p>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+<%= render template: "layouts/store_managers"%>

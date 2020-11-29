@@ -5,7 +5,14 @@
         <div class="alert alert-success mt-5"><%= msg %></div>
       <% end %>
       <h3 class="text-center my-5">〜<%= "#{current_user.name}" %>さんのマイページ〜</h3>
-      <hr>      
+      <h6 class="text-center my-5">
+        <% if @replies.present? %>
+          <p><%= link_to "新着メッセージがあります", messages_path(current_user.id), class: "red" %></p>
+        <% else %>
+          <%= link_to "メッセージ一覧", messages_path(current_user.id) %>
+        <% end %>
+      </h6>
+      <hr>
       <h4 class="my-4 text-center">【ご登録内容】</h4>
       <div class="jumbotron">
         <table class="table">
