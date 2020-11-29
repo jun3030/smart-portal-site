@@ -121,7 +121,7 @@
                     </div>
                     <div class="detail-right">
                       <div class="service-price text-price">
-                        3,500
+                        <%= store.plans.pluck(:plan_price).min %>
                         <span>円（税込）</span>
                       </div>
                       <div>

@@ -48,5 +48,4 @@ class Store < ApplicationRecord
     query = '(SELECT MIN(plans.plan_price) FROM plans where plans.store_id = stores.id GROUP BY plans.store_id)'
     Arel.sql(query)
   end
-
 end
