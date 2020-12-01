@@ -78,8 +78,20 @@ class User::TopController < User::Base
     redirect_to message_show_url(current_user.id, @message)
   end
 
+  # 利用規約============================
   def user_policy
+  end
 
+  def privacy_policy
+  end
+
+  def security
+  end
+
+  def specified_commercial_transaction
+  end
+
+  def operating_company
   end
 
   private

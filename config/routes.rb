@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     get "/store/:id", to: "user/top#details", as: :details
     # 利用規約リンク
     get "/user_policy", to: "user/top#user_policy", as: :user_policy
-
+    get "/privacy_policy", to: "user/top#privacy_policy", as: :privacy_policy
+    get "/security", to: "user/top#security", as: :security
+    get "/specified_commercial_transaction", to: "user/top#specified_commercial_transaction", as: :specified_commercial_transaction
+    get "/operating_company", to: "user/top#operating_company", as: :operating_company
 
     get "user/:id/messages", to: "user/top#messages", as: :messages
     get "user/:user_id/messages/:id", to: "user/top#message_show", as: :message_show
