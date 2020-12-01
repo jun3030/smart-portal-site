@@ -78,6 +78,10 @@ class User::TopController < User::Base
     redirect_to message_show_url(current_user.id, @message)
   end
 
+  def user_policy
+
+  end
+
   private
 
     # ヘッダーとトップページのカテゴリ一覧表示用

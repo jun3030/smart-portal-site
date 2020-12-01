@@ -354,4 +354,31 @@ i.icon-l.ctg-icon_aircon {
   border-radius: 5px;
 }
 
+// footerの編集
+footer .footer-bottom {
+  background: #e8e8e8;
+}
 
+.smart-portal-logo {
+  margin-top:5px;
+}
+
+.footer-bottom-link {
+  display: flex;
+  justify-content: space-around;
+  text-decoration: none;
+}
+
+.poricy {
+  display: inline-block;
+  padding:10px 15px 0px 15px;
+}
+
+.poricy-link {
+  color: #767676;
+}
+
+.poricy-link:hover {
+  text-decoration: none;
+  color:silver;
+}

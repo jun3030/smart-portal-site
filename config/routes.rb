@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     root            to: "user/top#index"
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
+    # 利用規約リンク
+    get "/user_policy", to: "user/top#user_policy", as: :user_policy
+
+
     get "user/:id/messages", to: "user/top#messages", as: :messages
     get "user/:user_id/messages/:id", to: "user/top#message_show", as: :message_show
     resources :store, only: :index do
