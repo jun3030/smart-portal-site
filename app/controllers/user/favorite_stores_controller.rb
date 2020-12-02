@@ -18,6 +18,7 @@ class User::FavoriteStoresController < User::Base
   end
 
   def destroy
+    debugger
     store=Store.find(params[:store_id])
     if favorite=FavoriteStore.find_by(user_id: current_user.id,store_id:store.id)
       favorite.delete
