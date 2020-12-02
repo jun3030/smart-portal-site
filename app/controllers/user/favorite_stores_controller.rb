@@ -9,14 +9,16 @@ class User::FavoriteStoresController < User::Base
   def create
     store=Store.find(params[:store_id])
     if FavoriteStore.create(user_id: current_user.id,store_id:store.id)
-      redirect_to root_url
+      flash[:success] = "お気に入り店舗に登録しました。"
+      redirect_to details_url(store)
     else
-      redirect_to root_url
+      flash[:success] = "お気に入り店舗の登録に失敗しました。お手数ですがもう一度やり直して下さい。"
+      redirect_to details_url(store)
     end
   end
 
   def destroy
-    post=Post.find(params[:post_id])
+    store=Store.find(params[:store_id])
     if favorite=FavoriteStore.find_by(user_id: current_user.id,store_id:store.id)
       favorite.delete
       redirect_to root_url

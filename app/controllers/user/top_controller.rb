@@ -24,6 +24,7 @@ class User::TopController < User::Base
   end
 
   def details
+    @store = Store.find(params[:id])
     @reserve_app_url = reserve_app_url
     @plans = @store.plans
     @masseurs = @store.masseurs

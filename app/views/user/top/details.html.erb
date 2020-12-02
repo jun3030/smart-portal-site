@@ -40,16 +40,15 @@
 
         <div class="col-md-6">
           <div class="wrap-service-info">
-            <div><%#= link_to "検討リストに追加する", "#", class:"btn btn-outline-dark btn-lg csr-btn"%><div>
+            <div><%= link_to "お気に入り店舗に追加する", user_favorite_stores_create_path(@store.id), method: :post, class:"btn btn-outline-dark btn-lg csr-btn"%><div>
             <div class="wrap-star-rate">
               <div class="star-rate star-rate4">
-                <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                <div id="star-rate-<%= @store.id %>" class="shop-review"></div><br>
+                <a href="#review-link"><%= "口コミ#{@store.reviews.count}件" %></a>
               </div>
-              <a><%#= link_to "口コミ　〇〇件", "#" %></a>
+              <div class="avg-score">
+                <%= @store.avg_score %>
+              </div>
             </div>
             <!--<div class="rating-text">4.85</div>-->
           </div>
@@ -148,7 +147,7 @@
     </div>
 
     <div id="review" class="service-review">
-      <h2 class="content-h2">口コミ</h2>
+      <h2 class="content-h2" id="review-link">口コミ</h2>
         <div id="storecommit" class="service-price">
           <div class="box-content">
             <table class="table">
@@ -181,6 +180,18 @@
                         starHalf: "/assets/star-half.png",
                         readOnly: true,
                         score: <%= review.rate %>,
+                    });
+                  </script>
+                  <!-- レビューの平均値 -->
+                  <script>
+                    $('#star-rate-<%= @store.id %>').raty({
+                      size: 36,
+                      starOff: "/assets/star-off.png",
+                      starOn: "/assets/star-on.png",
+                      starHalf: "/assets/star-half.png",
+                      half: true,
+                      readOnly: true,
+                      score: <%= @store.avg_score %>,
                     });
                   </script>
                 </div>

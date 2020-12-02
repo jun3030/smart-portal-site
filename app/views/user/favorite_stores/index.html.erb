@@ -1,0 +1,92 @@
+<section class="product-shop spad">
+  <div class="container">
+  <h1 class="ttl-main-page">お気に入り店舗リスト</h1>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+        <div class="box29">
+          <!--<div class="box-title"></div>
+          <h5 class="star_rate"></h5>
+          <p></p>
+        </div>
+        <div class="box2">
+          <p>ここに文章</p>
+        </div>
+        <div class="filter-widget">
+          <h4 class="fw-title">一覧</h4>
+          <ul class="filter-catagories">
+            <li><a href="#">a</a></li>
+            <li><a href="#">b</a></li>
+            <li><a href="#">c</a></li>
+          </ul>
+        </div>-->
+      </div>
+    </div>
+
+    <div class="col-lg-9 order-1 order-lg-2">
+      <div class="product-show-option">
+        <hr>
+        <div class="list_head">
+          <h4 class="fw-title">店舗一覧</h4>
+        </div>
+        <!-- お気に入り店舗リスト表示 -->
+        <% @favorite_stores.each do |store| %>
+          <% favorite_store = Store.find(store.store_id) %>
+          <div class="">
+            <div class="row">
+              <div class="col-lg-12">
+               <div class="s_top_space">
+                &emsp;<%= link_to favorite_store.store_name, details_path(favorite_store), class:"bottom_space_10 white-space_n" %>
+                <div class="posted-by">
+                  <div class="pb-pic list-mgr-img-box">
+                    <%  store_images = favorite_store.store_images.first %>
+                    <% unless store_images.nil? %>
+                      <% if store_images.store_image.present? %>
+                        <img src="<%= store_images.store_image[0].url %>" alt="" class="all_store_store_image">
+                      <% else %>
+                        <img src="../../images/no_image.jpg" alt="" class="all_store_store_image">
+                      <% end %>
+                    <% else %>
+                      <img src="../../images/no_image.jpg" alt="" class="all_store_store_image">
+                    <% end %>
+                  </div>
+                  <div class="pb-text ">
+                    <p class="posted_text "><%= favorite_store.store_description %></p>
+                  </div>
+                  <%= render 'layouts/raty.html.erb' %>
+                  <div class="service-detail list-mgr-star">
+                    <div class="detail-left list-mgr-detail-left">
+                      <div id="star-rate-<%= favorite_store.id %>" class="shop-review"></div>
+                      <span><%= favorite_store.avg_score %><%= link_to " 口コミ #{favorite_store.reviews.count}件", user_store_review_index_path(store.id) %></span>
+                      <script>
+                        $('#star-rate-<%= favorite_store.id %>').raty({
+                          size: 36,
+                          starOff: "/assets/star-off.png",
+                          starOn: "/assets/star-on.png",
+                          starHalf: "/assets/star-half.png",
+                          half: true,
+                          readOnly: true,
+                          score: <%= favorite_store.avg_score %>,
+                        });
+                      </script>
+                    </div>
+                    <div class="detail-right">
+                      <div class="service-price text-price">
+                        <%= favorite_store.plans.pluck(:plan_price).min %>
+                        <span>円（税込）</span>
+                      </div>
+                      <div>
+                        <%= link_to "料金と口コミを確認する", details_path(favorite_store), class: "link-detail-btn" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+      </div>
+    </section>
+    </div>
+  </div>
+</section>

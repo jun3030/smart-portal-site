@@ -37,8 +37,8 @@ Rails.application.routes.draw do
 
       # 店舗お気に入り機能================
       get "/user/:id/favorite_stores", to: "user/favorite_stores#index", as: :user_favorite_stores_index
-      post "/user/store/:store_id/add" => "user/favorite_stores#create"
-      delete "/user/store/:store_id/add" => "user/favorite_stores#destroy"
+      post "/user/store/:store_id/create" => "user/favorite_stores#create", as: :user_favorite_stores_create
+      delete "/user/store/:store_id/delete" => "user/favorite_stores#destroy"
     end
 
     devise_for :users, controllers: {

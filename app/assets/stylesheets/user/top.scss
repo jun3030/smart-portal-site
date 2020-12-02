@@ -253,6 +253,19 @@ i.icon-l.ctg-icon_aircon {
 .m-bottom-10 {
   margin-bottom: 10px;
 }
+
+.wrap-star-rate {
+  display: flex;
+  align-items: center;
+}
+
+.avg-score {
+  padding:0px 8px 0px 2px;
+  font-size: 40px;
+  color:#f06f18;
+  line-height: 1;
+}
+
 // shopページ //
 .width_660 {
   width: 660px;
@@ -424,6 +437,3 @@ footer .footer-bottom {
 .bac-c_bla04 {
   background-color: #e8e8e8;
 }
-
-// プライバシーポリシー
-
