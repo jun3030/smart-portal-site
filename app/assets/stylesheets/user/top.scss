@@ -266,6 +266,47 @@ i.icon-l.ctg-icon_aircon {
   line-height: 1;
 }
 
+.box-content {
+  line-height: 1.5;
+  margin: 10px 10px 20px 10px;
+}
+
+.item-step {
+  display: table;
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.step-num {
+  border-radius: 50%;
+  font-size: 1.1rem;
+  position: relative;
+  background: #fcf1d8;
+  color: #f06f18;
+  font-family: Verdana;
+  height: 60px;
+  letter-spacing: 1.1px;
+  line-height: 1;
+  padding: 4px;
+  text-align: center;
+  width: 60px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.item-step .step-title {
+  padding-left: 20px;
+  width: 110px;
+}
+
+.item-step li {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 // shopページ //
 .width_660 {
   width: 660px;
