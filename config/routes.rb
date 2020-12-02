@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root            to: "user/top#index"
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
-    # 利用規約リンク
+    # 利用規約リンク==========================================
     get "/user_policy", to: "user/top#user_policy", as: :user_policy
     get "/privacy_policy", to: "user/top#privacy_policy", as: :privacy_policy
     get "/security", to: "user/top#security", as: :security
@@ -34,6 +34,11 @@ Rails.application.routes.draw do
       get "/user/store/:store_id/review/:id", to: "user/review#show", as: :user_store_review_show
       patch "/user/store/:store_id/review/:id", to: "user/review#update", as: :user_store_review_update
       delete "/user/store/:store_id/review/:id", to: "user/review#destroy"
+
+      # 店舗お気に入り機能================
+      get "/user/:id/favorite_stores", to: "user/favorite_stores#index", as: :user_favorite_stores_index
+      post "/user/store/:store_id/add" => "user/favorite_stores#create"
+      delete "/user/store/:store_id/add" => "user/favorite_stores#destroy"
     end
 
     devise_for :users, controllers: {

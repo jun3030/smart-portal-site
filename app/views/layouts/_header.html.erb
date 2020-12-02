@@ -64,6 +64,7 @@
                                 <ul class="dropdown">
                                     <li><%= link_to "マイページ", user_path(current_user) %></li>
                                     <li><%= link_to "メッセージ", messages_path(current_user) %></li>
+                                    <li><%= link_to "お気に入り店舗", user_favorite_stores_index_path(current_user.id) %></li>
                                     <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
                                 </ul>
                             </li>

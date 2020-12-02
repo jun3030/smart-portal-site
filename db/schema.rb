@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_145316) do
+ActiveRecord::Schema.define(version: 2020_12_01_142412) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2020_11_15_145316) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
+  end
+
+  create_table "favorite_stores", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "store_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["store_id"], name: "index_favorite_stores_on_store_id"
+    t.index ["user_id"], name: "index_favorite_stores_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -255,6 +264,8 @@ ActiveRecord::Schema.define(version: 2020_11_15_145316) do
   add_foreign_key "business_trip_ranges", "cities"
   add_foreign_key "business_trip_ranges", "masseurs"
   add_foreign_key "cities", "prefectures"
+  add_foreign_key "favorite_stores", "stores"
+  add_foreign_key "favorite_stores", "users"
   add_foreign_key "favorites", "masseurs"
   add_foreign_key "favorites", "users"
   add_foreign_key "masseurs", "stores"
