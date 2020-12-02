@@ -1,3 +1,11 @@
+<div class="container">
+<% flash.each do |message_type, msg| %><br>
+    <div class="alert alert-success">
+      <%= msg %>
+    </div>
+<% end %>
+</div>
+
 <section class="product-shop spad">
   <div class="container">
   <h1 class="ttl-main-page">お気に入り店舗リスト</h1>
@@ -35,9 +43,9 @@
             <div class="row">
               <div class="col-lg-12">
                <div class="s_top_space">
-                 <svg id="close" viewBox="0 0 24 24">
-                   <a href="user/store/<% favorite_store.id %>/delete" data-method="delete"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></a>
-                 </svg>
+                <%= link_to user_favorite_stores_delete_path(favorite_store.id), method: :delete do %>
+                    <img src="../../images/cross.png" alt="" id="cross-image">
+                <% end %>
                 &emsp;<%= link_to favorite_store.store_name, details_path(favorite_store), class:"bottom_space_10 white-space_n" %>
                 <div class="posted-by">
                   <div class="pb-pic list-mgr-img-box">
