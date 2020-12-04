@@ -310,6 +310,7 @@
           <li><%= @store.payment %></li>
         </ul>
       </div>
+      <div class="text-center"><%= link_to "予約日時を入力する", "#{@reserve_app_url}/calendars/#{@store.calendar_id}/tasks", class:"btn btn-warning btn-lg"%></div><br>
     </div>
 
     <div id="attention" class="service-price">
