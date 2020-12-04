@@ -31,6 +31,11 @@
               </div>
 
               <div class="field mt-3">
+                <%= sf.label :payment, class:"mr-2" %>
+                <%= sf.text_area :payment, placeholder: "例）	現金orカードにて施術料金をお支払いください。", class:"form-control" %>
+              </div>
+
+              <div class="field mt-3">
                 <% unless @store.store_images.pluck(:store_image).any? %>
                   <% if @store.store_images.where(store_image: nil).present? %>
                     <%= sf.fields_for :store_images do |sif| %>

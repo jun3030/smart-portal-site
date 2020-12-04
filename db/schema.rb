@@ -226,6 +226,7 @@ ActiveRecord::Schema.define(version: 2020_12_01_142412) do
     t.string "adress"
     t.string "store_phonenumber", null: false
     t.string "store_description"
+    t.string "payment", default: "店舗にて施術料金をお支払い下さい。テスト"
     t.integer "store_manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

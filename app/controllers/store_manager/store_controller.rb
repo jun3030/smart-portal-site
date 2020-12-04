@@ -53,6 +53,6 @@ class StoreManager::StoreController < StoreManager::Base
     end
 
     def store_params
-      params.require(:store).permit(:store_name, :adress, :store_phonenumber, :store_description, store_images_attributes:[:id, {store_image: []},:remove_store_image, {sm_image: []},:remove_sm_image ])
+      params.require(:store).permit(:store_name, :adress, :store_phonenumber, :store_description, :payment, store_images_attributes:[:id, {store_image: []},:remove_store_image, {sm_image: []},:remove_sm_image ])
     end
 end
