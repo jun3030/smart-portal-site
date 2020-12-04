@@ -95,6 +95,10 @@ class User::TopController < User::Base
   def operating_company
   end
 
+  def cancel_poricy
+    @store = Store.find(params[:id])
+  end
+
   private
 
     # ヘッダーとトップページのカテゴリ一覧表示用

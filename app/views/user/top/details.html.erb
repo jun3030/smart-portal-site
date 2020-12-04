@@ -312,25 +312,65 @@
       </div>
     </div>
 
-    <!--<div id="attention" class="service-price">
+    <div id="attention" class="service-price">
       <h2 class="content-h2">ご予約の前に</h2>
       <div class="box-content">
         <h5>お客様へのお願い</h5>
           <p>
-            ・お客様へのお願い<br>
+            <%= @store.customer_request %><br>
           </p>
           <br>
-          <h5>変更・キャンセルについて</h5>
+          <h5>よくある質問と答え</>
           <p>
-            ・変更・キャンセルについて<br>
-          </p>
-          <br>
-          <h5>よくある質問と答え</h5>
-          <p>
-            ・よくある質問と答え<br>
+            <%= @store.question %><br>
           </p>
       </div>
-    </div>-->
+    </div>
+
+    <div id="attention" class="service-attention">
+      <h2 class="content-h2">キャンセルポリシー</h2>
+      <div class="box-content">
+        <div class="cansel-poricy-flex">
+          <div class="cansel-poricy-left">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <td colspan="2">キャンセル料金</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <th>作業日の5日前まで</th>
+                  <td>予約金額の0%</td>
+                </tr>
+                <tr>
+                  <th>作業日の2〜4日前</th>
+                  <td>予約金額の25%</td>
+                </tr>
+                <tr>
+                  <th>作業日の1日前</th>
+                  <td>予約金額の50%</td>
+                </tr>
+                <tr>
+                  <th>作業日当日</th>
+                  <td>予約金額の100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cansel-poricy-right">
+            <div class="detail-2column">
+              ※作業日確定から48時間以内であれば、何日前でもキャンセル料は頂きません。<br>
+              <div class="link-right">
+                <%= link_to "キャンセルポリシーを全文確認する", cancel_poricy_path(@store.id) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="shop" class="service-price">
       <h2 class="content-h2">この店舗について</h2>

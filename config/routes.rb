@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get "/security", to: "user/top#security", as: :security
     get "/specified_commercial_transaction", to: "user/top#specified_commercial_transaction", as: :specified_commercial_transaction
     get "/operating_company", to: "user/top#operating_company", as: :operating_company
+    get "/store/:id/cancel_poricy", to: "user/top#cancel_poricy", as: :cancel_poricy
 
     get "user/:id/messages", to: "user/top#messages", as: :messages
     get "user/:user_id/messages/:id", to: "user/top#message_show", as: :message_show

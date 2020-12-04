@@ -226,7 +226,9 @@ ActiveRecord::Schema.define(version: 2020_12_01_142412) do
     t.string "adress"
     t.string "store_phonenumber", null: false
     t.string "store_description"
-    t.string "payment", default: "店舗にて施術料金をお支払い下さい。テスト"
+    t.string "payment", default: "店舗にて施術料金をお支払い下さい。"
+    t.string "customer_request", default: "・予約のリクエストをいただいた後はメッセージをお送りしておりますので、メッセージ欄をご確認くださいませ。"
+    t.string "question", default: "例)Q.追加料金がかかる場合がありますか？\n                                      A.コースの変更・延長がない場合は施術料の追加料金はかかりません。"
     t.integer "store_manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

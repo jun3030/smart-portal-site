@@ -33,6 +33,8 @@ ja:
           store_phonenumber: 電話番号
           store_description: 店舗についての説明
           payment: 代金の受け取り方法
+          customer_request: お客様へのお願い
+          question: よくある質問と答え
         store_image:
           store_image: 店舗画像
           sm_image: 店長写真

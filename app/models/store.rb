@@ -15,8 +15,10 @@ class Store < ApplicationRecord
   validates :adress, length: { minimum: 5 }, allow_blank: true
   validates :store_phonenumber, length: { minimum: 10 }, allow_blank: true
   validates :store_description, length: { minimum: 10 }, allow_blank: true
-  enum calendar_status: { "released": 0, "private": 1 }, _prefix: true
   validates :payment, presence: true, length: { in: 1..200 }
+  validates :customer_request, presence: true, length: { in: 1..1000 }
+  validates :question, presence: true, length: { in: 1..1000 }
+  enum calendar_status: { "released": 0, "private": 1 }, _prefix: true
 
   scope :categorized, -> (id) { includes(masseurs: :categories).where(categories: { id: id }) }
   scope :active, -> { includes(:store_manager).where.not(store_managers: {order_plan: nil}) }
