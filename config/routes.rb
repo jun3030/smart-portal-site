@@ -4,6 +4,14 @@ Rails.application.routes.draw do
     root            to: "user/top#index"
     get "/shop",    to: "user/top#shop"
     get "/store/:id", to: "user/top#details", as: :details
+    # 利用規約リンク==========================================
+    get "/user_policy", to: "user/top#user_policy", as: :user_policy
+    get "/privacy_policy", to: "user/top#privacy_policy", as: :privacy_policy
+    get "/security", to: "user/top#security", as: :security
+    get "/specified_commercial_transaction", to: "user/top#specified_commercial_transaction", as: :specified_commercial_transaction
+    get "/operating_company", to: "user/top#operating_company", as: :operating_company
+    get "/store/:id/cancel_poricy", to: "user/top#cancel_poricy", as: :cancel_poricy
+
     get "user/:id/messages", to: "user/top#messages", as: :messages
     get "user/:user_id/messages/:id", to: "user/top#message_show", as: :message_show
     resources :store, only: :index do
@@ -27,6 +35,11 @@ Rails.application.routes.draw do
       get "/user/store/:store_id/review/:id", to: "user/review#show", as: :user_store_review_show
       patch "/user/store/:store_id/review/:id", to: "user/review#update", as: :user_store_review_update
       delete "/user/store/:store_id/review/:id", to: "user/review#destroy"
+
+      # 店舗お気に入り機能================
+      get "/user/:id/favorite_stores", to: "user/favorite_stores#index", as: :user_favorite_stores_index
+      post "/user/store/:store_id/create" => "user/favorite_stores#create", as: :user_favorite_stores_create
+      delete "/user/store/:store_id/delete" => "user/favorite_stores#destroy", as: :user_favorite_stores_delete
     end
 
     devise_for :users, controllers: {

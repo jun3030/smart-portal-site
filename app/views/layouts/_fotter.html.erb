@@ -72,4 +72,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 </div>
             </div>
         </div>
+        <div class="footer-bottom">
+          <div class="footer-bottom-link">
+            <div class="footer-logo-wrap">
+              <h3 class="smart-portal-logo">Smart Portal</h3>
+            </div>
+            <ul class="list-unstyled">
+              <li class="poricy"><%= link_to "利用規約", user_policy_path, class: "poricy-link" %></li>
+              <li class="poricy"><%= link_to "プライバシーポリシー", privacy_policy_path, class: "poricy-link" %></li>
+              <li class="poricy"><%= link_to "情報セキュリティ方針", security_path, class: "poricy-link" %></li>
+              <li class="poricy"><%= link_to "特定商取引法に基づく表記", specified_commercial_transaction_path, class: "poricy-link" %></li>
+              <li class="poricy"><%= link_to "運営会社", operating_company_path, class: "poricy-link" %></li>
+            </ul>
+          </div>
+        </div>
     </footer>

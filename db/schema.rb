@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_15_145316) do
+ActiveRecord::Schema.define(version: 2020_12_01_142412) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2020_11_15_145316) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
+  end
+
+  create_table "favorite_stores", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "store_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["store_id"], name: "index_favorite_stores_on_store_id"
+    t.index ["user_id"], name: "index_favorite_stores_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -119,7 +128,7 @@ ActiveRecord::Schema.define(version: 2020_11_15_145316) do
 
   create_table "plans", force: :cascade do |t|
     t.string "plan_name"
-    t.string "plan_price"
+    t.integer "plan_price"
     t.integer "store_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -217,6 +226,9 @@ ActiveRecord::Schema.define(version: 2020_11_15_145316) do
     t.string "adress"
     t.string "store_phonenumber", null: false
     t.string "store_description"
+    t.string "payment", default: "店舗にて施術料金をお支払い下さい。"
+    t.string "customer_request", default: "・予約のリクエストをいただいた後はメッセージをお送りしておりますので、メッセージ欄をご確認くださいませ。"
+    t.string "question", default: "Q.追加料金がかかる場合がありますか？  A.コースの変更・延長がない場合は施術料の追加料金はかかりません。"
     t.integer "store_manager_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -255,6 +267,8 @@ ActiveRecord::Schema.define(version: 2020_11_15_145316) do
   add_foreign_key "business_trip_ranges", "cities"
   add_foreign_key "business_trip_ranges", "masseurs"
   add_foreign_key "cities", "prefectures"
+  add_foreign_key "favorite_stores", "stores"
+  add_foreign_key "favorite_stores", "users"
   add_foreign_key "favorites", "masseurs"
   add_foreign_key "favorites", "users"
   add_foreign_key "masseurs", "stores"

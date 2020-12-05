@@ -24,6 +24,7 @@ class User::TopController < User::Base
   end
 
   def details
+    @store = Store.find(params[:id])
     @reserve_app_url = reserve_app_url
     @plans = @store.plans
     @masseurs = @store.masseurs
@@ -76,6 +77,26 @@ class User::TopController < User::Base
       end
     end
     redirect_to message_show_url(current_user.id, @message)
+  end
+
+  # 利用規約============================
+  def user_policy
+  end
+
+  def privacy_policy
+  end
+
+  def security
+  end
+
+  def specified_commercial_transaction
+  end
+
+  def operating_company
+  end
+
+  def cancel_poricy
+    @store = Store.find(params[:id])
   end
 
   private
