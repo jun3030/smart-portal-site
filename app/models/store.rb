@@ -56,3 +56,4 @@ class Store < ApplicationRecord
     Arel.sql(query)
   end
 end
+
