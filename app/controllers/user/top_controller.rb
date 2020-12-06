@@ -1,9 +1,10 @@
 class User::TopController < User::Base
   include SmartYoyakuApi::User
+  require 'json'
   before_action :set_categories
   before_action :not_found, only: :details
   before_action :correct_user, only: :messages
-  before_action :correct_user2, only: :message_show
+  before_action :correct_user2, only: [:message_show, :history]
   before_action :set_store, only:[:message_new, :message_create, :message_update]
   before_action :set_message, only:[:message_show, :message_update]
 
@@ -76,6 +77,12 @@ class User::TopController < User::Base
       end
     end
     redirect_to message_show_url(current_user.id, @message)
+  end
+
+  def history
+    url = reserve_app_url + "/api/v1/store_member/:id/store_member_tasks"
+    uri = `curl -X GET "#{url}"`
+    @tasks = JSON.parse(uri)
   end
 
   private

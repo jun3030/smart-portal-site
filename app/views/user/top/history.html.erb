@@ -1,1 +1,6 @@
-<%= @api %>
+<% @tasks.each do |task| %>
+  <p>店舗名</p>
+  <p><%= Store.find(task["calendar_id"]).store_name %></p>
+  <p>予約日・時間</p>
+  <!--<p><%= Time.at(task["start_at"]).strftime("%F %T") %></p>-->
+<% end %>
