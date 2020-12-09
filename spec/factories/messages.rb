@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :message do
-    title { "MyString" }
-    content { "MyString" }
-    message_status { "MyString" }
-    store { "" }
-    user { "" }
+    sequence(:title) { |n| "title#{n}" }
+    sequence(:content) { |n| "content"*10 }
+    sequence(:checked) { |n| "checked" }
+    association :user
+    association :store
   end
 end

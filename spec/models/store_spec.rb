@@ -5,6 +5,8 @@ RSpec.describe Store, type: :model do
     @store = build(:store)
   end
 
+  @store = Store.new
+
   it "有効なstoreを持つこと" do
     expect(@store).to be_valid
   end
