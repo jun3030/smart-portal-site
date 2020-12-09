@@ -80,9 +80,9 @@ class User::TopController < User::Base
   end
 
   def history
-    url = reserve_app_url + "/api/v1/store_member/:id/store_member_tasks"
+    url = reserve_app_url + "/api/v1/store_member/21/store_member_tasks"
     uri = `curl -X GET "#{url}"`
-    @tasks = JSON.parse(uri)
+    @tasks = JSON.parse(uri)["tasks"]
   end
 
   private
