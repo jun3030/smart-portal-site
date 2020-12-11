@@ -83,10 +83,9 @@ class User::TopController < User::Base
 
   def history
     # Rails.env.production? ? HOST = "本番用のホスト名" : HOST = "reserve_app_url"
-    url = reserve_app_url + "/store_members_tasks?store_members_email=" + current_user.email
-    uri = URI.parse(url)
-    response = Net::HTTP.get_response(uri)
-    @tasks = JSON.parse(response)["tasks"]
+    url = "http://localhost:4000/api/v1/store_members_tasks?store_members_email=bbbbb@email.com"
+    uri = `curl -v -X GET "#{url}"`
+    @tasks = JSON.parse(uri)["tasks"]
   end
 
   private
