@@ -6,7 +6,7 @@ class User::TopController < User::Base
   before_action :set_categories
   before_action :not_found, only: :details
   before_action :correct_user, only: :messages
-  before_action :correct_user2, only: [:message_show, :history]
+  before_action :correct_user2, only: [:message_show]
   before_action :set_store, only:[:message_new, :message_create, :message_update]
   before_action :set_message, only:[:message_show, :message_update]
 
@@ -83,7 +83,7 @@ class User::TopController < User::Base
 
   def history
     # Rails.env.production? ? HOST = "本番用のホスト名" : HOST = "reserve_app_url"
-    url = "http://localhost:4000/api/v1/store_members_tasks?store_members_email=bbbbb@email.com"
+    url = reserve_app_url + "/api/v1/store_members_tasks?store_members_email=" + current_user.email
     uri = `curl -v -X GET "#{url}"`
     @tasks = JSON.parse(uri)["tasks"]
   end

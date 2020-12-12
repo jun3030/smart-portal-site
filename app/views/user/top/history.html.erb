@@ -1,7 +1,28 @@
-<% @tasks.each do |task| %>
-  <p>店舗名</p>
-  <p><%= task["calendar"]["calendar_name"] %></p>
-  <p><%= task["calendar"]["calendar_name"] %></p>
-  <p>予約日・時間</p>
-  <!--<p><%= Time.at(task["start_at"]).strftime("%F %T") %></p>-->
-<% end %>
+<div class="center cenrer-block"><br>
+  <div id="price" class="service-price">
+    <h2 class="content-h2">予約履歴一覧</h2>
+    <div class="box-content">
+      <table class="table">
+        <thead align="center">
+          <tr>
+            <th>店舗名</th>
+            <th>コース名</th>
+            <th>金額</th>
+            <th>予約日</th>
+          </tr>
+        </thead>
+
+        <% @tasks.each do |task| %>
+          <tbody align="center">
+            <tr>
+              <td><%= link_to task["calendar"]["calendar_name"], details_path(task["calendar"]["calendar_id"].to_i) %></td>
+              <td><%= task["task_course"]["title"] %></td>
+              <td><%= task["task_course"]["charge"] %>円</td>
+              <td><%= Time.at(task["start_at"]).strftime("%Y/%m/%d") %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
