@@ -47,6 +47,7 @@ class User::TopController < User::Base
     end
   end
 
+  # メッセージ機能============================
   def messages
     @messages = Message.where(user_id: current_user.id).order(created_at: "DESC")
     @replies = Reply.where(reply_from: "store_manager")
@@ -82,11 +83,14 @@ class User::TopController < User::Base
     redirect_to message_show_url(current_user.id, @message)
   end
 
+  # 予約履歴============================
   def history
     # Rails.env.production? ? HOST = "本番用のホスト名" : HOST = "reserve_app_url"
     url = reserve_app_url + "/api/v1/store_members_tasks?store_members_email=" + current_user.email
     uri = `curl -v -X GET "#{url}"`
     @tasks = JSON.parse(uri)["tasks"]
+  end
+
   # 利用規約============================
   def user_policy
   end
