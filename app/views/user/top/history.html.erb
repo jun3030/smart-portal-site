@@ -15,7 +15,7 @@
         <% @tasks.each do |task| %>
           <tbody align="center">
             <tr>
-              <td><%= link_to task["calendar"]["calendar_name"], details_path(task["calendar"]["calendar_id"].to_i) %></td>
+              <td><%= link_to task["calendar"]["calendar_name"], details_path(task["calendar"]["id"].to_i) %></td>
               <td><%= task["task_course"]["title"] %></td>
               <td><%= task["task_course"]["charge"] %>円</td>
               <td><%= Time.at(task["start_at"]).strftime("%Y/%m/%d") %></td>
