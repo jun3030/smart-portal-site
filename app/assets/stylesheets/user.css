@@ -510,3 +510,18 @@ li {
   text-align:center;
   padding:30px;
 }
+
+/* キャンセルポリシー */
+.cansel-poricy-flex {
+  display:flex;
+}
+
+.detail-2column {
+  float: left;
+  width: 460px;
+  margin-left:30px;
+}
+
+.link-right {
+  text-align: right;
+}

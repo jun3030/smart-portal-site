@@ -40,16 +40,15 @@
 
         <div class="col-md-6">
           <div class="wrap-service-info">
-            <div><%#= link_to "検討リストに追加する", "#", class:"btn btn-outline-dark btn-lg csr-btn"%><div>
+            <div><%= link_to "お気に入り店舗に追加する", user_favorite_stores_create_path(@store.id), method: :post, class:"btn btn-outline-dark btn-lg csr-btn"%><div>
             <div class="wrap-star-rate">
               <div class="star-rate star-rate4">
-                <!--<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>-->
+                <div id="star-rate-<%= @store.id %>" class="shop-review"></div><br>
+                <a href="#review-link"><%= "口コミ#{@store.reviews.count}件" %></a>
               </div>
-              <a><%#= link_to "口コミ　〇〇件", "#" %></a>
+              <div class="avg-score">
+                <%= @store.avg_score %>
+              </div>
             </div>
             <!--<div class="rating-text">4.85</div>-->
           </div>
@@ -149,7 +148,7 @@
     </div>
 
     <div id="review" class="service-review">
-      <h2 class="content-h2">口コミ</h2>
+      <h2 class="content-h2" id="review-link">口コミ</h2>
         <div id="storecommit" class="service-price">
           <div class="box-content">
             <table class="table">
@@ -182,6 +181,18 @@
                         starHalf: "/assets/star-half.png",
                         readOnly: true,
                         score: <%= review.rate %>,
+                    });
+                  </script>
+                  <!-- レビューの平均値 -->
+                  <script>
+                    $('#star-rate-<%= @store.id %>').raty({
+                      size: 36,
+                      starOff: "/assets/star-off.png",
+                      starOn: "/assets/star-on.png",
+                      starHalf: "/assets/star-half.png",
+                      half: true,
+                      readOnly: true,
+                      score: <%= @store.avg_score %>,
                     });
                   </script>
                 </div>
@@ -252,7 +263,7 @@
         </table>
       </div>
     </div>
-    <!--<div id="step" class="service-step">
+    <div id="step" class="service-step">
       <h2 class="content-h2">施術までの流れ</h2>
       <div class="box-content">
         <ul class="item-step list-unstyled">
@@ -262,7 +273,7 @@
             <span>1</span>
           </li>
           <li class="step-title">
-            <%= link_to "ネット予約", "#"%>
+            ネット予約
           </li>
           <li>予約ボタンをクリックしてネット予約をしてください。</li>
         </ul>
@@ -297,30 +308,71 @@
           <li class="step-title">
             お支払い
           </li>
-          <li>店舗にて施術料金をお支払い下さい。</li>
+          <li><%= @store.payment %></li>
         </ul>
       </div>
-    </div>-->
+      <div class="text-center"><%= link_to "予約日時を入力する", "#{@reserve_app_url}/calendars/#{@store.calendar_id}/tasks", class:"btn btn-warning btn-lg"%></div><br>
+    </div>
 
-    <!--<div id="attention" class="service-price">
+    <div id="attention" class="service-price">
       <h2 class="content-h2">ご予約の前に</h2>
       <div class="box-content">
         <h5>お客様へのお願い</h5>
           <p>
-            ・お客様へのお願い<br>
+            <%= @store.customer_request %><br>
           </p>
           <br>
-          <h5>変更・キャンセルについて</h5>
+          <h5>よくある質問と答え</>
           <p>
-            ・変更・キャンセルについて<br>
-          </p>
-          <br>
-          <h5>よくある質問と答え</h5>
-          <p>
-            ・よくある質問と答え<br>
+            <%= @store.question %><br>
           </p>
       </div>
-    </div>-->
+    </div>
+
+    <div id="attention" class="service-attention">
+      <h2 class="content-h2">キャンセルポリシー</h2>
+      <div class="box-content">
+        <div class="cansel-poricy-flex">
+          <div class="cansel-poricy-left">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <td colspan="2">キャンセル料金</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <th>作業日の5日前まで</th>
+                  <td>予約金額の0%</td>
+                </tr>
+                <tr>
+                  <th>作業日の2〜4日前</th>
+                  <td>予約金額の25%</td>
+                </tr>
+                <tr>
+                  <th>作業日の1日前</th>
+                  <td>予約金額の50%</td>
+                </tr>
+                <tr>
+                  <th>作業日当日</th>
+                  <td>予約金額の100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="cansel-poricy-right">
+            <div class="detail-2column">
+              ※作業日確定から48時間以内であれば、何日前でもキャンセル料は頂きません。<br>
+              <div class="link-right">
+                <%= link_to "キャンセルポリシーを全文確認する", cancel_poricy_path(@store.id) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="shop" class="service-price">
       <h2 class="content-h2">この店舗について</h2>

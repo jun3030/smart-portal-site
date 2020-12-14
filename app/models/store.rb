@@ -6,6 +6,8 @@ class Store < ApplicationRecord
   has_many :store_images, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :favorite_stores
+  has_many :users, through: :favorite_stores
   accepts_nested_attributes_for :masseurs
   accepts_nested_attributes_for :store_images
   accepts_nested_attributes_for :plans
@@ -13,6 +15,9 @@ class Store < ApplicationRecord
   validates :adress, length: { minimum: 5 }, allow_blank: true
   validates :store_phonenumber, length: { minimum: 10 }, allow_blank: true
   validates :store_description, length: { minimum: 10 }, allow_blank: true
+  validates :payment, presence: true, length: { in: 1..200 }
+  validates :customer_request, presence: true, length: { in: 1..1000 }
+  validates :question, presence: true, length: { in: 1..1000 }
   enum calendar_status: { "released": 0, "private": 1 }, _prefix: true
 
   scope :categorized, -> (id) { includes(masseurs: :categories).where(categories: { id: id }) }
