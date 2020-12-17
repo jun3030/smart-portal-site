@@ -9,8 +9,9 @@
         <% if @replies.present? %>
           <p><%= link_to "新着メッセージがあります", messages_path(current_user.id), class: "red" %></p>
         <% else %>
-          <%= link_to "メッセージ一覧", messages_path(current_user.id) %>
+          <p><%= link_to "メッセージ一覧", messages_path(current_user.id) %></p>
         <% end %>
+        <p><%= link_to "予約履歴一覧", history_path(current_user.id) %></p>
       </h6>
       <hr>
       <h4 class="my-4 text-center">【ご登録内容】</h4>

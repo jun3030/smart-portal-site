@@ -1,5 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Reply, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @reply = build(:reply)
+  end
+
+  describe 'reply' do
+    it "replyがなかった場合は無効であること" do
+      @reply.reply = nil
+      expect(@reply).to be_invalid
+    end
+  end
 end

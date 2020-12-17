@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
     get "user/:id/messages", to: "user/top#messages", as: :messages
     get "user/:user_id/messages/:id", to: "user/top#message_show", as: :message_show
+    get "user/:user_id/history", to: "user/top#history", as: :history
     resources :store, only: :index do
       get "/messages/new", to: "user/top#message_new", as: :message_new
       post "messages", to: "user/top#message_create", as: :message_create

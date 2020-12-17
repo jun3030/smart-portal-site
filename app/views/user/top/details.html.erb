@@ -8,7 +8,7 @@
   <div class="service-head">
     <h1 class="ttl-main-page top_space_m_10" itemprop="name">
     <!--<i class="icon-l ctg-icon_aircon"></i>-->
-    <span class="center_span"><%= @store.store_name %></span>
+    <h2 class="content-h2"><%= @store.store_name %></h2>
     </h1>
     <p class="description" itemprop="description"><%= @store.store_description %></p>
   </div>
@@ -138,7 +138,8 @@
               <td><%= plan.plan_name %></td>
               <td><%= plan.plan_time %>分</td>
               <td class="js-price"><%= plan.plan_price %>円(税込)</td>
-              <td><%= link_to "プランを予約する", "#{@reserve_app_url}/calendars/#{@store.calendar_id}/tasks?course_id=#{plan.course_id}", class:"btn btn-success" %></td>
+              <td><%= link_to "プランを予約する", "#{@reserve_app_url}/calendars/#{@store.calendar_id}/tasks?course_id=#{plan.course_id}",
+              class:"btn btn-success" %></td>
             </tr>
             <% end %>
           </tbody>
