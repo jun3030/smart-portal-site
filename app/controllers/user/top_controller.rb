@@ -1,9 +1,12 @@
 class User::TopController < User::Base
   include SmartYoyakuApi::User
+  require 'net/http'
+  require 'uri'
+  require 'json'
   before_action :set_categories
   before_action :not_found, only: :details
   before_action :correct_user, only: :messages
-  before_action :correct_user2, only: :message_show
+  before_action :correct_user2, only: [:message_show]
   before_action :set_store, only:[:message_new, :message_create, :message_update]
   before_action :set_message, only:[:message_show, :message_update]
 
@@ -44,6 +47,7 @@ class User::TopController < User::Base
     end
   end
 
+  # メッセージ機能============================
   def messages
     @messages = Message.where(user_id: current_user.id).order(created_at: "DESC")
     @replies = Reply.where(reply_from: "store_manager")
@@ -77,6 +81,14 @@ class User::TopController < User::Base
       end
     end
     redirect_to message_show_url(current_user.id, @message)
+  end
+
+  # 予約履歴============================
+  def history
+    # Rails.env.production? ? HOST = "本番用のホスト名" : HOST = "reserve_app_url"
+    url = reserve_app_url + "/api/v1/store_members_tasks?store_members_email=" + current_user.email
+    uri = `curl -v -X GET "#{url}"`
+    @tasks = JSON.parse(uri)["tasks"]
   end
 
   # 利用規約============================
@@ -133,13 +145,17 @@ class User::TopController < User::Base
     # urlに含まれるuser.idがcurrent_userと紐づいていない場合警告
     def correct_user
       @user = User.find(params[:id])
-      flash[:danger] = "アクセス権限がありません。"
-      redirect_to(root_url) unless @user == current_user
+      unless @user.id == current_user.id
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to(root_url) unless @user == current_user
+      end
     end
 
     def correct_user2
       @user = User.find(params[:user_id])
-      flash[:danger] = "アクセス権限がありません。"
-      redirect_to(root_url) unless @user == current_user
+      unless @user.id == current_user.id
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to(root_url) unless @user == current_user
+      end
     end
 end
