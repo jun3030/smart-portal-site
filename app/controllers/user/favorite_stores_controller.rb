@@ -1,6 +1,7 @@
 class User::FavoriteStoresController < User::Base
 
   before_action :set_categories
+  before_action :currect_user, only: [:index]
 
   def index
     @favorite_stores = current_user.favorite_stores
@@ -35,5 +36,14 @@ class User::FavoriteStoresController < User::Base
   # ヘッダーとトップページのカテゴリ一覧表示用
   def set_categories
     @categories = Category.all
+  end
+
+  def currect_user
+    if current_user.present?
+      unless current_user.id == params[:id].to_i
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to root_path
+      end
+    end
   end
 end
