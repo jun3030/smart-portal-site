@@ -19,7 +19,7 @@ RSpec.describe 'Users', type: :system do
             fill_in 'Eメール', with: 'sample-user@email.com'
             fill_in '住所', with: '東京都墨田区'
             fill_in 'パスワード', with: 'password'
-            fill_in 'パスワード確認', with: 'password'
+
           end
         end
       end
