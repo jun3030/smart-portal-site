@@ -145,13 +145,17 @@ class User::TopController < User::Base
     # urlに含まれるuser.idがcurrent_userと紐づいていない場合警告
     def correct_user
       @user = User.find(params[:id])
-      flash[:danger] = "アクセス権限がありません。"
-      redirect_to(root_url) unless @user == current_user
+      unless @user.id == current_user.id
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to(root_url) unless @user == current_user
+      end
     end
 
     def correct_user2
       @user = User.find(params[:user_id])
-      flash[:danger] = "アクセス権限がありません。"
-      redirect_to(root_url) unless @user == current_user
+      unless @user.id == current_user.id
+        flash[:danger] = "アクセス権限がありません。"
+        redirect_to(root_url) unless @user == current_user
+      end
     end
 end
