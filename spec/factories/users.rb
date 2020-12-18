@@ -7,4 +7,8 @@ FactoryBot.define do
     password { "password" }
     gender { "male" }
   end
+
+
+
+
 end
