@@ -1,27 +1,42 @@
 require 'rails_helper'
 
 RSpec.describe 'Review', type: :system, js: true do
-
   before do
     store= build(:store)
     @store = Store.create!(store_name: store.store_name, adress: store.adress, store_phonenumber: store.store_phonenumber, store_manager_id: 1)
   end
 
   describe 'Review CRUD' do
-    context "値がvalidの場合" do
-      it "口コミが投稿される" do
+    context "sign_in状態の場合" do
+      before do
         sign_in
         visit user_store_review_new_path(@store.id)
-        find('#star').find("img[alt='5']").click
-        fill_in 'タイトル', with: 'また利用したいです'
-        fill_in 'レビュー内容', with: '丁寧に施術して頂きました。'
-        click_on '口コミを投稿する'
-        expect(current_path).to eq user_store_review_index_path(@store.id) # user/review indexへ遷移すること
-        expect(page).to have_content '口コミを投稿しました。'
+      end
+      context "値がvalidの場合" do
+        let!(:before_count) { Review.all.count }
+        it "口コミが投稿される" do
+          find('#star').find("img[alt='5']").click
+          fill_in 'タイトル', with: 'また利用したいです'
+          fill_in 'レビュー内容', with: '丁寧に施術して頂きました。'
+          click_on '口コミを投稿する'
+          expect(current_path).to eq user_store_review_index_path(@store.id) # indexへ遷移したか確認
+          expect(page).to have_content '口コミを投稿しました。' # メッセージが表示されたか確認
+          expect(Review.all.count).not_to eq(before_count) # 口コミが作成されたか確認
+        end
+      end
+      context "値がinvalidの場合" do
+        it "口コミ投稿に失敗する" do
+          find('#star').find("img[alt='5']").click
+          fill_in 'タイトル', with: 'また利用したいです'
+          fill_in 'レビュー内容', with: ''
+          click_on '口コミを投稿する'
+          expect(page).to have_content '口コミが投稿できませんでした。投稿するには全ての項目を埋めて下さい。' # エラーメッセージが出ているか確認/newページに遷移したか確認
+          expect(page).to have_field 'タイトル', with: 'また利用したいです' # 入力内容が保持されているか確認
+          expect { click_on '口コミを投稿する' }.not_to change(Review, :count) # 口コミの作成に失敗したか確認
+        end
       end
     end
   end
-
 end
 
 #   it "store_managerが新規登録される" do
