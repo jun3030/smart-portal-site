@@ -1,18 +1,23 @@
 require 'rails_helper'
 
-RSpec.describe 'Review', type: :system do
+RSpec.describe 'Review', type: :system, js: true do
+
   before do
-    # レビューデータを作成
-    # @user = User.create!(name: "test", email: "test@email.com", nickname: "test", password: "password", address: "japan-aichi-nagoya", gender: "male")
-    StoreManager.create!(name: "store_manager", email: "store_manager@email.com", password: "password")
-    @store = Store.create!(store_name: "sample1", adress: "京都府京都市中京区", store_phonenumber: "0909999999", store_manager_id: 1)
+    store= build(:store)
+    @store = Store.create!(store_name: store.store_name, adress: store.adress, store_phonenumber: store.store_phonenumber, store_manager_id: 1)
   end
 
   describe 'Review CRUD' do
     context "値がvalidの場合" do
       it "口コミが投稿される" do
         sign_in
-        visit user_store_review_new_path(1)
+        visit user_store_review_new_path(@store.id)
+        find('#star').find("img[alt='5']").click
+        fill_in 'タイトル', with: 'また利用したいです'
+        fill_in 'レビュー内容', with: '丁寧に施術して頂きました。'
+        click_on '口コミを投稿する'
+        expect(current_path).to eq user_store_review_index_path(@store.id) # user/review indexへ遷移すること
+        expect(page).to have_content '口コミを投稿しました。'
       end
     end
   end
