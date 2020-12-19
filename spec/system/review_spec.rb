@@ -35,6 +35,46 @@ RSpec.describe 'Review', type: :system, js: true do
           expect { click_on '口コミを投稿する' }.not_to change(Review, :count) # 口コミの作成に失敗したか確認
         end
       end
+      context "口コミが投稿された場合" do
+        before do
+          find('#star').find("img[alt='5']").click
+          fill_in 'タイトル', with: 'また利用したいです'
+          fill_in 'レビュー内容', with: '丁寧に施術して頂きました。'
+          click_on '口コミを投稿する'
+          expect(current_path).to eq user_store_review_index_path(@store.id) # indexへ遷移したか確認
+        end
+        it "showページへ遷移できること" do
+          click_on '丁寧に施術して頂きました。'
+          expect(page).to have_content '編集' # 編集ボタンがあることを確認
+          expect(page).to have_content '削除' # 編集ボタンがあることを確認
+        end
+        context "editページへ遷移した場合" do
+          context "値がvalidの場合" do
+            it "口コミを更新できること" do
+              click_on '丁寧に施術して頂きました。'
+              click_on '編集'
+              find('#star').find("img[alt='1']").click
+              fill_in 'タイトル', with: '更新'
+              fill_in 'レビュー内容', with: '体が楽になりました！'
+              click_on '口コミを編集する'
+              expect(current_path).to eq user_store_review_show_path(@store.id, Review.first.id)
+              expect(page).to have_content '口コミを更新しました。'
+            end
+          end
+          context "値がinvalidの場合" do
+            it "口コミの更新に失敗すること" do
+              click_on '丁寧に施術して頂きました。'
+              click_on '編集'
+              find('#star').find("img[alt='1']").click
+              fill_in 'タイトル', with: '更新失敗'
+              fill_in 'レビュー内容', with: ''
+              click_on '口コミを編集する'
+              expect(page).to have_content '口コミが更新されませんでした。更新するには全ての項目を記入して下さい。' # エラーメッセージが出ているか確認/newページに遷移したか確認
+              expect(page).to have_field 'タイトル', with: '更新失敗' # 入力内容が保持されているか確認
+            end
+          end
+        end
+      end
     end
   end
 end
