@@ -69,8 +69,22 @@ RSpec.describe 'Review', type: :system, js: true do
               fill_in 'タイトル', with: '更新失敗'
               fill_in 'レビュー内容', with: ''
               click_on '口コミを編集する'
-              expect(page).to have_content '口コミが更新されませんでした。更新するには全ての項目を記入して下さい。' # エラーメッセージが出ているか確認/newページに遷移したか確認
+              expect(page).to have_content '口コミが更新されませんでした。更新するには全ての項目を記入して下さい。' # エラーメッセージが出ているか確認/editページに遷移したか確認
               expect(page).to have_field 'タイトル', with: '更新失敗' # 入力内容が保持されているか確認
+              expect(page).to have_field 'レビュー内容', with: '' # 入力内容が保持されているか確認
+            end
+          end
+          context "削除を押した場合" do
+            let!(:before_count) { Review.all.count }
+            it "口コミを削除できること" do
+              click_on '丁寧に施術して頂きました。'
+              click_on '削除'
+              expect(page.driver.browser.switch_to.alert.text).to eq "口コミを本当に削除しますか？" # アラートメッセージの確認
+              page.driver.browser.switch_to.alert.dismiss
+              expect{
+                  expect(page.accept_confirm).to eq "口コミを本当に削除しますか？"
+                  expect(page).to have_content "口コミを削除しました。"
+                  }
             end
           end
         end
