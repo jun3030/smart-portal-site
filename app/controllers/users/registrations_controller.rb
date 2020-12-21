@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :correct_user, only: [:show]
 
   def show
-    @replies = Reply.where(checked: "未読", user_id: current_user.id)
+    @replies = Reply.where(checked: "未読", user_id: current_user.id, reply_from: "store_manager")
   end
 
   # GET /resource/sign_up
