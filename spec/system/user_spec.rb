@@ -12,22 +12,19 @@ RSpec.describe 'Users', type: :system do
           it "ユーザーの新規作成が成功" do
             # ユーザー新規登録画面へ遷移
             visit new_user_registration_path
-
             fill_in '名前', with: 'sample-user'
             fill_in 'ニックネーム', with: 'sample-user'
             find('#user_gender_male', visible: false).set('male')
             fill_in 'Eメール', with: 'sample-user@email.com'
             fill_in '住所', with: '東京都墨田区'
             fill_in 'パスワード', with: 'password'
-
+            fill_in 'パスワード（確認用）', with: 'password'
+            click_button '新規会員登録'
+            expect(page).to have_content 'アカウント登録が完了しました。'
           end
         end
       end
     end
-
-    describe 'ログイン後' do
-    end
-
   end
 
 end

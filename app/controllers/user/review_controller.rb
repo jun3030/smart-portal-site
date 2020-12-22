@@ -22,7 +22,7 @@ class User::ReviewController < User::Base
       flash[:success] = "口コミを投稿しました。"
       redirect_to user_store_review_index_path(@store.id)
     else
-      flash[:danger] = "口コミが投稿できませんでした。投稿するには全ての項目を埋めて下さい。"
+      flash.now[:danger] = "口コミが投稿できませんでした。投稿するには全ての項目を埋めて下さい。"
       render :new
     end
   end
@@ -47,6 +47,7 @@ class User::ReviewController < User::Base
       redirect_to user_store_review_show_path
     else
       flash.now[:danger] = "口コミが更新されませんでした。更新するには全ての項目を記入して下さい。"
+      @review = Review.new(review_params) # 入力内容保持の為記入
       render :edit
     end
   end
