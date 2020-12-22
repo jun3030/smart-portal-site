@@ -8,6 +8,7 @@ RSpec.describe Store, type: :model do
   it "有効なstoreを持つこと" do
     expect(@store).to be_valid
   end
+
   it "store_manager_idがなければ無効であること" do
     @store.store_manager_id = nil
     expect(@store).to be_invalid
@@ -31,13 +32,14 @@ RSpec.describe Store, type: :model do
       expect(@store).to be_valid
     end
   end
+
   describe 'store_description' do
     it "店舗説明が存在した際に9文字以下は無効であること" do
       @store.store_description = SecureRandom.alphanumeric(9)
       expect(@store).to be_invalid
     end
 
-  it "店舗説明が存在した際に10文字以上の場合は有効であること" do
+    it "店舗説明が存在した際に10文字以上の場合は有効であること" do
       @store.store_description = SecureRandom.alphanumeric(10)
       expect(@store).to be_valid
     end

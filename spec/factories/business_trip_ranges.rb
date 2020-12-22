@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :business_trip_range do
-    prefecture_name { "MyString" }
-    prefecture_judge { "MyString" }
-    masseur { nil }
-    city { nil }
+    after(:build) do |business_trip_range|
+      business_trip_range.city = create(:city)
+      business_trip_range.masseur = create(:masseur)
+    end
   end
 end
