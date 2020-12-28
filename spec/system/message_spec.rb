@@ -22,7 +22,7 @@ RSpec.describe 'Message', type: :system do
           fill_in 'タイトル', with: 'プランについて'
           fill_in '内容', with: 'もう少し長い施術時間のコースはありますか？'
           click_on 'メッセージを送信する'
-          find('#store_id', visible: false).set('@store.id')　# hidden_field
+          find('#store_id', visible: false).set('@store.id') # hidden_field
           find('#user_id', visible: false).set('current_user.id') # hidden_field
           find('#checked', visible: false).set('未読') # hidden_field
           expect(current_path).to eq details_path(@store.id) # 店舗詳細ページへ遷移したか確認
@@ -46,7 +46,7 @@ RSpec.describe 'Message', type: :system do
           fill_in 'タイトル', with: 'プランについて'
           fill_in '内容', with: 'もう少し長い施術時間のコースはありますか？'
           click_on 'メッセージを送信する'
-          find('#store_id', visible: false).set('@store.id')　# hidden_field
+          find('#store_id', visible: false).set('@store.id') # hidden_field
           find('#user_id', visible: false).set('current_user.id') # hidden_field
           find('#checked', visible: false).set('未読') # hidden_field
         end
@@ -63,6 +63,7 @@ RSpec.describe 'Message', type: :system do
             expect{
                 expect(page).to have_content "口コミを削除しました。"
                 }
+          end
           end
         end
       end
