@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Message', type: :system do
   before do
-    @user = User.create!(name: "tester1", email: "tester1@email.com", password: "password")
-    @store_manager = StoreManager.create!(name: "sample1", email: "sample1@email.com", password: "password", order_plan: 1)
-    @store = Store.create!(store_name: "sample1の店舗", adress: "京都府京都市中京区", store_phonenumber: "09012345678",
+    @user = User.create!(name: "一般人B", email: "bbbbb@email.com", password: "password", address: "神奈川県横浜市", gender: "male")
+    @store_manager = StoreManager.create!(name: "テストA", email: "aaaaa@email.com", password: "password", order_plan: 1)
+    @store = Store.create!(store_name: "店舗A", adress: "京都府京都市中京区", store_phonenumber: "09012345678",
                           store_description: "sample1の店舗sample1の店舗sample1の店舗",　store_manager_id: 1, calendar_id: 1, calendar_secret_id: 1, calendar_status: "released")
   end
 
