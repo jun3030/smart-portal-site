@@ -33,7 +33,11 @@ class StoreManager::RepliesController < ApplicationController
     @reply = Reply.find(params[:id])
     @reply.destroy
     flash[:success] = "メッセージを削除しました。"
-    redirect_to new_store_manager_store_message_reply_url(@reply.store_id, @reply.message_id)
+    if current_store_manager.present?
+      redirect_to new_store_manager_store_message_reply_url(@reply.store_id, @reply.message_id)
+    else
+      redirect_to message_show_url(@reply.user_id, @reply.message_id)
+    end
   end
 
   private
