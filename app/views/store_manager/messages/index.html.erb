@@ -36,10 +36,8 @@
               <tr>
                 <td>
                   <% if m.replies.ids.present? %>
-                    <% m.replies.ids.each do |r| %>
-                      <% if Reply.find(r).checked == "未読" && Reply.find(r).reply_from == "user" %>
-                        <img src="/images/new1.png" alt="">
-                      <% end %>
+                    <% if m.replies.where(checked: "未読", reply_from: "user").any? %>
+                      <img src="/images/new1.png" alt="">
                     <% end %>
                   <% else %>
                     <% if m.checked == "未読" %>
