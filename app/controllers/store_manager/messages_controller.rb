@@ -11,7 +11,7 @@ class StoreManager::MessagesController < ApplicationController
   # メッセージを開くと同時に既読にする
   def update
     @message.update_attributes(update_message_params)
-    if Reply.where(reply_from: "user").present?
+    if @message.replies.where(reply_from: "user").present?
       update_reply_params.each do |id, item|
         reply = Reply.find(id)
         reply.update_attributes(item)
